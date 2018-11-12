@@ -1,0 +1,23 @@
+{
+  "name": "lunzi",
+  "version": "1.0.0",
+  "description": "VUE lunzi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Honohonoho/lunzi.git"
+  },
+  "keywords": [
+    "vue",
+    "ui"
+  ],
+  "author": "Qi Li",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Honohonoho/lunzi/issues"
+  },
+  "homepage": "https://github.com/Honohonoho/lunzi#readme"
+}
