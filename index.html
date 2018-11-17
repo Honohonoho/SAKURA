@@ -25,7 +25,6 @@
             --color: #999;
             --border-color: #999;
             --border-color-hover: #666;
-            --border-color-hover: red;
         }
     </style>
 </head>
@@ -35,11 +34,11 @@
         <g-button :loading="loading1" @click="loading1 = !loading1">按钮</g-button>
         <g-button icon="settings" icon-position="left" :loading="loading2" @click="loading2 =!loading2">按钮</g-button>
         <g-button icon="settings" icon-position="right" :loading="loading3" @click="loading3 =!loading3">按钮</g-button>
-        <button-group>
+        <g-button-group>
             <g-button icon="left">按钮</g-button>
             <g-button>更多</g-button>
             <g-button icon="right" icon-position="right">按钮</g-button>
-        </button-group>
+        </g-button-group>
     </div>
     <script src="//at.alicdn.com/t/font_919384_1trnorfxyod.js"></script>
     <script src="./src/app.js"></script>

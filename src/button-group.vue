@@ -5,7 +5,14 @@
 </template>
 <script>
 export default {
-    
+    mounted() {
+        for (let node of this.$el.children) {
+            let name = node.nodeName.toLowerCase()
+            if(name !== 'button') {
+                console.warn(`The child node of <g-button-group> expect be <g-gutton>, but got <${name}>`)
+            }
+        }
+    }
 }
 </script>
 <style lang="scss">
@@ -15,6 +22,9 @@ export default {
     > .g-button {
         border-radius: 0;
         margin-left: -1px; // 去除边框重叠
+        &:not(:first-child) {
+            margin-left: 0;
+        }
         &:hover {
             position: relative;
             z-index: 1;
