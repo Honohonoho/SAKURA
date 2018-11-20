@@ -5,7 +5,11 @@ import Button from '../src/button'
 Vue.config.productionTip = false
 Vue.config.devtools = false
 
+// Mocha
 describe('Button', () => {
+    // BDD 行为驱动测试
+
+    // 测试用例用 it 隔开，各自有自己的作用域
     it('存在.', () => {
         expect(Button).to.be.ok
     })
@@ -70,7 +74,7 @@ describe('Button', () => {
             }
         }).$mount()
 
-        const callback = sinon.fake();
+        const callback = sinon.fake(); // sinon.fake() 可以知道自己被调用
         vm.$on('click', callback)
         vm.$el.click()
         expect(callback).to.have.been.called
