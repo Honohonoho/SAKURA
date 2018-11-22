@@ -1,7 +1,7 @@
 {
-  "name": "lunzi",
+  "name": "lunzi-test-v1",
   "version": "0.0.1",
-  "description": "VUE lunzi",
+  "description": "A VUE UI Library",
   "main": "index.js",
   "scripts": {
     "dev-test": "parcel watch test/* --no-cache & karma start",
