@@ -4,9 +4,10 @@
   "description": "A VUE UI Library",
   "main": "dist/index.js",
   "scripts": {
-    "dev-test": "parcel watch test/* --no-cache & karma start",
+    "dev-test": "npx parcel watch test/* --no-cache",
     "test": "parcel build test/* --no-minify && karma start --single-run",
-    "start": "npx parcel index.html --no-cache"
+    "start": "npx parcel index.html --no-cache",
+    "karma": "npx karma start"
   },
   "repository": {
     "type": "git",
