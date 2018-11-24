@@ -26,6 +26,9 @@
             --border-color: #999;
             --border-color-hover: #666;
         }
+        .box {
+            margin: 20px;
+        }
     </style>
 </head>
 
@@ -39,7 +42,14 @@
             <g-button>更多</g-button>
             <g-button icon="right" icon-position="right">按钮</g-button>
         </g-button-group>
-        <g-input></g-input>
+        <div class="box">
+            <g-input value="张三" disabled></g-input>
+            <g-input value="李四" readonly></g-input>
+            <g-input value="测试"></g-input>
+        </div>
+        <div class="box">
+            <g-input value="测试" error="姓名不能少于2个字"></g-input>
+        </div>
     </div>
     <!-- <script src="//at.alicdn.com/t/font_919384_1trnorfxyod.js"></script> -->
     <script src="./src/app.js"></script>
