@@ -24,4 +24,15 @@ describe('Input', () => {
         expect(inputElement.value).to.equal('1234')
         vm.$destroy()
     })
+    it('accpet property: disabled', () => {
+        const Constructor = Vue.extend(Input)
+        const vm = new Constructor({
+            propsData: {
+                disabled: true
+            }
+        }).$mount()
+        const inputElement = vm.$el.querySelector('input')
+        expect(inputElement.disabled).to.equal(true)
+        vm.$destroy()
+    })
 })
