@@ -80,7 +80,13 @@ describe('Input', () => {
             expect(callback).to.have.been.calledWith(event) // 带有 event 参数的回调被调用
         })
         it('event:input available', () => {
-            
+            vm = new Constructor({}).$mount()
+            const callback = sinon.fake()
+            vm.$on('input', callback)
+            let event = new Event('input')
+            let inputElement = vm.$el.querySelector('input')
+            inputElement.dispatchEvent(event)
+            expect(callback).to.have.been.calledWith(event)
         })
         it('event:focus available', () => {
             
