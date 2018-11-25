@@ -14,8 +14,15 @@ describe('Input', () => {
         expect(Input).to.exist
     })
     describe('accpet props', () => {
-        it('accpet property: value', () => {
+        // runs before each test in this block
+        beforeEach(function() {
             const Constructor = Vue.extend(Input)
+        })
+        // runs after each test in this block
+        afterEach(function() {
+            vm.$destroy() 
+        })
+        it('accpet property: value', () => {
             const vm = new Constructor({
                 propsData: {
                     value: '1234'
@@ -23,10 +30,8 @@ describe('Input', () => {
             }).$mount()
             const inputElement = vm.$el.querySelector('input')
             expect(inputElement.value).to.equal('1234')
-            vm.$destroy()
         })
         it('accpet property: disabled', () => {
-            const Constructor = Vue.extend(Input)
             const vm = new Constructor({
                 propsData: {
                     disabled: true
@@ -34,10 +39,8 @@ describe('Input', () => {
             }).$mount()
             const inputElement = vm.$el.querySelector('input')
             expect(inputElement.disabled).to.equal(true)
-            vm.$destroy()
         })
         it('accpet property: readonly', () => {
-            const Constructor = Vue.extend(Input)
             const vm = new Constructor({
                 propsData: {
                     readonly: true
@@ -45,10 +48,8 @@ describe('Input', () => {
             }).$mount()
             const inputElement = vm.$el.querySelector('input')
             expect(inputElement.readOnly).to.equal(true) // use lower camel case, 'readonly' change to 'readOnly'
-            vm.$destroy()
         })
         it('accpet property: error', () => {
-            const Constructor = Vue.extend(Input)
             const vm = new Constructor({
                 propsData: {
                     error: '输入有误'
@@ -58,7 +59,6 @@ describe('Input', () => {
             expect(useElement.getAttribute('xlink:href')).to.equal('#i-error')
             const errorMessage = vm.$el.querySelector('.error-message')
             expect(errorMessage.innerText).to.equal('输入有误')
-            vm.$destroy()
         })
     })
     describe('event handle', () => {
