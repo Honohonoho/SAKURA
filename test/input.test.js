@@ -89,7 +89,13 @@ describe('Input', () => {
             expect(callback).to.have.been.calledWith(event)
         })
         it('event:focus available', () => {
-            
+            vm = new Constructor({}).$mount()
+            const callback = sinon.fake()
+            vm.$on('focus', callback)
+            let event = new Event('focus')
+            let inputElement = vm.$el.querySelector('input')
+            inputElement.dispatchEvent(event)
+            expect(callback).to.have.been.calledWith(event)
         })
         it('event:blur available', () => {
             
