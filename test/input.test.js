@@ -14,16 +14,17 @@ describe('Input', () => {
         expect(Input).to.exist
     })
     describe('accpet props', () => {
+        const Constructor = Vue.extend(Input)
+        let vm
         // runs before each test in this block
-        beforeEach(function() {
-            const Constructor = Vue.extend(Input)
-        })
+        // beforeEach(function() {
+        // })
         // runs after each test in this block
         afterEach(function() {
             vm.$destroy() 
         })
         it('accpet property: value', () => {
-            const vm = new Constructor({
+            vm = new Constructor({
                 propsData: {
                     value: '1234'
                 }
@@ -32,7 +33,7 @@ describe('Input', () => {
             expect(inputElement.value).to.equal('1234')
         })
         it('accpet property: disabled', () => {
-            const vm = new Constructor({
+            vm = new Constructor({
                 propsData: {
                     disabled: true
                 }
@@ -41,7 +42,7 @@ describe('Input', () => {
             expect(inputElement.disabled).to.equal(true)
         })
         it('accpet property: readonly', () => {
-            const vm = new Constructor({
+            vm = new Constructor({
                 propsData: {
                     readonly: true
                 }
@@ -50,7 +51,7 @@ describe('Input', () => {
             expect(inputElement.readOnly).to.equal(true) // use lower camel case, 'readonly' change to 'readOnly'
         })
         it('accpet property: error', () => {
-            const vm = new Constructor({
+            vm = new Constructor({
                 propsData: {
                     error: '输入有误'
                 }
