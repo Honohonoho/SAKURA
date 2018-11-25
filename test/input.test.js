@@ -35,4 +35,15 @@ describe('Input', () => {
         expect(inputElement.disabled).to.equal(true)
         vm.$destroy()
     })
+    it('accpet property: readonly', () => {
+        const Constructor = Vue.extend(Input)
+        const vm = new Constructor({
+            propsData: {
+                readonly: true
+            }
+        }).$mount()
+        const inputElement = vm.$el.querySelector('input')
+        expect(inputElement.readOnly).to.equal(true) // use lower camel case, 'readonly' change to 'readOnly'
+        vm.$destroy()
+    })
 })
