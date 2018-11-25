@@ -20,7 +20,7 @@ describe('Input', () => {
         // beforeEach(function() {
         // })
         // runs after each test in this block
-        afterEach(function() {
+        afterEach(() => {
             vm.$destroy() 
         })
         it('accpet property: value', () => {
@@ -63,8 +63,21 @@ describe('Input', () => {
         })
     })
     describe('event handle', () => {
+        const Constructor = Vue.extend(Input)
+        let vm
+        // beforeEach(function() {
+        // })
+        afterEach(() => {
+            vm.$destroy()
+        })
         it('event:change available', () => {
-
+            vm = new Constructor({}).$mount()
+            const callback = sinon.fake()
+            vm.$on('change', callback)
+            let event = new Event('change')
+            let inputElement = vm.$el.querySelector('input')
+            inputElement.dispatchEvent(event)
+            expect(callback).to.have.been.calledWith(event) // 带有 event 参数的回调被调用
         })
         it('event:input available', () => {
             
