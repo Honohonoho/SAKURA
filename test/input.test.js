@@ -77,9 +77,17 @@ describe('Input', () => {
                 const callback = sinon.fake()
                 vm.$on(eventName, callback)
                 let event = new Event(eventName)
+                Object.defineProperty(
+                    event, 
+                    'target', 
+                    {
+                        value: { value: 'hi'},
+                        enumerable: true
+                    }
+                )
                 let inputElement = vm.$el.querySelector('input')
                 inputElement.dispatchEvent(event)
-                expect(callback).to.have.been.calledWith(event) // 带有 event 参数的回调被调用
+                expect(callback).to.have.been.calledWith('hi') // 带有 event 参数的回调被调用
             })
         })
     })
