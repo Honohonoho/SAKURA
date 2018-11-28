@@ -1,13 +1,18 @@
 <template>
-    <div class="col" :class="[`col-${span}`]">
-        <slot>1</slot>
+    <div class="col" :class="[`col-${span}`, offset && `offset-${offset}`]">
+        <slot></slot>
     </div>
 </template>
 <script>
 export default {
     name: 'Col',
     props: {
-        span: [Number, String]
+        span: {
+            type: [Number, String] 
+        },
+        offset: {
+            type: [Number, String]
+        }
     }
 }
 </script>
@@ -24,6 +29,13 @@ export default {
         // for each $col-#{n}
         &.#{$class}#{$n} {
             width: ($n / 24) * 100%;
+        }
+    }
+    // 空隙
+    $class: offset-;
+    @for $n from 1 through 24 {
+        &.#{$class}#{$n} {
+            margin-left: ($n / 24) * 100%;
         }
     }
 }
