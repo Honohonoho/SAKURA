@@ -49,13 +49,13 @@ export default {
     computed: {
         colClasses() {
             let {span, offset, pad, narrowPc, pc, widePc} = this
+            let createClasses = this.createClasses
             return [
-                span && `col-${span}`,
-                offset && `offset-${offset}`,
-                ...(pad ? [`col-pad-${pad.span}`] : []),
-                ...(narrowPc ? [`col-narrow-pc-${narrowPc.span}`] : []),
-                ...(pc ? [`col-pc-${pc.span}`] : []),
-                ...(widePc ? [`col-wide-pc-${widePc.span}`] : [])
+                ...createClasses({span, offset}),
+                ...createClasses(pad, 'pad-'),
+                ...createClasses(narrowPc, 'narrow-pc-'),
+                ...createClasses(pc, 'pc-'),
+                ...createClasses(widePc, 'wide-pc-'),
             ]
         },
         colStyle() {
@@ -64,6 +64,21 @@ export default {
                 paddingLeft: gutter/2 + 'px',
                 paddingRight: gutter/2 + 'px'
             }
+        }
+    },
+    methods: {
+        createClasses(propObj, classStr = '') {
+            if(!propObj) {
+                return []
+            }
+            let array = []
+            if (propObj.span) {
+                array.push(`col-${classStr}${propObj.span}`)
+            }
+            if (propObj.offset) {
+                array.push(`offset-${classStr}${propObj.offset}`)
+            }
+            return array
         }
     }
 }
