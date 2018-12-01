@@ -38,7 +38,7 @@
 
 <body>
     <div id="app">
-        <g-row class="topbar">
+        <!-- <g-row class="topbar">
             <g-col span="9" class="demobox">123123</g-col>
             <g-col span="15" class="demobox">1123222</g-col>
         </g-row>
@@ -54,7 +54,7 @@
                 </g-row>
             </g-col>
             <g-col span="6" class="demobox">55555</g-col>
-        </g-row>
+        </g-row> -->
         <!-- <g-button :loading="loading1" @click="loading1 = !loading1">按钮</g-button>
         <g-button icon="settings" icon-position="left" :loading="loading2" @click="loading2 =!loading2">按钮</g-button>
         <g-button icon="settings" icon-position="right" :loading="loading3" @click="loading3 =!loading3">按钮</g-button>
@@ -71,22 +71,38 @@
         </div>
         <div class="box">
             <g-input value="测试" error="姓名不能少于2个字"></g-input>
-        </div>
-        <div class="box">
+        </div>-->
+        <div class="box" style="border: 1px solid black;">
             <g-row gutter="20">
-                <g-col span="12">1112312</g-col>
-                <g-col span="12">2</g-col>
+                <g-col span="2" 
+                    :phone="{span:12}"
+                    :pad="{span:8}"
+                    :narrow-pc="{span:4}"
+                    :pc="{span:2}"
+                    :wide-pc="{span:1}"
+                >
+                    1112312
+                </g-col>
+                <g-col span="22"
+                    :phone="{span:12, offset: 0}"
+                    :pad="{span:16}"
+                    :narrow-pc="{span:20}"
+                    :pc="{span:22}"
+                    :wide-pc="{span:23}"
+                >
+                    2
+                </g-col>
             </g-row>
-            <g-row gutter="20">
+            <!-- <g-row gutter="20">
                 <g-col span="6">1112312</g-col>
                 <g-col span="8" offset="2">2</g-col>
                 <g-col span="6" offset="2">2</g-col>
             </g-row>
             <g-row gutter="20">
-                <g-col span="2">1112312</g-col>
+                <g-col span="4">1112312</g-col>
                 <g-col span="20" offset="2">2</g-col>
-            </g-row>
-        </div> -->
+            </g-row> -->
+        </div>
     </div>
     <!-- <script src="//at.alicdn.com/t/font_919384_1trnorfxyod.js"></script> -->
     <script src="./src/app.js"></script>
