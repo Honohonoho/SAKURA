@@ -52,21 +52,14 @@ export default {
     },
     computed: {
         colClasses() {
-            let {span, offset, phone, pad, narrowPc, pc, widePc} = this
-            let phoneClass = []
-            // if(phone) {
-            //     phoneClass = [`col-phone-${phone.span}`]
-            // }
+            let {span, offset, pad, narrowPc, pc, widePc} = this
             return [
                 span && `col-${span}`,
                 offset && `offset-${offset}`,
-                ...(phone && [`col-phone-${phone.span}`]),
                 ...(pad && [`col-pad-${pad.span}`]),
                 ...(narrowPc && [`col-narrow-pc-${narrowPc.span}`]),
                 ...(pc && [`col-pc-${pc.span}`]),
                 ...(widePc && [`col-wide-pc-${widePc.span}`])
-                //...(phone && [phoneClass])
-                // ...(phone && [`col-phone-${phone.span}`])
             ]
         },
         colStyle() {
@@ -99,21 +92,6 @@ export default {
     @for $n from 1 through 24 {
         &.#{$class}#{$n} {
             margin-left : ($n / 24) * 100%;
-        }
-    }
-    // phone
-    @media (max-width: 576px) {
-        $class: col-phone-;
-        @for $n from 1 through 24 {
-            &.#{$class}#{$n} {
-                width: ($n / 24) * 100%;
-            }
-        }
-        $class: offset-phone-;
-        @for $n from 1 through 24 {
-            &.#{$class}#{$n} {
-                margin-left : ($n / 24) * 100%;
-            }
         }
     }
     // pad
