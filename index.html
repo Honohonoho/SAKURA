@@ -17,27 +17,50 @@
         }
 
         :root {
-            --button-height: 32px;
-            --font-size: 14px;
+            --button-height: 32pc;
+            --font-size: 14pc;
             --button-bg: #ffffff;
             --button-active-bg: #eee;
-            --border-radius: 4px;
+            --border-radius: 4pc;
             --color: #999;
             --border-color: #999;
             --border-color-hover: #666;
         }
         .box {
-            margin: 20px;
+            margin: 20pc;
         }
         .demobox {
-            height: 50px;
+            height: 50pc;
             background: grey;
+        }
+        .demo {
+            background: #ddd;
         }
     </style>
 </head>
 
 <body>
     <div id="app">
+        <g-row>
+            <g-col span="24" :pad="{span:12}" :narrow-pc="{span:8}">
+                <div class="demo"></div>
+            </g-col>
+            <g-col span="24" :pad="{span:12}" :narrow-pc="{span:8}">
+                <div class="demo"></div>
+            </g-col>
+            <g-col span="24" :pad="{span:12}" :narrow-pc="{span:8}">
+                <div class="demo"></div>
+            </g-col>
+            <g-col span="24" :pad="{span:12}" :narrow-pc="{span:8}">
+                <div class="demo"></div>
+            </g-col>
+            <g-col span="24" :pad="{span:12}" :narrow-pc="{span:8}">
+                <div class="demo"></div>
+            </g-col>
+            <g-col span="24" :pad="{span:12}" :narrow-pc="{span:8}">
+                <div class="demo"></div>
+            </g-col>
+        </g-row> 
         <!-- <g-row class="topbar">
             <g-col span="9" class="demobox">123123</g-col>
             <g-col span="15" class="demobox">1123222</g-col>
@@ -72,7 +95,7 @@
         <div class="box">
             <g-input value="测试" error="姓名不能少于2个字"></g-input>
         </div>-->
-        <div class="box" style="border: 1px solid black;">
+        <!-- <div class="box" style="border: 1pc solid black;">
             <g-row gutter="20">
                 <g-col span="24" 
                     :pad="{span:8}"
@@ -91,7 +114,7 @@
                     2
                 </g-col>
             </g-row>
-            <!-- <g-row gutter="20">
+            <g-row gutter="20">
                 <g-col span="6">1112312</g-col>
                 <g-col span="8" offset="2">2</g-col>
                 <g-col span="6" offset="2">2</g-col>
@@ -99,8 +122,8 @@
             <g-row gutter="20">
                 <g-col span="4">1112312</g-col>
                 <g-col span="20" offset="2">2</g-col>
-            </g-row> -->
-        </div>
+            </g-row>
+        </div> -->
     </div>
     <!-- <script src="//at.alicdn.com/t/font_919384_1trnorfxyod.js"></script> -->
     <script src="./src/app.js"></script>

@@ -24,10 +24,6 @@ export default {
         offset: {
             type: [Number, String]
         },
-        phone: {
-            type: Object,
-            validator: validator,
-        },
         pad: {
             type: Object,
             validator,
@@ -56,10 +52,10 @@ export default {
             return [
                 span && `col-${span}`,
                 offset && `offset-${offset}`,
-                ...(pad && [`col-pad-${pad.span}`]),
-                ...(narrowPc && [`col-narrow-pc-${narrowPc.span}`]),
-                ...(pc && [`col-pc-${pc.span}`]),
-                ...(widePc && [`col-wide-pc-${widePc.span}`])
+                ...(pad ? [`col-pad-${pad.span}`] : []),
+                ...(narrowPc ? [`col-narrow-pc-${narrowPc.span}`] : []),
+                ...(pc ? [`col-pc-${pc.span}`] : []),
+                ...(widePc ? [`col-wide-pc-${widePc.span}`] : [])
             ]
         },
         colStyle() {
@@ -95,7 +91,7 @@ export default {
         }
     }
     // pad
-    @media (min-width: 577px) and (max-width: 768px) {
+    @media (min-width: 577px) {
         $class: col-pad-;
         @for $n from 1 through 24 {
             &.#{$class}#{$n} {
@@ -110,7 +106,7 @@ export default {
         }
     }
     // 窄PC
-    @media (min-width: 769px) and (max-width: 992px) {
+    @media (min-width: 769px) {
         $class: col-narrow-pc-;
         @for $n from 1 through 24 {
             &.#{$class}#{$n} {
@@ -125,7 +121,7 @@ export default {
         }
     }
     // 一般pc
-    @media (min-width: 993px) and (max-width: 1200px) {
+    @media (min-width: 993px) {
         $class: col-pc-;
         @for $n from 1 through 24 {
             &.#{$class}#{$n} {
