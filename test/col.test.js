@@ -24,5 +24,17 @@ describe('Button', () => {
         div.remove()
         vm.$destroy()
     })
-    
+    it('接受 offset 属性.', () => {
+        const Constructor = Vue.extend(Col)
+        const div = document.createElement('div')
+        document.body.appendChild(div)
+        const vm = new Constructor({
+            propsData: {
+                offset: '12'
+            }
+        }).$mount(div)
+        expect( vm.$el.classList.contains('offset-12') ).to.equal(true)
+        div.remove()
+        vm.$destroy()
+    })
 })
