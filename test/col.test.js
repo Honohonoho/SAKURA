@@ -37,4 +37,18 @@ describe('Button', () => {
         div.remove()
         vm.$destroy()
     })
+    it('接受 pc 属性.', () => {
+        const Constructor = Vue.extend(Col)
+        const div = document.createElement('div')
+        document.body.appendChild(div)
+        const vm = new Constructor({
+            propsData: {
+                pc: {span: 12, offset: 10}
+            }
+        }).$mount(div)
+        expect( vm.$el.classList.contains('col-pc-12') ).to.equal(true)
+        expect( vm.$el.classList.contains('offset-pc-10') ).to.equal(true)
+        div.remove()
+        vm.$destroy()
+    })
 })
