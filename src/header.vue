@@ -11,6 +11,8 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-    
+    height: 100px;
+    background: #7dbcea;
+    color: #fff;
 }
 </style>

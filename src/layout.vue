@@ -1,5 +1,5 @@
 <template>
-    <div class="layout" :class="layoutClass">
+    <div class="layout" :class="{'layout-has-sider': layoutClass.hasSider}">
         <slot></slot>
     </div>
 </template>
@@ -29,8 +29,7 @@ export default {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    border: 1px solid red;
-    &.hasSider {
+    &.layout-has-sider {
         flex-direction: row;
     }
 }

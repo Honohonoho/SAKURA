@@ -11,6 +11,8 @@ export default {
 
 <style lang="scss" scoped>
 .sider {
-    
+    width: 200px;
+    background: #3ba0e9;
+    color: #fff;
 }
 </style>
