@@ -17,27 +17,53 @@
         }
 
         :root {
-            --button-height: 32pc;
-            --font-size: 14pc;
+            --button-height: 32px;
+            --font-size: 14px;
             --button-bg: #ffffff;
             --button-active-bg: #eee;
-            --border-radius: 4pc;
+            --border-radius: 4px;
             --color: #999;
             --border-color: #999;
             --border-color-hover: #666;
         }
         .box {
-            margin: 20px;
+            /* margin: 20px; */
         }
         .demo {
             background: #ddd;
+            min-height: 100px;
+            border: 1px solid #666;
         }
     </style>
 </head>
 
 <body>
     <div id="app">
-        <g-row>
+        <g-layout>
+            <g-sider class="demo">sider</g-sider>
+            <g-layout>
+                <g-header class="demo">header</g-header>
+                <g-content class="demo">content</g-content>
+                <g-footer class="demo">footer</g-footer>
+            </g-layout>
+        </g-layout>
+        <!-- <g-layout>
+            <g-header></g-header>
+            <g-layout>
+                <g-content></g-content>
+                <g-sider></g-sider>
+            </g-layout>
+            <g-footer></g-footer>
+        </g-layout>
+        <g-layout>
+            <g-sider></g-sider>
+            <g-layout>
+                <g-header></g-header>
+                <g-content></g-content>
+                <g-footer></g-footer>
+            </g-layout>
+        </g-layout> -->
+        <!-- <g-row>
             <g-col span="24" :pad="{span:12}" :narrow-pc="{span:8}">
                 <div class="demo"></div>
             </g-col>
@@ -56,7 +82,7 @@
             <g-col span="24" :pad="{span:12}" :narrow-pc="{span:8}">
                 <div class="demo"></div>
             </g-col>
-        </g-row> 
+        </g-row>  -->
         <!-- <g-button :loading="loading1" @click="loading1 = !loading1">按钮</g-button>
         <g-button icon="settings" icon-position="left" :loading="loading2" @click="loading2 =!loading2">按钮</g-button>
         <g-button icon="settings" icon-position="right" :loading="loading3" @click="loading3 =!loading3">按钮</g-button>
