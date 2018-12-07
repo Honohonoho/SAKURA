@@ -31,12 +31,29 @@ new Vue({
         loading3: false,
         message: 'hi'
     },
+    created() {
+        // this.$toast('我是message', {
+        //     closeButton: {
+        //         text: '知道了',
+        //         callback(toast) {
+        //             console.log('用户知道了')
+        //         }
+        //     }
+        // })
+    },
     methods: {
         inputChange() {
             console.log(1)
         },
         showToast() {
-            this.$toast('我是 message')
+            this.$toast('我是 message', {
+                closeButton: {
+                    text: '知道了',
+                    callback() {
+                        console.log('用户知道了')
+                    }
+                }
+            })
         }
     }
 });
