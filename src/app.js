@@ -32,8 +32,9 @@ new Vue({
         message: 'hi'
     },
     created() {
-        this.$toast('<p>段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落<a href="http://qq.com">qq</a></p>', {
-            enableHtml: true
+        this.$toast('段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落', {
+            enableHtml: true,
+            autoCloseDelay: 50
         })
         // this.$toast('我是message', {
         //     closeButton: {
@@ -49,14 +50,14 @@ new Vue({
             console.log(1)
         },
         showToast() {
-            this.$toast('我是 message', {
-                closeButton: {
-                    text: '知道了',
-                    callback() {
-                        console.log('用户知道了')
-                    }
-                }
-            })
+            // this.$toast('我是 message', {
+            //     closeButton: {
+            //         text: '知道了',
+            //         callback() {
+            //             console.log('用户知道了')
+            //         }
+            //     }
+            // })
         }
     }
 });
