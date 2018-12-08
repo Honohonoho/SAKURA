@@ -49,6 +49,10 @@ export default {
                 this.close()
             }, this.autoCloseDelay * 1000)
         }
+        this.$nextTick(() => {
+            this.$refs.line.style.height = 
+                `${this.$refs.wrapper.getBoundingClientRect().height}px`
+        })
     },
     methods: {
         close() {
