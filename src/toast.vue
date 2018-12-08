@@ -1,6 +1,7 @@
 <template>
     <div class="toast">
-        <slot></slot>
+        <slot v-if="!enableHtml"></slot>
+        <div v-else v-html="$slots.default[0]"></div>
         <span class="line"></span>
         <span class="close" v-if="closeButton" @click="onClickClose">
             {{closeButton.text}}
@@ -36,6 +37,10 @@ export default {
                     callback: undefined
                 }
             }
+        },
+        enableHtml: {
+            type: Boolean,
+            default: false
         }
     },
     mounted() {
@@ -67,7 +72,7 @@ export default {
     left: 50%;
     transform: translateX(-50%);
     line-height: 20px;
-    height: 40px;
+    min-height: 40px;
     padding: 0 16px;
     display: flex;
     align-items: center;
@@ -77,8 +82,10 @@ export default {
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
     .close {
         padding-left: 16px;
+        flex-shrink: 0;
     }
     .line {
+        display: inline-block;
         height: 100%;
         border-left: 1px solid #666;
         margin-left: 16px;

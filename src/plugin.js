@@ -4,9 +4,7 @@ export default {
         Vue.prototype.$toast = function(message, toastOptions) {
             let Constructor = Vue.extend(Toast)
             let toast = new Constructor({
-                propsData: {
-                    closeButton: toastOptions.closeButton
-                }
+                propsData: toastOptions
             })
             toast.$slots.default = [message]
             toast.$mount() // 不写这句，那么tioast的生命周期钩子不会生效

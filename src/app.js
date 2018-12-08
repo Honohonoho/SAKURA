@@ -32,6 +32,9 @@ new Vue({
         message: 'hi'
     },
     created() {
+        this.$toast('<p>段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落<a href="http://qq.com">qq</a></p>', {
+            enableHtml: true
+        })
         // this.$toast('我是message', {
         //     closeButton: {
         //         text: '知道了',
