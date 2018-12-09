@@ -33,8 +33,16 @@ new Vue({
     },
     created() {
         this.$toast('段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落', {
-            enableHtml: true,
-            autoCloseDelay: 50
+            position: 'middle',
+            enableHtml: false,
+            autoCloseDelay: 50,
+            closeButton: {
+                text: '重置',
+                callback() {
+                    console.log('reset successfully')
+                }
+            },
+            autoClose: true
         })
         // this.$toast('我是message', {
         //     closeButton: {
