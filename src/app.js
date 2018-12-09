@@ -49,9 +49,37 @@ new Vue({
         inputChange() {
             console.log(1)
         },
-        showToast() {
+        showToast1() {
             this.$toast('段落段落段落段落段落', {
                 position: 'top',
+                enableHtml: false,
+                autoCloseDelay: 50,
+                closeButton: {
+                    text: '重置',
+                    callback() {
+                        console.log('reset successfully')
+                    }
+                },
+                autoClose: true
+            })
+        },
+        showToast2() {
+            this.$toast('段落段落段落段落段落', {
+                position: 'middle',
+                enableHtml: false,
+                autoCloseDelay: 50,
+                closeButton: {
+                    text: '重置',
+                    callback() {
+                        console.log('reset successfully')
+                    }
+                },
+                autoClose: true
+            })
+        },
+        showToast3() {
+            this.$toast('段落段落段落段落段落', {
+                position: 'bottom',
                 enableHtml: false,
                 autoCloseDelay: 50,
                 closeButton: {

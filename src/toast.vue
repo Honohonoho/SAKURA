@@ -77,7 +77,7 @@ export default {
 }
 </script>
 <style lang="scss">
-@keyframes fade-in {
+@keyframes slide-up {
     0% {
         opacity: 0;
         transform: translateY(100%);
@@ -88,7 +88,7 @@ export default {
     }
 }
 // 顶部toast应该由上至下出现
-@keyframes fade-top-in {
+@keyframes slide-down {
     0% {
         opacity: 0;
         transform: translateY(-100%);
@@ -98,6 +98,14 @@ export default {
         transform: translateY(0%);
     }
 }
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 .wrapper {
     position: fixed;
     left: 50%;
@@ -105,25 +113,28 @@ export default {
     &.position-top {
         top: 0;
         .toast {
+            animation: slide-down .3s;
             border-top-left-radius: 0;
             border-top-right-radius: 0;
-            animation: fade-top-in .3s;
         }
     }
     &.position-middle {
         top: 50%;
         transform: translate(-50%, -50%);
+        .toast {
+            animation: fade-in .3s;
+        }
     }
     &.position-bottom {
         bottom: 0;
         .toast {
+            animation: slide-up .3s;
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;   
         }
     }
 }
 .toast {
-    animation: fade-in .3s;
     font-size: 14px;
     line-height: 20px;
     min-height: 40px;
