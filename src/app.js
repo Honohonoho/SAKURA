@@ -32,25 +32,17 @@ new Vue({
         message: 'hi'
     },
     created() {
-        this.$toast('段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落', {
-            position: 'middle',
-            enableHtml: false,
-            autoCloseDelay: 50,
-            closeButton: {
-                text: '重置',
-                callback() {
-                    console.log('reset successfully')
-                }
-            },
-            autoClose: true
-        })
-        // this.$toast('我是message', {
+        // this.$toast('段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落', {
+        //     position: 'middle',
+        //     enableHtml: false,
+        //     autoCloseDelay: 50,
         //     closeButton: {
-        //         text: '知道了',
-        //         callback(toast) {
-        //             console.log('用户知道了')
+        //         text: '重置',
+        //         callback() {
+        //             console.log('reset successfully')
         //         }
-        //     }
+        //     },
+        //     autoClose: true
         // })
     },
     methods: {
@@ -58,14 +50,18 @@ new Vue({
             console.log(1)
         },
         showToast() {
-            // this.$toast('我是 message', {
-            //     closeButton: {
-            //         text: '知道了',
-            //         callback() {
-            //             console.log('用户知道了')
-            //         }
-            //     }
-            // })
+            this.$toast('段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落', {
+                position: 'middle',
+                enableHtml: false,
+                autoCloseDelay: 50,
+                closeButton: {
+                    text: '重置',
+                    callback() {
+                        console.log('reset successfully')
+                    }
+                },
+                autoClose: true
+            })
         }
     }
 });
