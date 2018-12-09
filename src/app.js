@@ -51,7 +51,7 @@ new Vue({
         },
         showToast() {
             this.$toast('段落段落段落段落段落', {
-                position: 'bottom',
+                position: 'top',
                 enableHtml: false,
                 autoCloseDelay: 50,
                 closeButton: {
