@@ -50,8 +50,8 @@ new Vue({
             console.log(1)
         },
         showToast() {
-            this.$toast('段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落', {
-                position: 'middle',
+            this.$toast('段落段落段落段落段落', {
+                position: 'bottom',
                 enableHtml: false,
                 autoCloseDelay: 50,
                 closeButton: {

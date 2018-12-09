@@ -62,6 +62,7 @@ export default {
     methods: {
         close() {
             this.$el.remove()
+            this.$emit('beforeClose')
             this.$destroy()
         },
         onClickClose() {
@@ -74,7 +75,18 @@ export default {
 }
 </script>
 <style lang="scss">
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
 .toast {
+    animation: fade-in .3s;
     font-size: 14px;
     position: fixed;
     left: 50%;
