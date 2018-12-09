@@ -105,6 +105,8 @@ export default {
     &.position-top {
         top: 0;
         .toast {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
             animation: fade-top-in .3s;
         }
     }
@@ -114,6 +116,10 @@ export default {
     }
     &.position-bottom {
         bottom: 0;
+        .toast {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;   
+        }
     }
 }
 .toast {
