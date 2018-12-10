@@ -24,8 +24,8 @@ function createToast({Vue, message, propsData, onClose}) {
         propsData
     })
     toast.$slots.default = [message]
-    toast.$mount() // 不写这句，那么tioast的生命周期钩子不会生效
-    toast.$on('beforeClose', onClose)
+    toast.$mount() // 不写这句，那么toast的生命周期钩子不会生效
+    toast.$on('close', onClose)
     document.body.appendChild(toast.$el)
     return toast
 }
