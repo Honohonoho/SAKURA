@@ -1,6 +1,7 @@
 const expect = chai.expect;
 import Vue from 'vue'
 import Toast from '../src/toast'
+import { version } from 'punycode';
 
 Vue.config.productionTip = false
 Vue.config.devtools = false
@@ -39,6 +40,18 @@ describe('Toast', () => {
             expect(closeButton.textContent.trim()).to.eq('关闭~')
             closeButton.click()
             expect(callback).to.have.been.called
+        })
+        it('接受 enableHtml', function () {
+            const Constructor = Vue.extend(Toast)
+            const vm = new Constructor({
+                propsData: {
+                    enableHtml: true
+                }
+            })
+            vm.$slots.default = ['<strong id="test">hi</strong>']
+            vm.$mount()
+            let node = vm.$el.querySelector('#test')
+            expect(node).to.exist
         })
     })
 })
