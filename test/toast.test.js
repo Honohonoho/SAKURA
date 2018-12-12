@@ -53,5 +53,14 @@ describe('Toast', () => {
             let node = vm.$el.querySelector('#test')
             expect(node).to.exist
         })
+        it('接受 position', function () {
+            const Constructor = Vue.extend(Toast)
+            const vm = new Constructor({
+                propsData: {
+                    position: 'bottom'
+                }
+            }).$mount()
+            expect(vm.$el.classList.contains('position-bottom')).to.eq(true)
+        })
     })
 })
