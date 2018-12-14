@@ -26,15 +26,24 @@
             --border-color: #999;
             --border-color-hover: #666;
         }
-        .box {
-            /* margin: 20px; */
-        }
     </style>
 </head>
 
 <body>
     <div id="app">
-        <button @click="showToast1">
+        <g-tabs selected="sport">
+            <g-tabs-head>
+                <g-tabs-item name="tech">科技</g-tabs-item>
+                <g-tabs-item name="finance">财经</g-tabs-item>
+                <g-tabs-item name="sport">体育</g-tabs-item>
+            </g-tabs-head>
+            <g-tabs-body>
+                <g-tabs-pane name="tech">tech news</g-tabs-pane>
+                <g-tabs-pane name="finance">finance news</g-tabs-pane>
+                <g-tabs-pane name="sport">sport news</g-tabs-pane>
+            </g-tabs-body>
+        </g-tabs>
+        <!-- <button @click="showToast1">
            top
         </button>
         <button @click="showToast2">
@@ -42,7 +51,7 @@
          </button>
          <button @click="showToast3">
             bottom
-         </button>
+         </button> -->
         <!-- <g-layout>
             <g-sider>sider</g-sider>
             <g-layout>

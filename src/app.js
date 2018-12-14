@@ -9,6 +9,11 @@ import Content from './content';
 import Sider from './sider';
 import Footer from './footer';
 import Toast from './toast';
+import Tabs from './tabs';
+import Tabshead from './tabs-head';
+import TabsBody from './tabs-body';
+import TabsItem from './tabs-item';
+import TabsPane from './tabs-pane';
 import plugin from './plugin';
 
 Vue.component('g-button', Button);
@@ -21,6 +26,11 @@ Vue.component('g-content', Content);
 Vue.component('g-sider', Sider);
 Vue.component('g-footer', Footer);
 Vue.component('g-toast', Toast);
+Vue.component('g-tabs', Tabs);
+Vue.component('g-tabs-head', Tabshead);
+Vue.component('g-tabs-body', TabsBody);
+Vue.component('g-tabs-item', TabsItem);
+Vue.component('g-tabs-pane', TabsPane);
 Vue.use(plugin);
 
 new Vue({
@@ -32,60 +42,49 @@ new Vue({
         message: 'hi'
     },
     created() {
-        // this.$toast('段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落', {
-        //     position: 'middle',
-        //     enableHtml: false,
-        //     closeButton: {
-        //         text: '重置',
-        //         callback() {
-        //             console.log('reset successfully')
-        //         }
-        //     },
-        //     autoClose: true
-        // })
     },
     methods: {
-        inputChange() {
-            console.log(1)
-        },
-        showToast1() {
-            this.$toast('段落段落段落段落段落', {
-                position: 'top',
-                enableHtml: false,
-                closeButton: {
-                    text: '重置',
-                    callback() {
-                        console.log('reset successfully')
-                    }
-                },
-                autoClose: 1
-            })
-        },
-        showToast2() {
-            this.$toast('段落段落段落段落段落', {
-                position: 'middle',
-                enableHtml: false,
-                closeButton: {
-                    text: '重置',
-                    callback() {
-                        console.log('reset successfully')
-                    }
-                },
-                autoClose: false
-            })
-        },
-        showToast3() {
-            this.$toast('段落段落段落段落段落', {
-                position: 'bottom',
-                enableHtml: false,
-                closeButton: {
-                    text: '重置',
-                    callback() {
-                        console.log('reset successfully')
-                    }
-                },
-                autoClose: false
-            })
-        }
+        // inputChange() {
+        //     console.log(1)
+        // },
+        // showToast1() {
+        //     this.$toast('段落段落段落段落段落', {
+        //         position: 'top',
+        //         enableHtml: false,
+        //         closeButton: {
+        //             text: '重置',
+        //             callback() {
+        //                 console.log('reset successfully')
+        //             }
+        //         },
+        //         autoClose: 1
+        //     })
+        // },
+        // showToast2() {
+        //     this.$toast('段落段落段落段落段落', {
+        //         position: 'middle',
+        //         enableHtml: false,
+        //         closeButton: {
+        //             text: '重置',
+        //             callback() {
+        //                 console.log('reset successfully')
+        //             }
+        //         },
+        //         autoClose: false
+        //     })
+        // },
+        // showToast3() {
+        //     this.$toast('段落段落段落段落段落', {
+        //         position: 'bottom',
+        //         enableHtml: false,
+        //         closeButton: {
+        //             text: '重置',
+        //             callback() {
+        //                 console.log('reset successfully')
+        //             }
+        //         },
+        //         autoClose: false
+        //     })
+        // }
     }
 });
