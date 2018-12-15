@@ -4,6 +4,7 @@
     </div>
 </template>
 <script>
+import Vue from 'vue'
 export default {
     name: 'g-tabs',
     props: {
@@ -18,6 +19,16 @@ export default {
                 return ['vertical', 'horizontal'].indexOf(value) >= 0
             }
         }
+    },
+    data() {
+        return {
+            eventBus: new Vue()
+        }
+    },
+    provide() {
+        return {
+            eventBus: this.eventBus
+        } 
     },
     created() {
 

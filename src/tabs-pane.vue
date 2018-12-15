@@ -5,7 +5,8 @@
 </template>
 <script>
 export default {
-    name: 'g-tabs-pane'
+    name: 'g-tabs-pane',
+    inject: ['eventBus'],
 }
 </script>
 <style lang="scss">

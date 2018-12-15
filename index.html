@@ -31,10 +31,17 @@
 
 <body>
     <div id="app">
-        <g-tabs selected="sport">
+        <g-tabs selected="selectedTab" @update:selected="selectedTab = $event">
+        <!-- <g-tabs :selected.sync="selectedTab" selected="selectedTab"> -->
             <g-tabs-head>
-                <g-tabs-item name="tech">科技</g-tabs-item>
-                <g-tabs-item name="finance">财经</g-tabs-item>
+                <template slot="action">
+                    <button>设置</button>
+                </template>   
+                <g-tabs-item name="tech">
+                    <g-icon name="settings"></g-icon>
+                    科技
+                </g-tabs-item>
+                <g-tabs-item name="finance" disabled>财经</g-tabs-item>
                 <g-tabs-item name="sport">体育</g-tabs-item>
             </g-tabs-head>
             <g-tabs-body>

@@ -6,7 +6,10 @@
 </template>
 <script>
 export default {
-    name: 'g-tabs-head'
+    name: 'g-tabs-head',
+    inject: ['eventBus'],
+    created() {
+    }
 }
 </script>
 <style lang="scss">
