@@ -32,11 +32,16 @@ export default {
     },
     created() {
 
+    },
+    mounted() {
+        this.eventBus.$emit('update:selected', this.selected)
     }
 }
 </script>
 <style lang="scss">
-
+.tabs {
+    
+}
 </style>
 
 

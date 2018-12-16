@@ -46,6 +46,9 @@ new Vue({
     created() {
     },
     methods: {
+        yyy(){
+            
+        }
         // inputChange() {
         //     console.log(1)
         // },
