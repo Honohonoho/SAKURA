@@ -34,6 +34,7 @@ export default {
 </script>
 <style lang="scss">
 .tabs-pane {
+    padding: 1em;
     &.active {
     }
 }

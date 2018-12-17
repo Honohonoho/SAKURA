@@ -34,14 +34,18 @@ $blue: blue;
     height: $tab-height;
     justify-content: flex-start;
     align-items: center;
-    border: 1px solid red;
     position: relative;
+    border-bottom: 1px solid #ddd;
     > .action-wrapper {
         margin-left: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1em;
     }
     > .line {
         position: absolute;
-        bottom: 0;
+        bottom: -1px;
         border-bottom: 1px solid $blue;
         transition: all .3s;
     }
