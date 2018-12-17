@@ -34,7 +34,15 @@ export default {
 
     },
     mounted() {
-        this.eventBus.$emit('update:selected', this.selected)
+        this.$children.forEach((child)=>{
+            if(child.$options.name === 'g-tabs-head') {
+                child.$children.forEach((item)=> {
+                    if(item.$options.name === 'g-tabs-item' && item.name === this.selected) {
+                        this.eventBus.$emit('update:selected', this.selected, item)
+                    }
+                })
+            }
+        })
     }
 }
 </script>
