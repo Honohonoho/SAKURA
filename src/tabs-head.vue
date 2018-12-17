@@ -1,7 +1,7 @@
 <template>
     <div class="tabs-head">
         <slot></slot>
-        <div class="line" ref="line"></div>
+        <div class="line" ref="line" v-show="Showline"></div>
         <div class="action-wrapper">
             <slot name="action"></slot>   
         </div>
@@ -11,9 +11,17 @@
 export default {
     name: 'g-tabs-head',
     inject: ['eventBus'],
-    created() {
+    data(){
+        return {
+            Showline: false
+        }
+    },
+    mounted() {
         this.eventBus.$on('update:selected', (item, vm)=> {
-            // console.log(item, vm)
+            this.Showline = true
+            let {width, height, top, left} = vm.$el.getBoundingClientRect()
+            this.$refs.line.style.width = `${width}px`
+            this.$refs.line.style.transform = `translateX(${left}px)`
         })
     }
 }
@@ -35,7 +43,7 @@ $blue: blue;
         position: absolute;
         bottom: 0;
         border-bottom: 1px solid $blue;
-        width: 100px;
+        transition: all .3s;
     }
 }
 </style>
