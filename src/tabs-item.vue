@@ -13,7 +13,7 @@ export default {
             default: false
         },
         name: {
-            type: String|Number,
+            type: String | Number,
             require: true
         }
     },
@@ -43,8 +43,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 .tabs-item {
+    height: 100%;
     flex-shrink: 0;
     padding: 0 2em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
     &.active {
         background: red;
     }

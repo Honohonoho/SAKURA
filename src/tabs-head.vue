@@ -11,7 +11,7 @@ export default {
     name: 'g-tabs-head',
     inject: ['eventBus'],
     created() {
-        this.$emit('update:selected', 'head')
+        //this.$emit('update:selected', 'head')
     }
 }
 </script>
