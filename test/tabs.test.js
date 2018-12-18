@@ -39,7 +39,7 @@ describe('Tabs', () => {
             el: div
         })
         vm.$nextTick(() => {
-            let node = vm.$el.querySelector('.tabs-item:nth-child(3)')
+            let node = vm.$el.querySelector(`.tabs-item[data-name="sport"]`)
             expect(node.classList.contains('active')).to.be.true
             done()
         })
