@@ -34,6 +34,9 @@ export default {
 
     },
     mounted() {
+        if (this.$children.length === 0) {
+            console.warn('children of Tabs component should be tabs-head or tabs-body.')
+        }
         this.$children.forEach((child)=>{
             if(child.$options.name === 'g-tabs-head') {
                 child.$children.forEach((item)=> {
