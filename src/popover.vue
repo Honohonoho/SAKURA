@@ -1,5 +1,5 @@
 <template>
-    <div class="popover" @click.stop="xxx">
+    <div class="popover" @click="onClick">
         <div ref="contentWrapper" class="content-wrapper" v-if="visible">
             <slot name="content"></slot>
         </div>
@@ -20,20 +20,24 @@ export default {
 
     },
     methods: {
-        xxx() {
-            this.visible = !this.visible
-            if(this.visible === true) {
-                this.$nextTick(()=> {
-                    document.body.appendChild(this.$refs.contentWrapper)
-                    let {width, height, top, left} = this.$refs.triggerWrapper.getBoundingClientRect()
-                    this.$refs.contentWrapper.style.left = left + window.scrollX + 'px'
-                    this.$refs.contentWrapper.style.top = top + window.scrollY + 'px'
-                    let eventHandler = ()=> {
-                        this.visible = false
-                        document.removeEventListener('click', eventHandler)
-                    }
-                    document.addEventListener('click', eventHandler)
-                })
+        onClick(event) {
+            if (this.$refs.triggerWrapper.contains(event.target)) {
+                this.visible = !this.visible
+                if(this.visible === true) {
+                    this.$nextTick(()=> {
+                        document.body.appendChild(this.$refs.contentWrapper)
+                        let {width, height, top, left} = this.$refs.triggerWrapper.getBoundingClientRect()
+                        this.$refs.contentWrapper.style.left = left + window.scrollX + 'px'
+                        this.$refs.contentWrapper.style.top = top + window.scrollY + 'px'
+                        let eventHandler = (e)=> {
+                            if (!this.$refs.contentWrapper.contains(e.target)) {
+                                this.visible = false
+                                document.removeEventListener('click', eventHandler)
+                            }
+                        }
+                        document.addEventListener('click', eventHandler)
+                    })
+                }
             }
         },
     }
