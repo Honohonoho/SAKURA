@@ -26,6 +26,9 @@
             --border-color: #999;
             --border-color-hover: #666;
         }
+        .popover {
+            margin: 10px;
+        }
     </style>
 </head>
 
@@ -63,6 +66,41 @@
                 <g-button>right点我</g-button>
             </template>
         </g-popover>
+        <div style="margin-top: 20px;">
+            <p>hover触发</p>
+            <g-popover trigger="hover">
+                <template slot="content">
+                    <div>123123132aspfjsdfsdklgndlskavklsdjcl;sdjmvklfdnbklvndfk</div>
+                </template>
+                <template>
+                    <g-button>top点我</g-button>
+                </template>
+            </g-popover>
+            <g-popover position="bottom" trigger="hover">
+                <template slot="content">
+                    <div>123123132aspfjsdfsdklgndlskavklsdjcl;sdjmvklfdnbklvndfk</div>
+                </template>
+                <template>
+                    <g-button>bottom点我</g-button>
+                </template>
+            </g-popover>
+            <g-popover position="left" trigger="hover">
+                <template slot="content">
+                    <div>123123132aspfjsdfsdklgndlskavklsdjcl;sdjmvklfdnbklvndfk</div>
+                </template>
+                <template>
+                    <g-button>left点我</g-button>
+                </template>
+            </g-popover>
+            <g-popover position="right" trigger="hover">
+                <template slot="content">
+                    <div>123123132aspfjsdfsdklgndlskavklsdjcl;sdjmvklfdnbklvndfk</div>
+                </template>
+                <template>
+                    <g-button>right点我</g-button>
+                </template>
+            </g-popover>
+        </div>
         <!-- <g-tabs selected="sport" @update:selected="yyy">
             <g-tabs-head>
                 <template slot="action">

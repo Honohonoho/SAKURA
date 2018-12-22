@@ -18,6 +18,13 @@ export default {
             validator(value) {
                 return ['top', 'bottom', 'left', 'right'].indexOf(value) >= 0
             }
+        },
+        trigger: {
+            type: String,
+            default: 'click',
+            validator(value) {
+                return ['click', 'hover'].indexOf(value) >= 0
+            }
         }
     },
     data() {
