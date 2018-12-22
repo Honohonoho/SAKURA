@@ -59,6 +59,14 @@ export default {
             this.$refs.popover.addEventListener('mouseleave', this.onMouseLeave)
         }
     },
+    destroyed() {
+        if (this.trigger === 'click') {
+            this.$refs.popover.removeEventListener('click', this.onClick)
+        } else {
+            this.$refs.popover.removeEventListener('mouseenter', this.onMouseEnter)
+            this.$refs.popover.removeEventListener('mouseleave', this.onMouseLeave)
+        }
+    },
     methods: {
         onClick(event) {
             if (this.$refs.triggerWrapper.contains(event.target)) {
