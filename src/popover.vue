@@ -1,5 +1,5 @@
 <template>
-    <div class="popover" ref="popover" @click="onClick">
+    <div class="popover" ref="popover">
         <div ref="contentWrapper" class="content-wrapper" :class="{[`position-${position}`]: true}" v-if="visible">
             <slot name="content"></slot>
         </div>
@@ -29,11 +29,35 @@ export default {
     },
     data() {
         return {
-            visible: false
+            visible: false, 
         }
     },
-    mounted(){
+    computed: {
+        showEvent() {
+            if (this.trigger === 'click') {
+                return 'click'
+            } else {
+                return 'mouseenter'
+            }
+        },
+        closeEvent() {
+            if (this.trigger === 'click') {
+                return 'click'
+            } else {
+                return 'mouseleave'
+            }
+        }
+    },
+    created() {
 
+    },
+    mounted(){
+        if (this.trigger === 'click') {
+            this.$refs.popover.addEventListener('click', this.onClick)
+        } else {
+            this.$refs.popover.addEventListener('mouseenter', this.onMouseEnter)
+            this.$refs.popover.addEventListener('mouseleave', this.onMouseLeave)
+        }
     },
     methods: {
         onClick(event) {
@@ -44,6 +68,15 @@ export default {
                     this.showContentNextTick()
                 }
             }
+        },
+        onMouseEnter() {
+            this.visible = true
+            this.$nextTick(()=> {
+                this.positionContent()
+            })
+        },
+        onMouseLeave() {
+            this.visible = false
         },
         closeContentAndRemoveListener() {
             this.visible = false
@@ -90,8 +123,8 @@ export default {
                 return
             }
             if (
-                this.$refs.contentWrapper &&
-                (this.$refs.contentWrapper === e.target || this.$refs.contentWrapper.contains(e.target))
+                this.$refs.triggerWrapper &&
+                (this.$refs.triggerWrapper === e.target || this.$refs.triggerWrapper.contains(e.target))
             ) {
                 return
             }
