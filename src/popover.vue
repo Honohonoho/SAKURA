@@ -50,14 +50,25 @@ export default {
             })
         },
         positionContent() {
-            document.body.appendChild(this.$refs.contentWrapper)
-            let {width, height, top, left} = this.$refs.triggerWrapper.getBoundingClientRect()
+            const {contentWrapper, triggerWrapper} = this.$refs
+            document.body.appendChild(contentWrapper)
+            let {width, height, top, left} = triggerWrapper.getBoundingClientRect()
             if (this.position === 'top') {
-                this.$refs.contentWrapper.style.left = left + window.scrollX + 'px'
-                this.$refs.contentWrapper.style.top = top + window.scrollY + 'px'      
+                contentWrapper.style.left = left + window.scrollX + 'px'
+                contentWrapper.style.top = top + window.scrollY + 'px'      
             }else if(this.position === 'bottom') {
-                this.$refs.contentWrapper.style.left = left + window.scrollX + 'px'
-                this.$refs.contentWrapper.style.top = top + height + window.scrollY + 'px'
+                contentWrapper.style.left = left + window.scrollX + 'px'
+                contentWrapper.style.top = top + height + window.scrollY + 'px'
+            }else if(this.position === 'left') {
+                contentWrapper.style.left =  left + window.scrollX + 'px'
+                let {height: selfHeight} = contentWrapper.getBoundingClientRect()
+                contentWrapper.style.top = top + window.scrollY + 
+                    (height - selfHeight)/2 + 'px'
+            }else if(this.position === 'right') {
+                contentWrapper.style.left = left + width + window.scrollX + 'px'
+                let {height: selfHeight} = contentWrapper.getBoundingClientRect()
+                contentWrapper.style.top = top + window.scrollY + 
+                    (height - selfHeight)/2 + 'px'
             }
         },
         onClickDocument(e) {
@@ -93,7 +104,6 @@ $border-radius: 4px;
     position: absolute;
     border: 1px solid $border-color;
     border-radius: $border-radius;
-    // box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
     filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.5));
     background: #fff;
     padding: .5em 1em;
@@ -115,11 +125,11 @@ $border-radius: 4px;
         }
         &::before {
             border-top-color: $border-color;
-            top: 101%;
+            top: 100%;
         }
         &::after {
             border-top-color: #ffffff;
-            top: 100%;
+            top: calc(100% - 1px);
         }
     }
     &.position-bottom {
@@ -137,10 +147,35 @@ $border-radius: 4px;
         }
     }
     &.position-left {
-        
+        margin-left: -10px;
+        transform: translateX(-100%);
+        &::before, &::after {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        &::before {
+            border-left-color: $border-color;
+            left: 100%;
+        }
+        &::after {
+            border-left-color: #ffffff;
+            left: calc(100% - 1px);
+        }
     }
     &.position-right {
-        
+        margin-left: 10px;
+        &::before, &::after {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        &::before {
+            border-right-color: $border-color;
+            right: 100%;
+        }
+        &::after {
+            border-right-color: #ffffff;
+            right: calc(100% - 1px);
+        }
     }
 }
 </style>
