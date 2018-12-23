@@ -44,8 +44,9 @@
             </template>
         </g-popover>
         <g-popover position="bottom">
-            <template slot="content">
-                <div>短内容</div>
+            <template slot="content" slot-scope="{close}">
+                <div>短内容短内容短内容</div>
+                <g-button @click="close">关闭</g-button>
             </template>
             <template>
                 <g-button>bottom点我</g-button>
