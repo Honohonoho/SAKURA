@@ -7,14 +7,24 @@
 import Vue from 'vue';
 export default {
     name: 'g-collapse',
+    props: {
+        // 每次只有一个content展开
+        accordion: {
+            type: Boolean,
+            default: false
+        }
+    },
     data() {
         return {
             eventBus: new Vue()
         }
     },
     provide() {
-        return {
-            eventBus: this.eventBus
+        console.log(this.accordion)
+        if (this.accordion) {
+            return {
+                eventBus: this.eventBus
+            }
         }
     }
 }

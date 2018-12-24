@@ -24,7 +24,7 @@ export default {
         }
     },
     mounted() {
-        this.eventBus.$on('update:selsected', (vm) => {
+        this.eventBus && this.eventBus.$on('update:selsected', (vm) => {
             if (vm !== this) {
                 this.closeContent()
             }
@@ -36,7 +36,7 @@ export default {
                 this.contentVisible = false
             } else {
                 this.contentVisible = true
-                this.eventBus.$emit('update:selsected', this)
+                this.eventBus && this.eventBus.$emit('update:selsected', this)
             }
         },
         closeContent() {
