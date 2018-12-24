@@ -4,8 +4,19 @@
     </div>
 </template>
 <script>
+import Vue from 'vue';
 export default {
-    name: 'g-collapse'
+    name: 'g-collapse',
+    data() {
+        return {
+            eventBus: new Vue()
+        }
+    },
+    provide() {
+        return {
+            eventBus: this.eventBus
+        }
+    }
 }
 </script>
 <style lang="scss">

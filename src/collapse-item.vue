@@ -1,9 +1,9 @@
 <template>
     <div class="collapse-item">
-        <div class="title">
+        <div class="title" @click="toggleContent">
             {{title}}
         </div>
-        <div class="content" v-if="open">
+        <div class="content" v-if="contentVisible">
             <slot></slot>
         </div>
     </div>
@@ -11,6 +11,7 @@
 <script>
 export default {
     name: 'g-collapse-item',
+    inject: ['eventBus'],
     props: {
         title: {
             type: String,
@@ -19,7 +20,27 @@ export default {
     },
     data() {
         return {
-            open: false
+            contentVisible: false
+        }
+    },
+    mounted() {
+        this.eventBus.$on('update:selsected', (vm) => {
+            if (vm !== this) {
+                this.closeContent()
+            }
+        })
+    },
+    methods: {
+        toggleContent() {
+            if (this.contentVisible) {
+                this.contentVisible = false
+            } else {
+                this.contentVisible = true
+                this.eventBus.$emit('update:selsected', this)
+            }
+        },
+        closeContent() {
+            this.contentVisible = false
         }
     }
 }
