@@ -12,6 +12,9 @@ export default {
         accordion: {
             type: Boolean,
             default: false
+        },
+        selected: {
+            type: String
         }
     },
     data() {
@@ -20,12 +23,14 @@ export default {
         }
     },
     provide() {
-        console.log(this.accordion)
         if (this.accordion) {
             return {
                 eventBus: this.eventBus
             }
         }
+    },
+    mounted(){
+        this.eventBus.$emit('update:selected', this.selected)
     }
 }
 </script>
