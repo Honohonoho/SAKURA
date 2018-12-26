@@ -25,17 +25,14 @@ export default {
     data() {
         return {
             contentVisible: false,
-            accordion: false
         }
     },
     mounted() {
         this.eventBus && this.eventBus.$on('update:selected', (names) => {
             if (names.indexOf(this.name) >= 0) {
-                this.showContent()
+                this.contentVisible = true
             } else {
-                if (this.accordion) {
-                    this.closeContent()
-                }
+                this.contentVisible = false
             }
         })
     },
@@ -47,12 +44,6 @@ export default {
                 this.eventBus && this.eventBus.$emit('update:addSelected', this.name)
             }
         },
-        closeContent() {
-            this.contentVisible = false
-        },
-        showContent() {
-            this.contentVisible = true
-        }
     }
 }
 </script>

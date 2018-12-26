@@ -30,16 +30,22 @@ export default {
     mounted(){
         this.eventBus.$emit('update:selected', this.selected)
         this.eventBus.$on('update:addSelected', (name) => {
-            this.selected.push(name)
-            this.$emit('update:selected', this.selected)
+            // deep copy this.selected
+            let deepCopySelected = JSON.parse(JSON.stringify(this.selected))
+            if (this.accordion) {
+                deepCopySelected = [name]
+            } else {
+                deepCopySelected.push(name)
+            }
+            this.$emit('update:selected', deepCopySelected)
+            this.eventBus.$emit('update:selected', deepCopySelected)
         })
         this.eventBus.$on('update:removeSelected', (name) => {
-            let index = this.selected.indexOf(name)
-            this.selected.splice(index,1)
-            this.$emit('update:selected', this.selected)
-        })
-        this.$children.forEach((vm) => {
-            vm.accordion = this.accordion
+            let deepCopySelected = JSON.parse(JSON.stringify(this.selected))
+            let index = deepCopySelected.indexOf(name)
+            deepCopySelected.splice(index,1)
+            this.$emit('update:selected', deepCopySelected)
+            this.eventBus.$emit('update:selected', deepCopySelected)
         })
     }
 }
