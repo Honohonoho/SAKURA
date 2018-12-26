@@ -24,25 +24,27 @@ export default {
     },
     data() {
         return {
-            contentVisible: false
+            contentVisible: false,
+            accordion: false
         }
     },
     mounted() {
-        this.eventBus && this.eventBus.$on('update:selected', (name) => {
-            if (name !== this.name) {
-                this.closeContent()
-            } else {
+        this.eventBus && this.eventBus.$on('update:selected', (names) => {
+            if (names.indexOf(this.name) >= 0) {
                 this.showContent()
+            } else {
+                if (this.accordion) {
+                    this.closeContent()
+                }
             }
         })
     },
     methods: {
         toggleContent() {
             if (this.contentVisible) {
-                this.contentVisible = false
+                this.eventBus && this.eventBus.$emit('update:removeSelected', this.name)
             } else {
-                // this.contentVisible = true
-                this.eventBus && this.eventBus.$emit('update:selected', this.name)
+                this.eventBus && this.eventBus.$emit('update:addSelected', this.name)
             }
         },
         closeContent() {

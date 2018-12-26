@@ -14,7 +14,7 @@ export default {
             default: false
         },
         selected: {
-            type: String
+            type: Array
         }
     },
     data() {
@@ -23,14 +23,24 @@ export default {
         }
     },
     provide() {
-        if (this.accordion) {
-            return {
-                eventBus: this.eventBus
-            }
+        return {
+            eventBus: this.eventBus
         }
     },
     mounted(){
         this.eventBus.$emit('update:selected', this.selected)
+        this.eventBus.$on('update:addSelected', (name) => {
+            this.selected.push(name)
+            this.$emit('update:selected', this.selected)
+        })
+        this.eventBus.$on('update:removeSelected', (name) => {
+            let index = this.selected.indexOf(name)
+            this.selected.splice(index,1)
+            this.$emit('update:selected', this.selected)
+        })
+        this.$children.forEach((vm) => {
+            vm.accordion = this.accordion
+        })
     }
 }
 </script>
