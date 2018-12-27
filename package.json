@@ -7,7 +7,9 @@
     "dev-test": "npx parcel watch test/* --no-cache",
     "test": "parcel build test/* --no-minify && karma start --single-run",
     "start": "npx parcel index.html --no-cache",
-    "karma": "npx karma start"
+    "karma": "npx karma start",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "repository": {
     "type": "git",
@@ -42,7 +44,8 @@
     "sass": "^1.14.3",
     "sinon": "^7.1.1",
     "sinon-chai": "^3.2.0",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.5.17",
+    "vuepress": "^0.14.8"
   },
   "alias": {
     "vue": "./node_modules/vue/dist/vue.common.js"
