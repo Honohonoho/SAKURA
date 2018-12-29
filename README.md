@@ -1,6 +1,6 @@
-# lunzi 一个 VUE UI 组件
+# SAKURA 一个 VUE UI 组件
 
-[![Build Status](https://travis-ci.org/Honohonoho/lunzi.svg?branch=master)](https://travis-ci.org/Honohonoho/lunzi)
+[![Build Status](https://travis-ci.org/Honohonoho/SAKURA.svg?branch=master)](https://travis-ci.org/Honohonoho/SAKURA)
 
 ## 介绍
 

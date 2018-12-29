@@ -1,4 +1,5 @@
 module.exports = {
+    base: '/SAKURA/',
     title: 'SAKURA UI 官网',
     description: '一个好用的 UI 组件库',
     sidebarDepth: 2,

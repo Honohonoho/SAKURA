@@ -5,4 +5,6 @@ sidebarDepth: 2
 
 使用方法
 
-<button-demo>默认按钮</button-demo>
+<ClientOnly>
+  <button-demo>默认按钮</button-demo>
+</ClientOnly>
