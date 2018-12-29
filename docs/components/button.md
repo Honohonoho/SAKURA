@@ -1,10 +1,7 @@
----
-sidebarDepth: 2
----
-# 按钮
+# Button - 按钮
 
 使用方法
 
 <ClientOnly>
-  <button-demo>默认按钮</button-demo>
+  <button-demo></button-demo>
 </ClientOnly>
