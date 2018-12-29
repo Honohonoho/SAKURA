@@ -73,6 +73,12 @@ $border-color-hover: #666;
     &[disabled] {
         cursor: not-allowed;
     }
+    &[disabled]:hover {
+        border-color: $border-color;
+    }
+    &[disabled]:active {
+        background-color: $button-background;
+    }
     > .icon {
         order: 1;
         margin-right: .3em;
