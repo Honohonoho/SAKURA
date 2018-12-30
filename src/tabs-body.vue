@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-    name: 'g-tabs-body',
+    name: 's-tabs-body',
     inject: ['eventBus'],
 }
 </script>

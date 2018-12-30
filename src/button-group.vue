@@ -1,5 +1,5 @@
 <template>
-    <div class="g-button-group">
+    <div class="s-button-group">
         <slot></slot>
     </div>
 </template>
@@ -9,17 +9,17 @@ export default {
         for (let node of this.$el.children) {
             let name = node.nodeName.toLowerCase()
             if(name !== 'button') {
-                console.warn(`The child node of <g-button-group> expect be <g-gutton>, but got <${name}>`)
+                console.warn(`The child node of <s-button-group> expect be <s-gutton>, but got <${name}>`)
             }
         }
     }
 }
 </script>
 <style lang="scss">
-.g-button-group {
+.s-button-group {
     display: inline-flex;
     vertical-align: top;
-    > .g-button {
+    > .s-button {
         border-radius: 0;
         margin-left: -1px; // 去除边框重叠
         &:not(:first-child) {

@@ -9,7 +9,7 @@
 </template>
 <script>
 export default {
-    name: 'g-tabs-head',
+    name: 's-tabs-head',
     inject: ['eventBus'],
     data(){
         return {

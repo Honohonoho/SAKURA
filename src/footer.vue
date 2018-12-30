@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-    name: 'g-footer'
+    name: 's-footer'
 }
 </script>
 

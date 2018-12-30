@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-    name: 'g-header'
+    name: 's-header'
 }
 </script>
 

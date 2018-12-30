@@ -6,7 +6,7 @@
 <script>
 import Vue from 'vue'
 export default {
-    name: 'g-tabs',
+    name: 's-tabs',
     props: {
         selected: {
             type: String,
@@ -38,9 +38,9 @@ export default {
             console.warn('children of Tabs component should be tabs-head or tabs-body.')
         }
         this.$children.forEach((child)=>{
-            if(child.$options.name === 'g-tabs-head') {
+            if(child.$options.name === 's-tabs-head') {
                 child.$children.forEach((item)=> {
-                    if(item.$options.name === 'g-tabs-item' && item.name === this.selected) {
+                    if(item.$options.name === 's-tabs-item' && item.name === this.selected) {
                         this.eventBus.$emit('update:selected', this.selected, item)
                     }
                 })

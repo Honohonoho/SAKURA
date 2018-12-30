@@ -6,7 +6,7 @@
 <script>
 import Vue from 'vue';
 export default {
-    name: 'g-collapse',
+    name: 's-collapse',
     props: {
         // 每次只有一个content展开
         accordion: {

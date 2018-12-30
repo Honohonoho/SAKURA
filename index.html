@@ -34,99 +34,99 @@
 
 <body>
     <div id="app" style="padding: 100px;">
-        <g-collapse :selected.sync="selectedTab" accordion>
-            <g-collapse-item title="标题1" name="1">内容1</g-collapse-item>
-            <g-collapse-item title="标题2" name="2">内容2</g-collapse-item>
-            <g-collapse-item title="标题3" name="3">内容3</g-collapse-item>
-        </g-collapse>
+        <s-collapse :selected.sync="selectedTab" accordion>
+            <s-collapse-item title="标题1" name="1">内容1</s-collapse-item>
+            <s-collapse-item title="标题2" name="2">内容2</s-collapse-item>
+            <s-collapse-item title="标题3" name="3">内容3</s-collapse-item>
+        </s-collapse>
         {{selectedTab}}
         <!-- <p>click触发</p>
-        <g-popover>
+        <s-popover>
             <template slot="content">
                 <div>长内容123123132aspfjsdfsdklgndlskavklsdjcl;sdjmvklfdnbklvndfk</div>
             </template>
             <template>
-                <g-button>top点我</g-button>
+                <s-button>top点我</s-button>
             </template>
-        </g-popover>
-        <g-popover position="bottom">
+        </s-popover>
+        <s-popover position="bottom">
             <template slot="content" slot-scope="{close}">
                 <div>短内容短内容短内容</div>
-                <g-button @click="close">关闭</g-button>
+                <s-button @click="close">关闭</s-button>
             </template>
             <template>
-                <g-button>bottom点我</g-button>
+                <s-button>bottom点我</s-button>
             </template>
-        </g-popover>
-        <g-popover position="left">
+        </s-popover>
+        <s-popover position="left">
             <template slot="content">
                 <div>短内容</div>
             </template>
             <template>
-                <g-button>left点我</g-button>
+                <s-button>left点我</s-button>
             </template>
-        </g-popover>
-        <g-popover position="right">
+        </s-popover>
+        <s-popover position="right">
             <template slot="content">
                 <div>短内容</div>
             </template>
             <template>
-                <g-button>right点我</g-button>
+                <s-button>right点我</s-button>
             </template>
-        </g-popover>
+        </s-popover>
         <div style="margin-top: 20px;">
             <p>hover触发</p>
-            <g-popover trigger="hover">
+            <s-popover trigger="hover">
                 <template slot="content">
                     <div>长内容123123132aspfjsdfsdklgndlskavklsdjcl;sdjmvklfdnbklvndfk</div>
                 </template>
                 <template>
-                    <g-button>top hover</g-button>
+                    <s-button>top hover</s-button>
                 </template>
-            </g-popover>
-            <g-popover position="bottom" trigger="hover">
+            </s-popover>
+            <s-popover position="bottom" trigger="hover">
                 <template slot="content">
                     <div>短内容</div>
                 </template>
                 <template>
-                    <g-button>bottom hover</g-button>
+                    <s-button>bottom hover</s-button>
                 </template>
-            </g-popover>
-            <g-popover position="left" trigger="hover">
+            </s-popover>
+            <s-popover position="left" trigger="hover">
                 <template slot="content">
                     <div>短内容</div>
                 </template>
                 <template>
-                    <g-button>left hover</g-button>
+                    <s-button>left hover</s-button>
                 </template>
-            </g-popover>
-            <g-popover position="right" trigger="hover">
+            </s-popover>
+            <s-popover position="right" trigger="hover">
                 <template slot="content">
                     <div>短内容</div>
                 </template>
                 <template>
-                    <g-button>right hover</g-button>
+                    <s-button>right hover</s-button>
                 </template>
-            </g-popover>
+            </s-popover>
         </div> -->
-        <!-- <g-tabs selected="sport" @update:selected="yyy">
-            <g-tabs-head>
+        <!-- <s-tabs selected="sport" @update:selected="yyy">
+            <s-tabs-head>
                 <template slot="action">
                     <button>设置</button>
                 </template>   
-                <g-tabs-item name="tech">
-                    <g-icon name="settings"></g-icon>
+                <s-tabs-item name="tech">
+                    <s-icon name="settings"></s-icon>
                     科技
-                </g-tabs-item>
-                <g-tabs-item name="finance" disabled>财经</g-tabs-item>
-                <g-tabs-item name="sport">体育</g-tabs-item>
-            </g-tabs-head>
-            <g-tabs-body>
-                <g-tabs-pane name="tech">tech news</g-tabs-pane>
-                <g-tabs-pane name="finance">finance news</g-tabs-pane>
-                <g-tabs-pane name="sport">sport news</g-tabs-pane>
-            </g-tabs-body>
-        </g-tabs> -->
+                </s-tabs-item>
+                <s-tabs-item name="finance" disabled>财经</s-tabs-item>
+                <s-tabs-item name="sport">体育</s-tabs-item>
+            </s-tabs-head>
+            <s-tabs-body>
+                <s-tabs-pane name="tech">tech news</s-tabs-pane>
+                <s-tabs-pane name="finance">finance news</s-tabs-pane>
+                <s-tabs-pane name="sport">sport news</s-tabs-pane>
+            </s-tabs-body>
+        </s-tabs> -->
         <!-- <button @click="showToast1">
            top
         </button>
@@ -136,14 +136,14 @@
          <button @click="showToast3">
             bottom
          </button> -->
-        <!-- <g-layout>
-            <g-sider>sider</g-sider>
-            <g-layout>
-                <g-header>header</g-header>
-                <g-content>content</g-content>
-                <g-footer>footer</g-footer>
-            </g-layout>
-        </g-layout> -->
+        <!-- <s-layout>
+            <s-sider>sider</s-sider>
+            <s-layout>
+                <s-header>header</s-header>
+                <s-content>content</s-content>
+                <s-footer>footer</s-footer>
+            </s-layout>
+        </s-layout> -->
     </div>
     <script src="./src/app.js"></script>
 

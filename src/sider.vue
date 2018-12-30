@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-    name: 'g-sider'    
+    name: 's-sider'    
 }
 </script>
 

@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-    name: 'g-tabs-pane',
+    name: 's-tabs-pane',
     inject: ['eventBus'],
     computed: {
         classes() {

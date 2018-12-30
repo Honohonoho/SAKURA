@@ -1,7 +1,7 @@
 const expect = chai.expect;
 import Vue from 'vue'
 import TabsPane from '../src/tabs-pane';
-// Vue.component('g-tabs-pane', TabsPane);
+// Vue.component('s-tabs-pane', TabsPane);
 
 Vue.config.productionTip = false
 Vue.config.devtools = false

@@ -10,7 +10,7 @@
 </template>
 <script>
 export default {
-    name: 'g-popover',
+    name: 's-popover',
     props: {
         position: {
             type: String,

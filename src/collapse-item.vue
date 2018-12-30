@@ -10,7 +10,7 @@
 </template>
 <script>
 export default {
-    name: 'g-collapse-item',
+    name: 's-collapse-item',
     inject: ['eventBus'],
     props: {
         title: {

@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-    name: 'g-content'
+    name: 's-content'
 }
 </script>
 

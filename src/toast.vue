@@ -14,7 +14,7 @@
 </template>
 <script>
 export default {
-    name: 'g-toast',
+    name: 's-toast',
     props: {
         autoClose: {
             type: [Boolean, Number],

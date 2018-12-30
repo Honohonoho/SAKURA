@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-    name: 'g-tabs-item',
+    name: 's-tabs-item',
     inject: ['eventBus'],
     props: {
         disabled: {
