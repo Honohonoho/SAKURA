@@ -36,53 +36,46 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-    $fontSize: 14px;
-    $height: 32px;
-    $borderColor: #999;
-    $borderRadius: 4px;
-    $color: #999;
-    $borderColorHover: #666;
-    $boxShadowColor: rgba(0, 0, 0, .5);
-    $errorBorderColor: #f1453d;
-    $errorColor: #f1453d;
-    .wrapper {
-        font-size: $fontSize;
-        margin: 10px;
-        display: inline-flex;
-        align-items: center;
-        > input {
-            font-size: inherit;
-            height: $height;
-            border: 1px solid $borderColor;
-            border-radius: $borderRadius;
-            padding: 0 8px;
-            outline: none;
-            &:hover {
-                border-color: $borderColorHover;
-            }
-            &:focus {
-                box-shadow: inset 0 1px 3px $boxShadowColor;
-            }
-            &[disabled], &[readonly] {
-                border-color: #bbb;
-                color: #bbb;
-                cursor: not-allowed;
-            }
+@import 'common';
+
+.wrapper {
+    font-size: $font-size;
+    margin: 10px;
+    display: inline-flex;
+    align-items: center;
+    > input {
+        font-size: inherit;
+        height: $height;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        padding: 0 8px;
+        outline: none;
+        &:hover {
+            border-color: $border-color-hover;
         }
-        &.error {
-            > input {
-                border-color: $errorBorderColor;
-            }
+        &:focus {
+            box-shadow: inset 0 1px 3px $box-shadow-color;
         }
-        .icon-error {
-            fill: $errorColor;
-            margin-left: .5em;
-        }
-        .error-message {
-            color: $errorColor;
-            margin-left: .5em;
+        &[disabled], &[readonly] {
+            border-color: #bbb;
+            color: #bbb;
+            cursor: not-allowed;
         }
     }
+    &.error {
+        > input {
+            border-color: $error-border-color;
+        }
+    }
+    .icon-error {
+        fill: $error-color;
+        margin-left: .5em;
+    }
+    .error-message {
+        color: $error-color;
+        margin-left: .5em;
+    }
+}
 </style>
 
 

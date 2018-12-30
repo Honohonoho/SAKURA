@@ -48,8 +48,8 @@ export default {
 }
 </script>
 <style lang="scss">
-$grey: #ddd;
-$border-radius: 4px;
+@import 'common';
+
 .collapse-item {
     > .title {
         // border-bottom: 1px solid $grey;

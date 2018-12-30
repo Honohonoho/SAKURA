@@ -27,8 +27,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$tab-height: 40px;
-$blue: blue;
+@import 'common';
+
 .tabs-head {
     display: flex;
     height: $tab-height;

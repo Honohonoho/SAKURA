@@ -142,8 +142,8 @@ export default {
 }
 </script>
 <style lang="scss">
-$border-color: #333;
-$border-radius: 4px;
+@import 'common';
+
 .popover {
     display: inline-block;
     vertical-align: top;
@@ -154,7 +154,7 @@ $border-radius: 4px;
 }
 .content-wrapper {
     position: absolute;
-    border: 1px solid $border-color;
+    border: 1px solid $border-color-toast;
     border-radius: $border-radius;
     filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.5));
     background: #fff;
@@ -176,7 +176,7 @@ $border-radius: 4px;
             left: 10px;
         }
         &::before {
-            border-top-color: $border-color;
+            border-top-color: $border-color-toast;
             border-bottom: none;
             top: 100%;
         }
@@ -192,7 +192,7 @@ $border-radius: 4px;
             left: 10px;
         }
         &::before {
-            border-bottom-color: $border-color;
+            border-bottom-color: $border-color-toast;
             border-top: none;
             bottom: 100%;
         }
@@ -210,7 +210,7 @@ $border-radius: 4px;
             transform: translateY(-50%);
         }
         &::before {
-            border-left-color: $border-color;
+            border-left-color: $border-color-toast;
             border-right: none;
             left: 100%;
         }
@@ -227,7 +227,7 @@ $border-radius: 4px;
             transform: translateY(-50%);
         }
         &::before {
-            border-right-color: $border-color;
+            border-right-color: $border-color-toast;
             border-left: none;
             right: 100%;
         }

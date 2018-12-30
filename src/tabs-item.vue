@@ -47,7 +47,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$blue: blue;
+@import 'common';
+
 .tabs-item {
     height: 100%;
     flex-shrink: 0;
