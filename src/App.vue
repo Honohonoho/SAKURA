@@ -115,47 +115,47 @@
 
 <script>
 import Vue from 'vue';
-import Button from './button';
-import Icon from './icon';
-import ButtonGroup from './button-group';
-import Input from './input';
-import Row from './row';
-import Layout from './layout';
-import Header from './header';
-import Content from './content';
-import Sider from './sider';
-import Footer from './footer';
-import Toast from './toast';
+// import Button from './button';
+// import Icon from './icon';
+// import ButtonGroup from './button-group';
+// import Input from './input';
+// import Row from './row';
+// import Layout from './layout';
+// import Header from './header';
+// import Content from './content';
+// import Sider from './sider';
+// import Footer from './footer';
+// import Toast from './toast';
 import Tabs from './tabs';
 import Tabshead from './tabs-head';
 import TabsBody from './tabs-body';
 import TabsItem from './tabs-item';
 import TabsPane from './tabs-pane';
-import Popover from './popover';
+// import Popover from './popover';
 import Collapse from './collapse';
 import CollapseItem from './collapse-item';
-import plugin from './plugin';
+// import plugin from './plugin';
 
 export default {
     name: "app",
     components: {
-        's-button': Button,
-        's-icon': Icon,
-        's-button-group': ButtonGroup,
-        's-input': Input,
-        's-row': Row,
-        's-layout': Layout,
-        's-header': Header,
-        's-content': Content,
-        's-sider': Sider,
-        's-footer': Footer,
-        's-toast': Toast,
+        // 's-button': Button,
+        // 's-icon': Icon,
+        // 's-button-group': ButtonGroup,
+        // 's-input': Input,
+        // 's-row': Row,
+        // 's-layout': Layout,
+        // 's-header': Header,
+        // 's-content': Content,
+        // 's-sider': Sider,
+        // 's-footer': Footer,
+        // 's-toast': Toast,
         's-tabs': Tabs,
         's-tabs-head': Tabshead,
         's-tabs-body': TabsBody,
         's-tabs-item': TabsItem,
         's-tabs-pane': TabsPane,
-        's-popover': Popover,
+        // 's-popover': Popover,
         's-collapse': Collapse,
         's-collapse-item': CollapseItem,
     },
@@ -221,5 +221,4 @@ export default {
 </script>
 
 <style lang="scss">
-
 </style>
