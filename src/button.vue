@@ -66,12 +66,13 @@ export default {
     }
     &[disabled] {
         cursor: not-allowed;
+        background: $button-active-background;
     }
     &[disabled]:hover {
         border-color: $border-color;
     }
     &[disabled]:active {
-        background-color: $button-background;
+        background-color:$button-active-background;
     }
     > .icon {
         order: 1;

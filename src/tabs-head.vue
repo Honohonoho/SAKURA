@@ -1,7 +1,7 @@
 <template>
     <div class="tabs-head">
         <slot></slot>
-        <div class="line" ref="line" v-show="Showline"></div>
+        <div class="line" ref="line"></div>
         <div class="action-wrapper">
             <slot name="action"></slot>   
         </div>
@@ -13,15 +13,14 @@ export default {
     inject: ['eventBus'],
     data(){
         return {
-            Showline: false
         }
     },
     mounted() {
+        let tabsHeadLeft = this.$el.getBoundingClientRect().left
         this.eventBus.$on('update:selected', (item, vm)=> {
-            this.Showline = true
             let {width, height, top, left} = vm.$el.getBoundingClientRect()
             this.$refs.line.style.width = `${width}px`
-            this.$refs.line.style.transform = `translateX(${left}px)`
+            this.$refs.line.style.left = `${left - tabsHeadLeft}px`
         })
     }
 }

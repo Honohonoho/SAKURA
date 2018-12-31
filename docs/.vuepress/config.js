@@ -7,7 +7,7 @@ module.exports = {
         nav: [
             { text: '主页', link: '/' },
             { text: '文档', link: '/install/' },
-            { text: 'GitHub', link: 'https://github.com/Honohonoho/lunzi' },
+            { text: 'GitHub', link: 'https://github.com/Honohonoho/SAKURA' },
         ],
         sidebar: [
             ['/install/', '安装'],
