@@ -1,5 +1,5 @@
 <template>
-    <div class="col" :class="colClasses" :style="colStyle">
+    <div class="s-col" :class="colClasses" :style="colStyle">
         <slot></slot>
     </div>
 </template>
@@ -84,12 +84,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.col {
-    height: 100px;
-    background: grey;
+.s-col {
     width: 50%;
-    border: 1px solid red;
-    padding: 0 10px;
+    box-sizing: border-box; 
     $class: col-;
     // loop through 24 times
     @for $n from 1 through 24 {

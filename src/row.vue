@@ -1,5 +1,5 @@
 <template>
-    <div class="row" :style="rowStyle" :class="rowClasses">
+    <div class="s-row" :style="rowStyle" :class="rowClasses">
         <slot></slot>
     </div>
 </template>
@@ -10,8 +10,8 @@ export default {
         gutter: {
             type: [Number, String]
         },
-        align: {
-            type: [Number, String]
+        justify: {
+            type: String
         }
     },
     mounted() {
@@ -28,24 +28,31 @@ export default {
             }
         },
         rowClasses() {
-            let {align} = this
-            return [align && `align-${align}`]
+            let {justify} = this
+            return [justify && `justify-${justify}`]
         }
     }
 }
 </script>
 <style lang="scss" scoped>
-.row {
+.s-row {
     display: flex;
     flex-wrap: wrap;
-    &.align-left {
+    box-sizing: border-box;
+    &.justify-left {
         justify-content: flex-start;
     }
-    &.align-right {
+    &.justify-right {
         justify-content: flex-end;
     }
-    &.align-center {
+    &.justify-center {
         justify-content: center;
+    }
+    &.justify-space-between {
+        justify-content: space-between;
+    }
+    &.justify-space-around {
+        justify-content: space-around;
     }
 }
 </style>
