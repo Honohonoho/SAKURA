@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper" :class="{'error': error}">
-        <input type="text" :value="value" :disabled="disabled" :readonly="readonly"
+        <input type="text" :value="value" :disabled="disabled" :readonly="readonly" :placeholder="placeholder"
             @change="$emit('change', $event.target.value)"
             @input="$emit('input', $event.target.value)"
             @focus="$emit('focus', $event.target.value)"
@@ -19,6 +19,9 @@ export default {
     },
     props: {
         value: {
+            type: String
+        },
+        placeholder: {
             type: String
         },
         disabled: {
@@ -54,12 +57,16 @@ export default {
             border-color: $border-color-hover;
         }
         &:focus {
-            box-shadow: inset 0 1px 3px $box-shadow-color;
+            border-color: $border-color-hover;
+            box-shadow: inset 0 0 1px $box-shadow-color;
         }
         &[disabled], &[readonly] {
             border-color: #bbb;
             color: #bbb;
             cursor: not-allowed;
+            &:focus {
+                box-shadow: none;
+            }
         }
     }
     &.error {
