@@ -1,24 +1,35 @@
 <template>
     <div>
         <h2>使用方法</h2>
-
+        
         <h3 class="section">基础用法</h3>
         <div class="demo-wrapper">
-            <s-input placeholder="请输入内容"></s-input>
+            <s-input placeholder="请输入内容" v-model="input1" @input="yyy" @change="xxx" @focus="f"></s-input>
+            {{input1}}
+            <pre><code>{{code1}}</code></pre>
         </div>
 
-        <h3 class="section">图标按钮</h3>
+        <h3 class="section">禁用状态</h3>
+        <p>通过添加 <code>disabled</code> 属性来禁用 input 组件</p>
         <div class="demo-wrapper">
-            <s-button icon="settings">设置</s-button>
-            <s-button icon="download">下载</s-button>
-            <s-button icon="left">上一页</s-button>
-            <s-button icon="right">下一页</s-button>
-            <p>使用 <code>iconPosition</code> 定位图标位置</p>
-            <s-button icon="settings" iconPosition="right">设置</s-button>
+            <s-input placeholder="请输入内容" disabled></s-input>
             <pre><code>{{code2}}</code></pre>
         </div>
 
-        <h3 class="section">Attributes</h3>
+        <h3 class="section">只读状态</h3>
+        <p>通过添加 <code>readonly</code> 属性来展示不可更改的内容</p>
+        <div class="demo-wrapper">
+            <s-input placeholder="请输入内容" readonly value="你改我一下试试"></s-input>
+            <pre><code>{{code3}}</code></pre>
+        </div>
+
+        <h3 class="section">错误提示</h3>
+        <p>通过给 <code>error</code> 属性赋值来展示相应的错误提示内容</p>
+        <div class="demo-wrapper">
+            <s-input placeholder="请输入内容" value="123" error="请输入正确的用户名"></s-input>
+            <pre><code>{{code4}}</code></pre>
+        </div>
+        <h3 class="section">属性 Attributes</h3>
         <table class="table">
             <thead>
                 <tr>
@@ -31,32 +42,64 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>icon</td>
-                    <td>图标</td>
+                    <td>value</td>
+                    <td>绑定值</td>
                     <td>string</td>
-                    <td>settings / download / left / right</td>
+                    <td>—</td>
                     <td>—</td>
                 </tr>
                 <tr>
-                    <td>iconPosition</td>
-                    <td>图标位置</td>
+                    <td>placeholder</td>
+                    <td>输入框占位文本</td>
                     <td>string</td>
-                    <td>left / right</td>
-                    <td>left</td>
-                </tr>
-                <tr>
-                    <td>loading</td>
-                    <td>是否显示加载状态</td>
-                    <td>boolean</td>
-                    <td>true / false</td>
-                    <td>false</td>
+                    <td>—</td>
+                    <td>—</td>
                 </tr>
                 <tr>
                     <td>disabled</td>
                     <td>是否禁用</td>
                     <td>boolean</td>
-                    <td>—</td>
+                    <td>true / false</td>
                     <td>false</td>
+                </tr>
+                <tr>
+                    <td>readonly</td>
+                    <td>是否只读</td>
+                    <td>boolean</td>
+                    <td>true / false</td>
+                    <td>false</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="section">事件 Event</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                <th>事件名称</th>
+                <th>说明</th>
+                <th>回调参数</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>input</td>
+                    <td>在 Input 值改变时触发</td>
+                    <td>(value: string | number)</td>
+                </tr>
+                <tr>
+                    <td>change</td>
+                    <td>Input 值改变后触发 blu r或 focus 时触发 change 事件</td>
+                    <td>(value: string | number)</td>
+                </tr>
+                <tr>
+                    <td>focus</td>
+                    <td>在 Input 获得焦点时触发</td>
+                    <td>(value: string | number)</td>
+                </tr>
+                <tr>
+                    <td>blur</td>
+                    <td>在 Input 失去焦点时触发</td>
+                    <td>(value: string | number)</td>
                 </tr>
             </tbody>
         </table>
@@ -71,30 +114,43 @@ export default {
     },
     data() {
         return {
+            input1: '',
             code1:
-            `<s-button>默认按钮</s-button>
+            `<s-input placeholder="请输入内容" v-model="input1"></s-input>
+        <script>
+        export default {
+            data() {
+                return {
+                input1: ''
+                }
+            }
+        }
+        <\/script>
             `.replace(/^ {8}/gm, "").trim(),
             code2: 
-            `<s-button icon="settings">设置</s-button>
-            <s-button icon="download">下载</s-button>
-            <s-button icon="left">上一页</s-button>
-            <s-button icon="right">下一页</s-button>
-            <s-button icon="settings" iconPosition="right">设置</s-button>
+            `<s-input placeholder="请输入内容" disabled></s-input>
             `.replace(/^ {8}/gm, "").trim(),
             code3:
-            `<s-button-group>
-                <s-button icon="left">上一页</s-button>
-                <s-button icon="download">下载</s-button>
-                <s-button icon="right">下一页</s-button>
-            </s-button-group>
+            `<s-input placeholder="请输入内容" readonly value="你改我一下试试"></s-input>
             `.replace(/^ {8}/gm, "").trim(),
             code4:
-            `<s-button :loading="true">默认按钮</s-button>
+            `<s-input placeholder="请输入内容" value="123" error="请输入正确的用户名"></s-input>
             `.replace(/^ {8}/gm, "").trim(),
             code5:
             `<s-button disabled>默认按钮</s-button>
             `.replace(/^ {8}/gm, "").trim()
         };
+    },
+    methods: {
+        yyy(value) {
+            // console.log(value)
+        },
+        xxx(value){
+            console.log(value)
+        },
+        f(a) {
+            console.log(a)
+        }
     }
 };
 </script>

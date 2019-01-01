@@ -43,7 +43,6 @@ export default {
 
 .wrapper {
     font-size: $font-size;
-    margin: 10px;
     display: inline-flex;
     align-items: center;
     > input {
@@ -63,10 +62,16 @@ export default {
         &[disabled], &[readonly] {
             border-color: #bbb;
             color: #bbb;
-            cursor: not-allowed;
+            background-color: $disabled-background-color;
             &:focus {
                 box-shadow: none;
             }
+        }
+        &[disabled] {
+            cursor: not-allowed;
+        }
+        &[readonly] {
+            cursor: pointer;
         }
     }
     &.error {
