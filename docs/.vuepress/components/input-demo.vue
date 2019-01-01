@@ -4,8 +4,8 @@
         
         <h3 class="section">基础用法</h3>
         <div class="demo-wrapper">
-            <s-input placeholder="请输入内容" v-model="input1" @input="yyy" @change="xxx" @focus="f"></s-input>
-            {{input1}}
+            <s-input placeholder="请输入内容" v-model="input1"></s-input>
+            结果：{{input1}}
             <pre><code>{{code1}}</code></pre>
         </div>
 
@@ -142,27 +142,10 @@ export default {
         };
     },
     methods: {
-        yyy(value) {
-            // console.log(value)
-        },
-        xxx(value){
-            console.log(value)
-        },
-        f(a) {
-            console.log(a)
-        }
     }
 };
 </script>
 <style lang="scss" scoped>
-.s-button {
-    margin-right: 10px;
-}
-.s-button-group {
-    .s-button {
-        margin-right: 0;
-    }
-}
 .section {
     margin-top: 50px;
 }
