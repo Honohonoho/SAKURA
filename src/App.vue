@@ -75,6 +75,11 @@
                 </template>
             </s-popover>
         </div> -->
+        <s-input placeholder="请输入内容"></s-input>
+        <s-input readonly value="123"></s-input>
+        <s-input disabled value="123"></s-input>
+        <s-input value="123"></s-input>
+        <s-input value="123" error="123123213"></s-input>
         <s-tabs selected="sport" @update:selected="yyy">
             <s-tabs-head>
                 <template slot="action">
@@ -116,9 +121,9 @@
 <script>
 import Vue from 'vue';
 // import Button from './button';
-// import Icon from './icon';
+import Icon from './icon';
 // import ButtonGroup from './button-group';
-// import Input from './input';
+import Input from './input';
 // import Row from './row';
 // import Layout from './layout';
 // import Header from './header';
@@ -140,9 +145,9 @@ export default {
     name: "app",
     components: {
         // 's-button': Button,
-        // 's-icon': Icon,
+        's-icon': Icon,
         // 's-button-group': ButtonGroup,
-        // 's-input': Input,
+        's-input': Input,
         // 's-row': Row,
         // 's-layout': Layout,
         // 's-header': Header,

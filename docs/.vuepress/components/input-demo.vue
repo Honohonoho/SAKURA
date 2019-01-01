@@ -3,9 +3,8 @@
         <h2>使用方法</h2>
 
         <h3 class="section">基础用法</h3>
-        <p>基础的按钮用法。</p>
         <div class="demo-wrapper">
-            <s-input></s-input>
+            <s-input placeholder="请输入内容"></s-input>
         </div>
 
         <h3 class="section">图标按钮</h3>
@@ -17,31 +16,6 @@
             <p>使用 <code>iconPosition</code> 定位图标位置</p>
             <s-button icon="settings" iconPosition="right">设置</s-button>
             <pre><code>{{code2}}</code></pre>
-        </div>
-
-        <h3 class="section">按钮组</h3>
-        <p>功能相似的按钮常常为一组出现使用 <code>s-button-group</code> 标签来嵌套你的按钮。</p>
-        <div class="demo-wrapper">
-            <s-button-group>
-                <s-button icon="left">上一页</s-button>
-                <s-button icon="download">下载</s-button>
-                <s-button icon="right">下一页</s-button>
-            </s-button-group>
-            <pre><code>{{code3}}</code></pre>
-        </div>
-
-        <h3 class="section">加载中</h3>
-        <p>按钮显示正在加载的状态，设置 <code>loading</code> 属性为 <code>true</code> 即可</p>
-        <div class="demo-wrapper">
-            <s-button :loading="true">默认按钮</s-button>
-            <pre><code>{{code4}}</code></pre>
-        </div>
-
-        <h3 class="section">禁用状态</h3>
-        <p>按钮的不可用状态，添加一个<code>disabled</code> 属性即可</p>
-        <div class="demo-wrapper">
-            <s-button disabled>默认按钮</s-button>
-            <pre><code>{{code5}}</code></pre>
         </div>
 
         <h3 class="section">Attributes</h3>
@@ -90,14 +64,10 @@
 </template>
 <script>
 import Input from "../../../src/input";
-import Button from "../../../src/button";
-import ButtonGroup from "../../../src/button-group";
 
 export default {
     components: {
-        's-input': Input,
-        "s-button": Button,
-        's-button-group': ButtonGroup
+        's-input': Input
     },
     data() {
         return {
