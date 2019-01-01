@@ -16,9 +16,9 @@ module.exports = {
                 title: '组件',
                 collapsable: true,
                 children: [
-                    ['/components/button', 'Button 按钮'],
                     ['/components/grid', 'Grid 网格'],
                     ['/components/layout', 'Layout 布局'],
+                    ['/components/button', 'Button 按钮'],
                     ['/components/input', 'Input 输入框'],
                     ['/components/tabs', 'Tabs 标签页'],
                     ['/components/popover', 'Popover 消息提示'],
