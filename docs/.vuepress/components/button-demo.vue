@@ -45,7 +45,7 @@
             <pre><code>{{code5}}</code></pre>
         </div>
 
-        <h3 class="section">Attributes</h3>
+        <h3 class="section">属性 Attributes</h3>
         <table class="table">
             <thead>
                 <tr>
@@ -130,6 +130,7 @@ export default {
 <style lang="scss" scoped>
 .s-button {
     margin-right: 10px;
+    margin-bottom: 10px;
 }
 .s-button-group {
     .s-button {
