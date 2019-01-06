@@ -5,74 +5,113 @@
         <h3 class="section">基本用法</h3>
         <p>最常见的时鼠标悬浮在按钮上方，然后出现提示信息。</p>
         <div class="demo-wrapper">
-            <p>click触发</p>
-            <s-popover>
-                <template slot="content">
-                    <div>长内容123123132aspfjsdfsdklgndlskavklsdjcl;sdjmvklfdnbklvndfk</div>
-                </template>
-                <template>
-                    <s-button>top点我</s-button>
-                </template>
-            </s-popover>
-            <s-popover position="bottom">
-                <template slot="content" slot-scope="{close}">
-                    <div>短内容短内容短内容</div>
-                    <s-button @click="close">关闭</s-button>
-                </template>
-                <template>
-                    <s-button>bottom点我</s-button>
-                </template>
-            </s-popover>
-            <s-popover position="left">
-                <template slot="content">
-                    <div>短内容</div>
-                </template>
-                <template>
-                    <s-button>left点我</s-button>
-                </template>
-            </s-popover>
-            <s-popover position="right">
-                <template slot="content">
-                    <div>短内容</div>
-                </template>
-                <template>
-                    <s-button>right点我</s-button>
-                </template>
-            </s-popover>
-            <div style="margin-top: 20px;">
-                <p>hover触发</p>
-                <s-popover trigger="hover">
-                    <template slot="content">
-                        <div>长内容123123132aspfjsdfsdklgndlskavklsdjcl;sdjmvklfdnbklvndfk</div>
-                    </template>
-                    <template>
-                        <s-button>top hover</s-button>
-                    </template>
-                </s-popover>
-                <s-popover position="bottom" trigger="hover">
-                    <template slot="content">
-                        <div>短内容</div>
-                    </template>
-                    <template>
-                        <s-button>bottom hover</s-button>
-                    </template>
-                </s-popover>
-                <s-popover position="left" trigger="hover">
-                    <template slot="content">
-                        <div>短内容</div>
-                    </template>
-                    <template>
-                        <s-button>left hover</s-button>
-                    </template>
-                </s-popover>
-                <s-popover position="right" trigger="hover">
-                    <template slot="content">
-                        <div>短内容</div>
-                    </template>
-                    <template>
-                        <s-button>right hover</s-button>
-                    </template>
-                </s-popover>
+            <p style="margin-top: 0;">click 触发</p>
+            <p class="wrapper-title">
+                通过 <span class="code">position</span> 属性来指定消息出现的位置，可设置 <span class="code">top</span>，<span class="code">left</span>
+                ，<span class="code">right</span>，<span class="code">bottom</span>。
+            </p>
+            <div class="box">
+                <div class="top-box box-item">
+                    <s-popover>
+                        <template slot="content">
+                            <div>上方出现的提示信息</div>
+                        </template>
+                        <template>
+                            <s-button>上方</s-button>
+                        </template>
+                    </s-popover>
+                </div>
+                <div class="middle-box box-item">
+                    <div class="left-box box-item">
+                        <s-popover position="left">
+                            <template slot="content">
+                                <div>左方出现的提示信息</div>
+                            </template>
+                            <template>
+                                <s-button>左方</s-button>
+                            </template>
+                        </s-popover>
+                    </div>
+                    <div class="right-box box-item">
+                        <s-popover position="right">
+                            <template slot="content">
+                                <div>右方出现的提示信息</div>
+                            </template>
+                            <template>
+                                <s-button>右方</s-button>
+                            </template>
+                        </s-popover>
+                    </div>
+                </div>
+                <div class="bottom-box box-item">
+                    <s-popover position="bottom">
+                        <template slot="content" slot-scope="{close}">
+                            <div>下方出现的提示信息</div>
+                            <s-button @click="close">关闭</s-button>
+                        </template>
+                        <template>
+                            <s-button>下方</s-button>
+                        </template>
+                    </s-popover>
+                </div>
+            </div>
+            <p class="wrapper-title">
+                特别的，在 <span class="code">slot</span> 为 <span class="code">content</span> 的模板中添加按钮，
+                并绑定与 <span class="code">slot-scop</span> 属性相同的 <span class="code">close</span> 事件
+                那么点击这个按钮可以关闭当前消息提示。
+            </p>
+            <pre><code>{{code1}}</code></pre>
+        </div>
+        <div class="demo-wrapper" style="margin-top: 20px;">
+            <p style="margin-top: 0;">hover触发</p>
+            <p class="wrapper-title">
+                在 <span class="code" v-text="text1"></span> 标签上设置属性 <span class="code">trigger</span> 为 <span class="code">hover</span>
+                那么现实消息信息的方式就会变为悬浮时出现。
+            </p>
+            <div class="box">
+                <div class="top-box box-item">
+                    <s-popover trigger="hover">
+                        <template slot="content">
+                            <div>上方出现的提示信息</div>
+                        </template>
+                        <template>
+                            <s-button>上方</s-button>
+                        </template>
+                    </s-popover>
+                </div>
+                <div class="middle-box box-item">
+                    <div class="left-box box-item">
+                        <s-popover position="left" trigger="hover">
+                            <template slot="content">
+                                <div>左方出现的提示信息</div>
+                            </template>
+                            <template>
+                                <s-button>左方</s-button>
+                            </template>
+                        </s-popover>
+                    </div>
+                    <div class="right-box box-item">
+                        <s-popover position="right" trigger="hover">
+                            <template slot="content">
+                                <div>右方出现的提示信息</div>
+                            </template>
+                            <template>
+                                <s-button>右方</s-button>
+                            </template>
+                        </s-popover>
+                    </div>
+                </div>
+                <div class="bottom-box box-item">
+                    <s-popover position="bottom" trigger="hover">
+                        <template slot="content" slot-scope="{close}">
+                            <div>下方出现的提示信息</div>
+                            <s-button @click="close">关闭</s-button>
+                        </template>
+                        <template>
+                            <s-button>下方</s-button>
+                        </template>
+                    </s-popover>
+                </div>
             </div>
             <pre><code>{{code1}}</code></pre>
         </div>
@@ -90,39 +129,32 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>title</td>
-                    <td>消息内容</td>
-                    <td>string</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>autoClose</td>
-                    <td>是否自动关闭</td>
-                    <td>boolean / number</td>
-                    <td>-</td>
-                    <td>默认3秒自动关闭</td>
-                </tr>
-                <tr>
                     <td>position</td>
                     <td>出现位置</td>
                     <td>string</td>
-                    <td>top / middle / bottom</td>
+                    <td>top / left / right / bottom</td>
                     <td>top</td>
                 </tr>
                 <tr>
-                    <td>closeButton</td>
-                    <td>关闭按钮和回调函数</td>
-                    <td>object{ text: string, callback: function }</td>
+                    <td>slot</td>
+                    <td>必填项，消息内容所对应的插槽名</td>
+                    <td>string</td>
+                    <td>content</td>
                     <td>-</td>
-                    <td>text: '关闭', callback: undefined</td>
                 </tr>
                 <tr>
-                    <td>enableHtml</td>
-                    <td>是否使用 HTML 片段</td>
-                    <td>boolean</td>
-                    <td>true / false</td>
-                    <td>false</td>
+                    <td>trigger</td>
+                    <td>触发方式</td>
+                    <td>string</td>
+                    <td>click / hover</td>
+                    <td>click</td>
+                </tr>
+                <tr>
+                    <td>slot-scope</td>
+                    <td>与关闭功能一同使用，绑定 close 事件</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
                 </tr>
             </tbody>
         </table>
@@ -139,9 +171,76 @@ export default {
     },
     data() {
         return {
-            text1: '',
+            text1: '<s-popover>',
             code1: `
-            
+            <s-popover>
+            <template slot="content">
+                <div>上方出现的提示信息</div>
+            </template>
+            <template>
+                <s-button>上方</s-button>
+            </template>
+        </s-popover>
+        <s-popover position="left">
+            <template slot="content">
+                <div>左方出现的提示信息</div>
+            </template>
+            <template>
+                <s-button>左方</s-button>
+            </template>
+        </s-popover>
+        <s-popover position="right">
+            <template slot="content">
+                <div>右方出现的提示信息</div>
+            </template>
+            <template>
+                <s-button>右方</s-button>
+            </template>
+        </s-popover>
+        <s-popover position="bottom">
+            <template slot="content" slot-scope="{close}">
+                <div>下方出现的提示信息</div>
+                <s-button @click="close">关闭</s-button>
+            </template>
+            <template>
+                <s-button>下方</s-button>
+            </template>
+        </s-popover>
+            `.replace(/^ {8}/gm, "").trim(),
+            code1: `
+            <s-popover>
+            <template slot="content" trigger="hover">
+                <div>上方出现的提示信息</div>
+            </template>
+            <template>
+                <s-button>上方</s-button>
+            </template>
+        </s-popover>
+        <s-popover position="left" trigger="hover">
+            <template slot="content">
+                <div>左方出现的提示信息</div>
+            </template>
+            <template>
+                <s-button>左方</s-button>
+            </template>
+        </s-popover>
+        <s-popover position="right" trigger="hover">
+            <template slot="content">
+                <div>右方出现的提示信息</div>
+            </template>
+            <template>
+                <s-button>右方</s-button>
+            </template>
+        </s-popover>
+        <s-popover position="bottom" trigger="hover">
+            <template slot="content" slot-scope="{close}">
+                <div>下方出现的提示信息</div>
+                <s-button @click="close">关闭</s-button>
+            </template>
+            <template>
+                <s-button>下方</s-button>
+            </template>
+        </s-popover>
             `.replace(/^ {8}/gm, "").trim(),
         }
     },
@@ -149,11 +248,25 @@ export default {
     }
 }
 </script>
-<style lang="scss">
-body {
-    font-size: 14px;
-}
-.toast-demo {
+<style lang="scss" scoped>
+.popover-demo {
+    .box {
+        max-width: 450px;
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        .box-item {
+            display: flex;
+        }
+        .middle-box {
+            max-width: 450px;
+            justify-content: space-between;
+        }
+        .top-box, .bottom-box {
+            align-self: center;
+        }
+    }
     .error {
         color: rgb(254, 108, 111);
     }

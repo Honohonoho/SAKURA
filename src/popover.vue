@@ -161,6 +161,7 @@ export default {
     padding: .5em 1em;
     max-width: 20em;
     word-break: break-all;
+    z-index: 999;
     &::before, &::after {
         content: '';
         display: block;
