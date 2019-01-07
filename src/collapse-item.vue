@@ -67,7 +67,7 @@ export default {
     }
     > .content {
         padding: 8px;
-        border-top: 1px solid $grey;
+        // border-top: 1px solid $grey;
     }
 }
 </style>

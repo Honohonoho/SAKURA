@@ -23,6 +23,7 @@ module.exports = {
                     ['/components/tabs', 'Tabs 标签页'],
                     ['/components/popover', 'Popover 消息提示'],
                     ['/components/toast', 'Toast 通知'],
+                    ['/components/collapse', 'Collapse 折叠面板'],
                 ]
             },
         ]
