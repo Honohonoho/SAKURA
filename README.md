@@ -4,22 +4,26 @@
 
 ## 介绍
 
+SAKURA(樱花) UI 是一个好用的 UI 组件库，提供了常用的 UI 组件， 适合移动端和 PC 端使用。
+
 ## 开始使用
 
 1.安装
 
-使用本框架前， 请在 CSS 中使用 border-sizing: border-box;
-
 ```
-*{box-sizing: border-box;}
+npm install sakura-ui -S
 ```
 
 ## 文档
 
-## 问答
+请访问[官方网站](https://honohonoho.github.io/SAKURA/)
 
 ## 版本记录
 
+持续开发中...
+
 ## 联系方式
+
+751718620@qq.com
 
 ## 贡献代码

@@ -4,7 +4,7 @@
             <h1>SAKURA UI 官网</h1>
             <img src="../public/sakura.png" alt="">
         </div>
-        <p>SAKURA(樱花) UI 是一个好用的 UI 组件库，提供了 ...... 等常用的组件， 适合移动端和 PC 端使用。</p>
+        <p>SAKURA(樱花) UI 是一个好用的 UI 组件库，提供了常用的 UI 组件， 适合移动端和 PC 端使用。</p>
     </div>
 </template>
 <script>
