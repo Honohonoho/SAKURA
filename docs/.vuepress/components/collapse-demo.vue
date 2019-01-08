@@ -3,34 +3,95 @@
         <h2>使用方法</h2>
 
         <h3 class="section">基本用法</h3>
-        <p>适用于大部分场景</p>
-        <div class="demo-wrapper">
-            <p class="wrapper-title">
-                Toast 注册了 <span class="code">$toast</span> 方法，接收一个 <span class="code">title</span> 字段和 <span class="code">option</span> 
-                对象字面量，用于设置通知的标题和正文，经过一段时间后 <span class="code">$toast</span> 组件会自动关闭，
-                但是通过设置 <span class="code">autoClose</span> 可以控制关闭的时间间隔，<span class="code">autoClose</span> 如果设置为 false，则不会自动关闭。
-            </p>
-            <s-collapse :selected.sync="selectedTab" accordion>
-                <s-collapse-item title="标题1" name="1">内容1</s-collapse-item>
-                <s-collapse-item title="标题2" name="2">内容2</s-collapse-item>
-                <s-collapse-item title="标题3" name="3">内容3</s-collapse-item>
-            </s-collapse>
-            {{selectedTab}}
-            <pre><code>{{code1}}</code></pre>
-        </div>
-
-        <h3 class="section">自定义出现位置</h3>
         <p class="wrapper-title">
-            通过 <span class="code">position</span> 字段来设置消息出现的位置，
-            有 <span class="code">top</span>，<span class="code">middle</span>，<span class="code">bottom</span> 三种位置，
-            如果不传则默认为 <span class="code">top</span>。
+            可同时展开多个面板，面板之间不影响
         </p>
         <div class="demo-wrapper">
+            <s-collapse :selected.sync="selectedTab1">
+                <s-collapse-item title="优先原则" name="1">
+                    <p>设计中对优先级的把握就是要让我们能够将真正重要的功能/内容/元素放到突出的位置，</p>
+                    <p>以最多的界面资源去展示它们，而将次要的部分，弱化、隐藏起来，再次的部分，则索性砍掉。</p>
+                </s-collapse-item>
+                <s-collapse-item title="一致原则" name="2">
+                    <p>保持一致性的目的主要是降低用户的学习成本，容易被用户预知。</p>
+                    <p>一致原则可以细分为交互逻辑的一致，元素的一致，交互逻辑的一致，词语的一致，信息架构的一致，视觉的一致。</p>
+                </s-collapse-item>
+                <s-collapse-item title="自然原则" name="3">
+                    <p>我们在做产品设计的过程中要与普适的原则相匹配，这样做不仅能降低用户的学习成本，更容易被用户预知。</p>
+                    <p>这样用户就可以结合现实中的规则，在使用产品的过程中将更简单，更容易。</p>
+                </s-collapse-item>
+                <s-collapse-item title="防御性设计" name="4">
+                    <p>防御性设计也是为了防止用户误用、滥用。</p>
+                    <p>我们必须将每个功能和细节考虑周到，比如登录，防止机器人恶意攻击，可以采取验证码的形式。
+                    但是为了不让用户每次登录都需要输入验证码，我们又可以在密码输入错误 3 次后再提示输入验证码，这就是所谓的考虑周到，真正的用户体验。
+                    </p>
+                </s-collapse-item>
+            </s-collapse>
+            <p>当前点击的面板name：{{selectedTab1}}</p>
             <pre><code>{{code1}}</code></pre>
         </div>
 
+        <h3 class="section">手风琴效果</h3>
+        <p>每次只能展开一个面板</p>
+        <div class="demo-wrapper">
+            <p class="wrapper-title">
+                通过在 <span class="code" v-text="text1"></span> 上添加 <span class="code">accordion</span> 属性来设置是否最多只展开一个。
+            </p>
+            <s-collapse :selected.sync="selectedTab2" accordion>
+                <s-collapse-item title="优先原则" name="1">
+                    <p>设计中对优先级的把握就是要让我们能够将真正重要的功能/内容/元素放到突出的位置，</p>
+                    <p>以最多的界面资源去展示它们，而将次要的部分，弱化、隐藏起来，再次的部分，则索性砍掉。</p>
+                </s-collapse-item>
+                <s-collapse-item title="一致原则" name="2">
+                    <p>保持一致性的目的主要是降低用户的学习成本，容易被用户预知。</p>
+                    <p>一致原则可以细分为交互逻辑的一致，元素的一致，交互逻辑的一致，词语的一致，信息架构的一致，视觉的一致。</p>
+                </s-collapse-item>
+                <s-collapse-item title="自然原则" name="3">
+                    <p>我们在做产品设计的过程中要与普适的原则相匹配，这样做不仅能降低用户的学习成本，更容易被用户预知。</p>
+                    <p>这样用户就可以结合现实中的规则，在使用产品的过程中将更简单，更容易。</p>
+                </s-collapse-item>
+                <s-collapse-item title="防御性设计" name="4">
+                    <p>防御性设计也是为了防止用户误用、滥用。</p>
+                    <p>我们必须将每个功能和细节考虑周到，比如登录，防止机器人恶意攻击，可以采取验证码的形式。
+                    但是为了不让用户每次登录都需要输入验证码，我们又可以在密码输入错误 3 次后再提示输入验证码，这就是所谓的考虑周到，真正的用户体验。
+                    </p>
+                </s-collapse-item>
+            </s-collapse>
+            <p>当前点击的面板name：{{selectedTab2}}</p>
+            <pre><code>{{code2}}</code></pre>
+        </div>
 
-        <h3 class="section">属性 Attributes</h3>
+
+        <h3 class="section">Collapse Attributes</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                <th>参数</th>
+                <th>说明</th>
+                <th style="min-width:110px;">类型</th>
+                <th>可选值</th>
+                <th>默认值</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>accordion</td>
+                    <td>是否手风琴模式</td>
+                    <td>boolean</td>
+                    <td>-</td>
+                    <td>false</td>
+                </tr>
+                <tr>
+                    <td>selectedTab</td>
+                    <td>当前激活的面板, 格式为字符串数组</td>
+                    <td>array</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 class="section">CollapseItem Attributes</h3>
         <table class="table">
             <thead>
                 <tr>
@@ -44,38 +105,17 @@
             <tbody>
                 <tr>
                     <td>title</td>
-                    <td>消息内容</td>
+                    <td>必填项，面板标题</td>
                     <td>string</td>
                     <td>-</td>
                     <td>-</td>
                 </tr>
                 <tr>
-                    <td>autoClose</td>
-                    <td>是否自动关闭</td>
-                    <td>boolean / number</td>
-                    <td>-</td>
-                    <td>默认3秒自动关闭</td>
-                </tr>
-                <tr>
-                    <td>position</td>
-                    <td>出现位置</td>
+                    <td>name</td>
+                    <td>必填项，唯一标志符</td>
                     <td>string</td>
-                    <td>top / middle / bottom</td>
-                    <td>top</td>
-                </tr>
-                <tr>
-                    <td>closeButton</td>
-                    <td>关闭按钮和回调函数</td>
-                    <td>object{ text: string, callback: function }</td>
                     <td>-</td>
-                    <td>text: '关闭', callback: undefined</td>
-                </tr>
-                <tr>
-                    <td>enableHtml</td>
-                    <td>是否使用 HTML 片段</td>
-                    <td>boolean</td>
-                    <td>true / false</td>
-                    <td>false</td>
+                    <td>-</td>
                 </tr>
             </tbody>
         </table>
@@ -93,9 +133,72 @@ export default {
     },
     data() {
         return {
-            selectedTab: ['2'],
-            text1: '',
+            selectedTab1: ['2', '4'],
+            selectedTab2: ['2'],
+            text1: '<s-collapse>',
             code1: `
+            <s-collapse :selected.sync="selectedTab1">
+            <s-collapse-item title="优先原则" name="1">
+                <p>设计中对优先级的把握就是要让我们能够将真正重要的功能/内容/元素放到突出的位置，</p>
+                <p>以最多的界面资源去展示它们，而将次要的部分，弱化、隐藏起来，再次的部分，则索性砍掉。</p>
+            </s-collapse-item>
+            <s-collapse-item title="一致原则" name="2">
+                <p>保持一致性的目的主要是降低用户的学习成本，容易被用户预知。</p>
+                <p>一致原则可以细分为交互逻辑的一致，元素的一致，交互逻辑的一致，词语的一致，信息架构的一致，视觉的一致。</p>
+            </s-collapse-item>
+            <s-collapse-item title="自然原则" name="3">
+                <p>我们在做产品设计的过程中要与普适的原则相匹配，这样做不仅能降低用户的学习成本，更容易被用户预知。</p>
+                <p>这样用户就可以结合现实中的规则，在使用产品的过程中将更简单，更容易。</p>
+            </s-collapse-item>
+            <s-collapse-item title="防御性设计" name="4">
+                <p>防御性设计也是为了防止用户误用、滥用。</p>
+                <p>我们必须将每个功能和细节考虑周到，比如登录，防止机器人恶意攻击，可以采取验证码的形式。
+                但是为了不让用户每次登录都需要输入验证码，我们又可以在密码输入错误 3 次后再提示输入验证码，这就是所谓的考虑周到，真正的用户体验。
+                </p>
+            </s-collapse-item>
+        </s-collapse>
+
+        <script>
+        export default {
+            data() {
+                return {
+                    selectedTab1: ['2', '4']
+                }
+            }
+        }
+        <\/script>
+            `.replace(/^ {8}/gm, "").trim(),
+            code2:`
+            <s-collapse :selected.sync="selectedTab2" accordion>
+            <s-collapse-item title="优先原则" name="1">
+                <p>设计中对优先级的把握就是要让我们能够将真正重要的功能/内容/元素放到突出的位置，</p>
+                <p>以最多的界面资源去展示它们，而将次要的部分，弱化、隐藏起来，再次的部分，则索性砍掉。</p>
+            </s-collapse-item>
+            <s-collapse-item title="一致原则" name="2">
+                <p>保持一致性的目的主要是降低用户的学习成本，容易被用户预知。</p>
+                <p>一致原则可以细分为交互逻辑的一致，元素的一致，交互逻辑的一致，词语的一致，信息架构的一致，视觉的一致。</p>
+            </s-collapse-item>
+            <s-collapse-item title="自然原则" name="3">
+                <p>我们在做产品设计的过程中要与普适的原则相匹配，这样做不仅能降低用户的学习成本，更容易被用户预知。</p>
+                <p>这样用户就可以结合现实中的规则，在使用产品的过程中将更简单，更容易。</p>
+            </s-collapse-item>
+            <s-collapse-item title="防御性设计" name="4">
+                <p>防御性设计也是为了防止用户误用、滥用。</p>
+                <p>我们必须将每个功能和细节考虑周到，比如登录，防止机器人恶意攻击，可以采取验证码的形式。
+                但是为了不让用户每次登录都需要输入验证码，我们又可以在密码输入错误 3 次后再提示输入验证码，这就是所谓的考虑周到，真正的用户体验。
+                </p>
+            </s-collapse-item>
+        </s-collapse>
+
+        <script>
+        export default {
+            data() {
+                return {
+                    selectedTab2: ['2']
+                }
+            }
+        }
+        <\/script>
             `.replace(/^ {8}/gm, "").trim(),
         }
     },
@@ -103,8 +206,13 @@ export default {
     }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .collapse-demo {
+    .collapse-content {
+        p {
+            line-height: 1.2;
+        }
+    }
     .wrapper-title {
         margin-top: 0;
         text-align: justify;

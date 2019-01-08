@@ -1,9 +1,9 @@
 <template>
     <div class="collapse-item">
-        <div class="title" @click="toggleContent">
+        <div class="collapse-title" @click="toggleContent">
             {{title}}
         </div>
-        <div class="content" v-if="contentVisible">
+        <div class="collapse-content" v-if="contentVisible" :class="{['active']: contentVisible}">
             <slot></slot>
         </div>
     </div>
@@ -49,9 +49,8 @@ export default {
 </script>
 <style lang="scss">
 @import 'common';
-
 .collapse-item {
-    > .title {
+    > .collapse-title {
         // border-bottom: 1px solid $grey;
         border-top: 1px solid $grey;
         min-height: 32px;
@@ -61,11 +60,11 @@ export default {
         cursor: pointer;
     }
     &:first-child {
-        > .title {
+        > .collapse-title {
             border-top: none;
         }
     }
-    > .content {
+    > .collapse-content {
         padding: 8px;
         // border-top: 1px solid $grey;
     }

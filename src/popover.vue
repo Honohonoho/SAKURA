@@ -60,6 +60,7 @@ export default {
         }
     },
     destroyed() {
+        if (!this.$refs.popover) return
         if (this.trigger === 'click') {
             this.$refs.popover.removeEventListener('click', this.onClick)
         } else {
