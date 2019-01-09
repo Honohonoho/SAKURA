@@ -11,7 +11,7 @@ SAKURA(樱花) UI 是一个好用的 UI 组件库，提供了常用的 UI 组件
 1.安装
 
 ```
-npm install sakura-ui -S
+npm install sakura_ui -S
 ```
 
 ## 文档

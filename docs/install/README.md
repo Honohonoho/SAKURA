@@ -3,5 +3,5 @@
 ### npm 安装
 
 ```
-npm install sakura-ui -S
+npm install sakura_ui -S
 ```

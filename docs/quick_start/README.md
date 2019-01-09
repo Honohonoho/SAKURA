@@ -4,5 +4,5 @@
 
 ```
 例如要引入 Button 组件
-import { Button } from 'sakura-ui';
+import { Button } from 'sakura_ui';
 ```
