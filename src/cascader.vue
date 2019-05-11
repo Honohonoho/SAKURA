@@ -37,13 +37,24 @@
 </script>
 
 <style scoped lang="scss">
+    @import "common";
+
     .s-cascader {
+        position: relative;
         .s-cascader-trigger {
             width: 100px;
             height: 32px;
-            border: 1px solid red;
+            border-radius: $cascader-border-radius;
+            border: 1px solid $input-border-color;
         }
         .s-cascader-popover {
+            position: absolute;
+            left: 0;
+            top: 100%;
+            background: $main-background-white;
+            border-radius: $cascader-border-radius;
+            box-shadow: $cascader-box-shadow;
+            overflow: hidden;
         }
     }
 </style>
