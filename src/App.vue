@@ -115,7 +115,13 @@
                 <s-footer>footer</s-footer>
             </s-layout>
         </s-layout> -->
-        <s-cascader :cascader-data="cascaderData" popover-height="200px"></s-cascader>
+        <s-cascader
+            :cascader-data="cascaderData"
+            :selected-children="cascaderSelectedChildren"
+            @update:selected="onSelectedChanged"
+            popover-height="200px"
+        >
+        </s-cascader>
     </div>
 </template>
 
@@ -174,6 +180,7 @@ export default {
             loading3: false,
             message: 'hi',
             selectedTab: ['2'],
+            cascaderSelectedChildren: [], //级联选择器每级选中的记录都保存在这
             cascaderData: [{
                 name: '浙江',
                 children: [
@@ -229,6 +236,10 @@ export default {
     created() {
     },
     methods: {
+        onSelectedChanged(newSelectedItem) {
+            console.log(newSelectedItem);
+            this.cascaderSelectedChildren = newSelectedItem
+        },
         yyy(){
 
         },

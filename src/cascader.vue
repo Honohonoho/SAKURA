@@ -6,6 +6,8 @@
         <div class="s-cascader-popover" v-if="popoverVisible">
             <s-cascader-item
                 :child-data="cascaderData"
+                :selected="selectedChildren"
+                @update:selected="onSelectedChanged"
                 :height="popoverHeight"
             >
             </s-cascader-item>
@@ -15,6 +17,7 @@
 
 <script>
     import CascaderItem from './cascader-item'
+
     export default {
         name: "s-cascader",
         components: {
@@ -24,6 +27,10 @@
             cascaderData: {
                 type: Array
             },
+            selectedChildren: {
+                type: Array,
+                default: () => {return []}
+            },
             popoverHeight: {
                 type: String
             }
@@ -32,13 +39,17 @@
             return {
                 popoverVisible: false
             }
+        },
+        methods: {
+            onSelectedChanged(newSelectedItem) {
+                this.$emit('update:selected', newSelectedItem)
+            }
         }
     }
 </script>
 
 <style scoped lang="scss">
     @import "common";
-
     .s-cascader {
         position: relative;
         .s-cascader-trigger {

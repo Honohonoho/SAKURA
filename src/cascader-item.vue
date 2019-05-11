@@ -1,13 +1,20 @@
 <template>
     <div class="cascader-item" :style="{height: height}">
         <div class="cascader-item-left">
-            <div class="label" v-for="item in childData" :key="item.index" @click="leftSelected = item">
+            <div class="label" v-for="item in childData" :key="item.index" @click="onClickLabel(item)">
                 {{item.name}}
                 <s-icon class="icon label-arrow" name="right" v-if="item.children"></s-icon>
             </div>
         </div>
         <div class="cascader-item-right" v-if="rightCascaderData">
-            <s-cascader-item :child-data="rightCascaderData" :height="height"></s-cascader-item>
+            <s-cascader-item
+                :child-data="rightCascaderData"
+                :selected="selected"
+                :level="level+1"
+                @update:selected="onSelectedChanged"
+                :height="height"
+            >
+            </s-cascader-item>
         </div>
     </div>
 </template>
@@ -24,22 +31,42 @@
             childData: {
                 type: Array
             },
+            selected: {
+                type: Array,
+                default: () => {return []}
+            },
+            level: {
+                type: Number,
+                default: 0
+            },
             height: {
                 type: String
             }
         },
         computed: {
             rightCascaderData() {
-                if (this.leftSelected && this.leftSelected.children) {
-                    return this.leftSelected.children
+                let leftSelected = this.selected[this.level]
+                if (leftSelected && leftSelected.children) {
+                    return leftSelected.children
                 } else {
                     return null
                 }
             }
         },
         data() {
-            return {
-                leftSelected: null
+            return {}
+        },
+        methods: {
+            onClickLabel(item) {
+                // 别直接改props ！！！
+                // this.$set(this.selected, this.level, item)
+
+                let newItem = JSON.parse(JSON.stringify(this.selected))
+                newItem[this.level] = item
+                this.$emit('update:selected', newItem)
+            },
+            onSelectedChanged(newSelectedItem) {
+                this.$emit('update:selected', newSelectedItem)
             }
         }
     }
@@ -47,7 +74,6 @@
 
 <style scoped lang="scss">
     @import "common";
-
     .cascader-item {
         height: 100px;
         display: flex;
