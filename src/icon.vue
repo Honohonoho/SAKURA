@@ -4,17 +4,19 @@
     </svg>
 </template>
 <script>
-import './svg.js'
-export default {
-    props: {
-        name: {}
+    import './svg.js'
+
+    export default {
+        props: {
+            name: {}
+        }
     }
-}
 </script>
 <style lang="scss">
-.s-icon {
+    .s-icon {
         height: 1em;
         width: 1em;
+        fill: currentColor;
     }
 </style>
 
