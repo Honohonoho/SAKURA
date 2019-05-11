@@ -207,6 +207,22 @@ export default {
                     {name: '苏州'},
                     {name: '扬州'}
                 ]
+            }, {
+                name: '陕西',
+                children: [
+                    {
+                        name: '西安',
+                        children: [
+                            {name: '未央区'},
+                            {name: '莲湖区'},
+                            {name: '长安区'},
+                            {name: '雁塔区'}
+                        ]
+                    },
+                    {name: '咸阳'},
+                    {name: '汉中'},
+                    {name: '渭南'}
+                ]
             }]
         }
     },
