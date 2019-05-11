@@ -63,6 +63,7 @@
 
                 let newItem = JSON.parse(JSON.stringify(this.selected))
                 newItem[this.level] = item
+                newItem.splice(this.level + 1)
                 this.$emit('update:selected', newItem)
             },
             onSelectedChanged(newSelectedItem) {

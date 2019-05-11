@@ -237,7 +237,6 @@ export default {
     },
     methods: {
         onSelectedChanged(newSelectedItem) {
-            console.log(newSelectedItem);
             this.cascaderSelectedChildren = newSelectedItem
         },
         yyy(){
