@@ -115,7 +115,7 @@
                 <s-footer>footer</s-footer>
             </s-layout>
         </s-layout> -->
-        <s-cascader :cascader-data="cascaderData"></s-cascader>
+        <s-cascader :cascader-data="cascaderData" popover-height="200px"></s-cascader>
     </div>
 </template>
 

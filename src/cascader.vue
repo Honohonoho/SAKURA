@@ -4,9 +4,11 @@
             <slot></slot>
         </div>
         <div class="s-cascader-popover" v-if="popoverVisible">
-            <!--<div v-for="item in cascaderData" :key="item.index">-->
-                <s-cascader-item :child-data="cascaderData"></s-cascader-item>
-            <!--</div>-->
+            <s-cascader-item
+                :child-data="cascaderData"
+                :height="popoverHeight"
+            >
+            </s-cascader-item>
         </div>
     </div>
 </template>
@@ -21,6 +23,9 @@
         props: {
             cascaderData: {
                 type: Array
+            },
+            popoverHeight: {
+                type: String
             }
         },
         data() {
