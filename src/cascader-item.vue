@@ -83,6 +83,7 @@
         .cascader-item-left {
             height: 100%;
             padding: 0.3em 0;
+            overflow: auto;
             .label {
                 padding: 0.3em 1em;
                 white-space: nowrap;

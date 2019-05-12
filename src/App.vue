@@ -148,7 +148,16 @@ import Collapse from './collapse';
 import CollapseItem from './collapse-item';
 import Cascader from './cascader';
 import plugin from './plugin';
+import city from './city';
 Vue.use(plugin);
+
+function ajax (parent_id = 0) {
+    return city.filter((item)=> {
+        return item.parent_id === parent_id
+    })
+}
+
+console.log(ajax());
 export default {
     name: "app",
     components: {
@@ -181,56 +190,7 @@ export default {
             message: 'hi',
             selectedTab: ['2'],
             cascaderSelectedChildren: [], //级联选择器每级选中的记录都保存在这
-            cascaderData: [{
-                name: '浙江',
-                children: [
-                    {
-                        name: '杭州',
-                        children: [
-                            {name: '上城区'},
-                            {name: '下城区'},
-                            {name: '西湖区'},
-                            {name: '滨江区'},
-                        ]
-                    },
-                    {name: '温州'},
-                    {name: '宁波'},
-                    {name: '嘉兴'}
-                ]
-            }, {
-                name: '江苏',
-                children: [
-                    {
-                        name: '南京',
-                        children: [
-                            {name: '玄武区'},
-                            {name: '秦淮区'},
-                            {name: '建邺区'},
-                            {name: '鼓楼区'},
-                        ]
-                    },
-                    {name: '徐州'},
-                    {name: '无锡'},
-                    {name: '苏州'},
-                    {name: '扬州'}
-                ]
-            }, {
-                name: '陕西',
-                children: [
-                    {
-                        name: '西安',
-                        children: [
-                            {name: '未央区'},
-                            {name: '莲湖区'},
-                            {name: '长安区'},
-                            {name: '雁塔区'}
-                        ]
-                    },
-                    {name: '咸阳'},
-                    {name: '汉中'},
-                    {name: '渭南'}
-                ]
-            }]
+            cascaderData: ajax()
         }
     },
     created() {
