@@ -1,7 +1,7 @@
 <template>
     <div class="s-cascader">
         <div class="s-cascader-trigger" @click="popoverVisible = !popoverVisible">
-            <slot></slot>
+            {{this.selectedResult || '&nbsp;'}}
         </div>
         <div class="s-cascader-popover" v-if="popoverVisible">
             <s-cascader-item
@@ -35,6 +35,11 @@
                 type: String
             }
         },
+        computed: {
+            selectedResult() {
+                return this.selectedChildren.map(item => item.name).join('/')
+            }
+        },
         data() {
             return {
                 popoverVisible: false
@@ -53,8 +58,11 @@
     .s-cascader {
         position: relative;
         .s-cascader-trigger {
-            width: 100px;
+            min-width: 10em;
             height: 32px;
+            display: inline-flex;
+            align-items: center;
+            padding: 0 1em;
             border-radius: $cascader-border-radius;
             border: 1px solid $input-border-color;
         }
@@ -62,6 +70,7 @@
             position: absolute;
             left: 0;
             top: 100%;
+            margin-top: 5px;
             background: $main-background-white;
             border-radius: $cascader-border-radius;
             box-shadow: $cascader-box-shadow;
