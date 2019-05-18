@@ -117,9 +117,9 @@
         </s-layout> -->
         <s-cascader
             :cascader-data="cascaderData"
-            @update:cascaderData = "onCascaderDataChanged"
             :selected-children="cascaderSelectedChildren"
-            @update:selected = "onSelectedChanged"
+            @update:cascaderData="onCascaderDataChanged"
+            @update:selected="onSelectedChanged"
             :load-data="loadData"
             popover-height="200px"
         >
@@ -207,31 +207,36 @@
         },
         methods: {
             loadData(node, updateData) {
-                // console.log('node:',node);
+                // console.log('selected node:',node);
+                // console.log('selected node id:',node.id);
                 let id = node.id;
-                ajax(id).then(res=>{
+                ajax(id).then(res => {
+                    // console.log('research result:',res);
                     updateData(res);
                 })
             },
-            onSelectedChanged(newSelectedItem) {
-                // console.log('newSelectedItem:',newSelectedItem)
-                let newSelectedItemId = newSelectedItem[newSelectedItem.length - 1].id
-                // console.log('id:',newSelectedItemId);
+            onSelectedChanged(newSelectedItemArray) {
+                console.log('newSelectedItemArray',newSelectedItemArray);
+                this.cascaderSelectedChildren = newSelectedItemArray
+                let newSelectedItemId = newSelectedItemArray[newSelectedItemArray.length - 1].id;
                 ajax(newSelectedItemId).then(res => {
-                    // console.log('res:',res)
-                    let lastLevelSelected = this.cascaderData.filter(item => {
-                        return item.id === newSelectedItemId
+                    console.log('3');
+                    console.log('cascaderSelectedChildren',this.cascaderSelectedChildren);
+                    let lastLevelSelected = this.cascaderSelectedChildren.filter(item => {
+                        console.log(item)
+                        return item.id === this.cascaderSelectedChildren[this.cascaderSelectedChildren.length - 1].id
                     });
-                    // console.log('lastLevelSelected:',lastLevelSelected);
-                    this.$set(lastLevelSelected[lastLevelSelected.length - 1], 'children', res)
-                    this.cascaderSelectedChildren = lastLevelSelected
+                    console.log('lastLevelSelected:',lastLevelSelected);
+                    this.$set(lastLevelSelected[0], 'children', res);
+                    // this.cascaderSelectedChildren = lastLevelSelected
                     // console.log(this.cascaderData)
+                    console.log('4');
                 })
-                this.cascaderSelectedChildren = newSelectedItem
+                // this.cascaderSelectedChildren = newSelectedItem
             },
             onCascaderDataChanged(newSource) {
                 this.cascaderData = newSource
-                console.log(this.cascaderData);
+                // console.log(this.cascaderData);
             },
             yyy() {
 

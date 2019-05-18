@@ -45,11 +45,14 @@
         },
         computed: {
             rightCascaderData() {
-                let leftSelected = this.selected[this.level]
-                if (leftSelected && leftSelected.children) {
-                    return leftSelected.children
-                } else {
-                    return null
+                if (this.selected && this.selected[this.level]) {
+                    let child = this.childData.filter(item => item.name === this.selected[this.level].name)
+                    // console.log(child);
+                    if (child && child[0].children && child[0].children.length > 0) {
+                        return child[0].children
+                    } else {
+                        return null
+                    }
                 }
             }
         },
