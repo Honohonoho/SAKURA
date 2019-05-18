@@ -1,9 +1,9 @@
 <template>
     <div id="app" style="padding: 100px;">
         <!--<s-collapse :selected.sync="selectedTab" accordion>-->
-            <!--<s-collapse-item title="标题1" name="1">内容1</s-collapse-item>-->
-            <!--<s-collapse-item title="标题2" name="2">内容2</s-collapse-item>-->
-            <!--<s-collapse-item title="标题3" name="3">内容3</s-collapse-item>-->
+        <!--<s-collapse-item title="标题1" name="1">内容1</s-collapse-item>-->
+        <!--<s-collapse-item title="标题2" name="2">内容2</s-collapse-item>-->
+        <!--<s-collapse-item title="标题3" name="3">内容3</s-collapse-item>-->
         <!--</s-collapse>-->
         <!--{{selectedTab}}-->
         <!-- <p>click触发</p>
@@ -99,14 +99,14 @@
             </s-tabs-body>
         </s-tabs> -->
         <!--<s-button @click="showToast1">-->
-           <!--top-->
+        <!--top-->
         <!--</s-button>-->
         <!--<s-button @click="showToast2">-->
-            <!--middle-->
-         <!--</s-button>-->
-         <!--<s-button @click="showToast3">-->
-            <!--bottom-->
-         <!--</s-button>-->
+        <!--middle-->
+        <!--</s-button>-->
+        <!--<s-button @click="showToast3">-->
+        <!--bottom-->
+        <!--</s-button>-->
         <!-- <s-layout>
             <s-sider>sider</s-sider>
             <s-layout>
@@ -117,8 +117,10 @@
         </s-layout> -->
         <s-cascader
             :cascader-data="cascaderData"
+            @update:cascaderData = "onCascaderDataChanged"
             :selected-children="cascaderSelectedChildren"
-            @update:selected="onSelectedChanged"
+            @update:selected = "onSelectedChanged"
+            :load-data="loadData"
             popover-height="200px"
         >
         </s-cascader>
@@ -126,123 +128,155 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import Button from './button';
-import Icon from './icon';
-import ButtonGroup from './button-group';
-import Input from './input';
-import Row from './row';
-import Layout from './layout';
-import Header from './header';
-import Content from './content';
-import Sider from './sider';
-import Footer from './footer';
-import Toast from './toast';
-import Tabs from './tabs';
-import Tabshead from './tabs-head';
-import TabsBody from './tabs-body';
-import TabsItem from './tabs-item';
-import TabsPane from './tabs-pane';
-import Popover from './popover';
-import Collapse from './collapse';
-import CollapseItem from './collapse-item';
-import Cascader from './cascader';
-import plugin from './plugin';
-import city from './city';
-Vue.use(plugin);
+    import Vue from 'vue';
+    import Button from './button';
+    import Icon from './icon';
+    import ButtonGroup from './button-group';
+    import Input from './input';
+    import Row from './row';
+    import Layout from './layout';
+    import Header from './header';
+    import Content from './content';
+    import Sider from './sider';
+    import Footer from './footer';
+    import Toast from './toast';
+    import Tabs from './tabs';
+    import Tabshead from './tabs-head';
+    import TabsBody from './tabs-body';
+    import TabsItem from './tabs-item';
+    import TabsPane from './tabs-pane';
+    import Popover from './popover';
+    import Collapse from './collapse';
+    import CollapseItem from './collapse-item';
+    import Cascader from './cascader';
+    import plugin from './plugin';
+    import city from './city';
 
-function ajax (parent_id = 0) {
-    return city.filter((item)=> {
-        return item.parent_id === parent_id
-    })
-}
+    Vue.use(plugin);
 
-console.log(ajax());
-export default {
-    name: "app",
-    components: {
-        // 's-button': Button,
-        // 's-icon': Icon,
-        // 's-button-group': ButtonGroup,
-        // 's-input': Input,
-        // 's-row': Row,
-        // 's-layout': Layout,
-        // 's-header': Header,
-        // 's-content': Content,
-        // 's-sider': Sider,
-        // 's-footer': Footer,
-        // 's-toast': Toast,
-        // 's-tabs': Tabs,
-        // 's-tabs-head': Tabshead,
-        // 's-tabs-body': TabsBody,
-        // 's-tabs-item': TabsItem,
-        // 's-tabs-pane': TabsPane,
-        // 's-popover': Popover,
-        // 's-collapse': Collapse,
-        // 's-collapse-item': CollapseItem,
-        's-cascader': Cascader
-    },
-    data() {
-        return {
-            loading1: false,
-            loading2: true,
-            loading3: false,
-            message: 'hi',
-            selectedTab: ['2'],
-            cascaderSelectedChildren: [], //级联选择器每级选中的记录都保存在这
-            cascaderData: ajax()
-        }
-    },
-    created() {
-    },
-    methods: {
-        onSelectedChanged(newSelectedItem) {
-            this.cascaderSelectedChildren = newSelectedItem
-        },
-        yyy(){
-
-        },
-        showToast1() {
-            this.$toast('段落段落段落段落段落', {
-                position: 'top',
-                enableHtml: false,
-                closeButton: {
-                    text: '重置',
-                    callback() {
-                        console.log('reset successfully')
-                    }
-                },
-                autoClose: 1
-            })
-        },
-        showToast2() {
-            this.$toast('段落段落段落段落段落', {
-                position: 'middle',
-                enableHtml: false,
-                closeButton: {
-                    text: '重置',
-                    callback() {
-                        console.log('reset successfully')
-                    }
-                },
-                autoClose: false
-            })
-        },
-        showToast3() {
-            this.$toast('段落段落段落段落段落', {
-                position: 'bottom',
-                enableHtml: false,
-                closeButton: {
-                    text: '重置',
-                    callback() {
-                        console.log('reset successfully')
-                    }
-                },
-                autoClose: false
-            })
-        }
+    function ajax(parent_id = 0) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                let result = city.filter((item) => {
+                    return item.parent_id === parent_id
+                })
+                resolve(result)
+            }, 0)
+        })
     }
-};
+
+    export default {
+        name: "app",
+        components: {
+            // 's-button': Button,
+            // 's-icon': Icon,
+            // 's-button-group': ButtonGroup,
+            // 's-input': Input,
+            // 's-row': Row,
+            // 's-layout': Layout,
+            // 's-header': Header,
+            // 's-content': Content,
+            // 's-sider': Sider,
+            // 's-footer': Footer,
+            // 's-toast': Toast,
+            // 's-tabs': Tabs,
+            // 's-tabs-head': Tabshead,
+            // 's-tabs-body': TabsBody,
+            // 's-tabs-item': TabsItem,
+            // 's-tabs-pane': TabsPane,
+            // 's-popover': Popover,
+            // 's-collapse': Collapse,
+            // 's-collapse-item': CollapseItem,
+            's-cascader': Cascader
+        },
+        data() {
+            return {
+                loading1: false,
+                loading2: true,
+                loading3: false,
+                message: 'hi',
+                selectedTab: ['2'],
+                cascaderSelectedChildren: [], //级联选择器每级选中的记录都保存在这
+                cascaderData: []
+            }
+        },
+        created() {
+            ajax(0).then(res => {
+                this.cascaderData = res;
+            })
+        },
+        methods: {
+            loadData(node, updateData) {
+                // console.log('node:',node);
+                let id = node.id;
+                ajax(id).then(res=>{
+                    updateData(res);
+                })
+            },
+            onSelectedChanged(newSelectedItem) {
+                // console.log('newSelectedItem:',newSelectedItem)
+                let newSelectedItemId = newSelectedItem[newSelectedItem.length - 1].id
+                // console.log('id:',newSelectedItemId);
+                ajax(newSelectedItemId).then(res => {
+                    // console.log('res:',res)
+                    let lastLevelSelected = this.cascaderData.filter(item => {
+                        return item.id === newSelectedItemId
+                    });
+                    // console.log('lastLevelSelected:',lastLevelSelected);
+                    this.$set(lastLevelSelected[lastLevelSelected.length - 1], 'children', res)
+                    this.cascaderSelectedChildren = lastLevelSelected
+                    // console.log(this.cascaderData)
+                })
+                this.cascaderSelectedChildren = newSelectedItem
+            },
+            onCascaderDataChanged(newSource) {
+                this.cascaderData = newSource
+                console.log(this.cascaderData);
+            },
+            yyy() {
+
+            },
+            showToast1() {
+                this.$toast('段落段落段落段落段落', {
+                    position: 'top',
+                    enableHtml: false,
+                    closeButton: {
+                        text: '重置',
+                        callback() {
+                            console.log('reset successfully')
+                        }
+                    },
+                    autoClose: 1
+                })
+            },
+            showToast2() {
+                this.$toast('段落段落段落段落段落', {
+                    position: 'middle',
+                    enableHtml: false,
+                    closeButton: {
+                        text: '重置',
+                        callback() {
+                            console.log('reset successfully')
+                        }
+                    },
+                    autoClose: false
+                })
+            },
+            showToast3() {
+                this.$toast('段落段落段落段落段落', {
+                    position: 'bottom',
+                    enableHtml: false,
+                    closeButton: {
+                        text: '重置',
+                        callback() {
+                            console.log('reset successfully')
+                        }
+                    },
+                    autoClose: false
+                })
+            }
+        }
+    };
 </script>
 
 <style lang="scss">

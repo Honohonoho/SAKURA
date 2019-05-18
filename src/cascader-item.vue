@@ -76,13 +76,12 @@
 <style scoped lang="scss">
     @import "common";
     .cascader-item {
-        height: 100px;
+        min-height: 100px;
         display: flex;
         justify-content: flex-start;
         align-items: flex-start;
         .cascader-item-left {
             height: 100%;
-            padding: 0.3em 0;
             overflow: auto;
             .label {
                 padding: 0.3em 1em;

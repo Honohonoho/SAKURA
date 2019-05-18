@@ -33,6 +33,9 @@
             },
             popoverHeight: {
                 type: String
+            },
+            loadData: {
+                type: Function
             }
         },
         computed: {
@@ -46,8 +49,39 @@
             }
         },
         methods: {
-            onSelectedChanged(newSelectedItem) {
-                this.$emit('update:selected', newSelectedItem)
+            onSelectedChanged(newSelectedItemArray) {
+                this.$emit('update:selected', newSelectedItemArray)
+                let lastSelectedItem = newSelectedItemArray[newSelectedItemArray.length - 1]
+                let simplest = (children, id) => {
+                    return children.filter(item => item.id === id)
+                }
+                let complex = (children, id) => {
+                    let noChildren = []
+                    let hasChildren = []
+                    children.forEach(item => {
+                        if(item.children) {
+                            hasChildren.push(item)
+                        } else {
+                            noChildren.push(item)
+                        }
+                    })
+                    let found = simplest(noChildren, id)
+                    if(found) {
+                        return found
+                    } else {
+                        return hasChildren.length > 0 ? complex(hasChildren, id) : undefined
+                    }
+                }
+                let updateCascaderData = (resData) => {
+                    console.log('updateCascaderData', resData);
+                    console.log(this);
+                    console.log('id',lastSelectedItem.id);
+                    let deepCopy = JSON.parse(JSON.stringify(this.cascaderData))
+                    let toUpdate = complex(deepCopy, lastSelectedItem.id)
+                    toUpdate.children = resData
+                    this.$emit('update:cascaderData', deepCopy)
+                }
+                this.loadData(lastSelectedItem, updateCascaderData)
             }
         }
     }
