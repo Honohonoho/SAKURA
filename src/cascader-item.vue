@@ -3,7 +3,7 @@
         <div class="cascader-item-left">
             <div class="label" v-for="item in childData" :key="item.index" @click="onClickLabel(item)">
                 {{item.name}}
-                <s-icon class="icon label-arrow" name="right" v-if="item.children"></s-icon>
+                <s-icon class="icon label-arrow" name="right" v-if="!item.isLeaf"></s-icon>
             </div>
         </div>
         <div class="cascader-item-right" v-if="rightCascaderData">

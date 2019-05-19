@@ -116,12 +116,12 @@
             </s-layout>
         </s-layout> -->
         <s-cascader
-            :cascader-data="cascaderData"
-            :selected-children="cascaderSelectedChildren"
-            @update:cascaderData="onCascaderDataChanged"
-            @update:selected="onSelectedChanged"
-            :load-data="loadData"
-            popover-height="200px"
+                :cascader-data="cascaderData"
+                :selected-children="cascaderSelectedChildren"
+                @update:cascaderData="onCascaderDataChanged"
+                @update:selected="onSelectedChanged"
+                :load-data="loadData"
+                popover-height="200px"
         >
         </s-cascader>
     </div>
@@ -159,6 +159,17 @@
             setTimeout(() => {
                 let result = city.filter((item) => {
                     return item.parent_id === parent_id
+                });
+                result.forEach(node => {
+                    // node.isLeaf = true / false
+                    let childrenOfNode = city.filter(item => {
+                        return item.parent_id === node.id
+                    });
+                    if (childrenOfNode.length > 0) {
+                        node.isLeaf = false // 没有children
+                    } else {
+                        node.isLeaf = true
+                    }
                 })
                 resolve(result)
             }, 0)
@@ -216,17 +227,17 @@
                 })
             },
             onSelectedChanged(newSelectedItemArray) {
-                console.log('newSelectedItemArray',newSelectedItemArray);
+                console.log('newSelectedItemArray', newSelectedItemArray);
                 this.cascaderSelectedChildren = newSelectedItemArray
                 let newSelectedItemId = newSelectedItemArray[newSelectedItemArray.length - 1].id;
                 ajax(newSelectedItemId).then(res => {
                     console.log('3');
-                    console.log('cascaderSelectedChildren',this.cascaderSelectedChildren);
+                    console.log('cascaderSelectedChildren', this.cascaderSelectedChildren);
                     let lastLevelSelected = this.cascaderSelectedChildren.filter(item => {
                         console.log(item)
                         return item.id === this.cascaderSelectedChildren[this.cascaderSelectedChildren.length - 1].id
                     });
-                    console.log('lastLevelSelected:',lastLevelSelected);
+                    console.log('lastLevelSelected:', lastLevelSelected);
                     this.$set(lastLevelSelected[0], 'children', res);
                     // this.cascaderSelectedChildren = lastLevelSelected
                     // console.log(this.cascaderData)
