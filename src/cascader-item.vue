@@ -1,18 +1,20 @@
 <template>
     <div class="cascader-item" :style="{height: height}">
         <ul class="cascader-item-left">
-            <li class="label" v-for="item in childData" :key="item.index" @click="onClickLabel(item)" :title="item.name">
+            <li class="label" v-for="item in childData" :key="item.index" @click="onClickLabel(item)"
+                :title="item.name">
                 <span class="label-name">{{item.name}}</span>
-                <s-icon class="icon label-arrow" name="right" v-if="loadData ? !item.isLeaf : item.children"></s-icon>
+                <s-icon class="icon label-arrow" name="right" v-if="rightArrowVisible(item)"></s-icon>
             </li>
         </ul>
         <div class="cascader-item-right" v-if="rightCascaderData">
             <s-cascader-item
-                :child-data="rightCascaderData"
-                :selected="selected"
-                :level="level+1"
-                @update:selected="onSelectedChanged"
-                :height="height"
+                    :child-data="rightCascaderData"
+                    :selected="selected"
+                    :loadData="loadData"
+                    :level="level+1"
+                    @update:selected="onSelectedChanged"
+                    :height="height"
             >
             </s-cascader-item>
         </div>
@@ -63,6 +65,9 @@
             return {}
         },
         methods: {
+            rightArrowVisible(item) {
+                return this.loadData ? !item.isLeaf : item.children
+            },
             onClickLabel(item) {
                 // 别直接改props ！！！
                 // this.$set(this.selected, this.level, item)
