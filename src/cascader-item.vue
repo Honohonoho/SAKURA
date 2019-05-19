@@ -3,7 +3,7 @@
         <ul class="cascader-item-left">
             <li class="label" v-for="item in childData" :key="item.index" @click="onClickLabel(item)" :title="item.name">
                 <span class="label-name">{{item.name}}</span>
-                <s-icon class="icon label-arrow" name="right" v-if="!item.isLeaf"></s-icon>
+                <s-icon class="icon label-arrow" name="right" v-if="loadData ? !item.isLeaf : item.children"></s-icon>
             </li>
         </ul>
         <div class="cascader-item-right" v-if="rightCascaderData">
@@ -41,6 +41,9 @@
             },
             height: {
                 type: String
+            },
+            loadData: {
+                type: Function
             }
         },
         computed: {

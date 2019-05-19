@@ -1,12 +1,13 @@
 <template>
     <div class="s-cascader">
         <div class="s-cascader-trigger" @click="popoverVisible = !popoverVisible">
-            {{this.selectedResult || '&nbsp;'}}
+            {{selectedResult || '&nbsp;'}}
         </div>
         <div class="s-cascader-popover" v-if="popoverVisible">
             <s-cascader-item
                 :child-data="cascaderData"
                 :selected="selectedChildren"
+                :loadData="loadData"
                 @update:selected="onSelectedChanged"
                 :height="popoverHeight"
             >
@@ -79,7 +80,7 @@
                     this.$emit('update:cascaderData', deepCopy)
                 }
                 if (!lastSelectedItem.isLeaf) {
-                    this.loadData(lastSelectedItem, updateCascaderData)
+                    this.loadData && this.loadData(lastSelectedItem, updateCascaderData)
                 }
             }
         }

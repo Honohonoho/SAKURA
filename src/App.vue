@@ -120,7 +120,6 @@
                 :selected-children="cascaderSelectedChildren"
                 @update:cascaderData="onCascaderDataChanged"
                 @update:selected="onSelectedChanged"
-                :load-data="loadData"
                 popover-height="200px"
         >
         </s-cascader>
@@ -208,13 +207,46 @@
                 message: 'hi',
                 selectedTab: ['2'],
                 cascaderSelectedChildren: [], //级联选择器每级选中的记录都保存在这
-                cascaderData: []
+                cascaderData: [{
+                    name: '浙江',
+                    children: [
+                        {
+                            name: '杭州',
+                            children: [
+                                {name: '上城区'},
+                                {name: '下城区'},
+                                {name: '西湖区'},
+                                {name: '滨江区'},
+                            ]
+                        },
+                        {name: '温州'},
+                        {name: '宁波'},
+                        {name: '嘉兴'}
+                    ]
+                }, {
+                    name: '江苏',
+                    children: [
+                        {
+                            name: '南京',
+                            children: [
+                                {name: '玄武区'},
+                                {name: '秦淮区'},
+                                {name: '建邺区'},
+                                {name: '鼓楼区'},
+                            ]
+                        },
+                        {name: '徐州'},
+                        {name: '无锡'},
+                        {name: '苏州'},
+                        {name: '扬州'}
+                    ]
+                }]
             }
         },
         created() {
-            ajax(0).then(res => {
-                this.cascaderData = res;
-            })
+            // ajax(0).then(res => {
+            //     this.cascaderData = res;
+            // })
         },
         methods: {
             loadData(node, updateData) {
@@ -230,19 +262,19 @@
                 console.log('newSelectedItemArray', newSelectedItemArray);
                 this.cascaderSelectedChildren = newSelectedItemArray
                 let newSelectedItemId = newSelectedItemArray[newSelectedItemArray.length - 1].id;
-                ajax(newSelectedItemId).then(res => {
-                    console.log('3');
-                    console.log('cascaderSelectedChildren', this.cascaderSelectedChildren);
-                    let lastLevelSelected = this.cascaderSelectedChildren.filter(item => {
-                        console.log(item)
-                        return item.id === this.cascaderSelectedChildren[this.cascaderSelectedChildren.length - 1].id
-                    });
-                    console.log('lastLevelSelected:', lastLevelSelected);
-                    this.$set(lastLevelSelected[0], 'children', res);
-                    // this.cascaderSelectedChildren = lastLevelSelected
-                    // console.log(this.cascaderData)
-                    console.log('4');
-                })
+                // ajax(newSelectedItemId).then(res => {
+                //     console.log('3');
+                //     console.log('cascaderSelectedChildren', this.cascaderSelectedChildren);
+                //     let lastLevelSelected = this.cascaderSelectedChildren.filter(item => {
+                //         console.log(item)
+                //         return item.id === this.cascaderSelectedChildren[this.cascaderSelectedChildren.length - 1].id
+                //     });
+                //     console.log('lastLevelSelected:', lastLevelSelected);
+                //     this.$set(lastLevelSelected[0], 'children', res);
+                //     // this.cascaderSelectedChildren = lastLevelSelected
+                //     // console.log(this.cascaderData)
+                //     console.log('4');
+                // })
                 // this.cascaderSelectedChildren = newSelectedItem
             },
             onCascaderDataChanged(newSource) {
