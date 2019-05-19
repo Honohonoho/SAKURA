@@ -78,7 +78,9 @@
                     toUpdate.children = resData
                     this.$emit('update:cascaderData', deepCopy)
                 }
-                this.loadData(lastSelectedItem, updateCascaderData)
+                if (!lastSelectedItem.isLeaf) {
+                    this.loadData(lastSelectedItem, updateCascaderData)
+                }
             }
         }
     }

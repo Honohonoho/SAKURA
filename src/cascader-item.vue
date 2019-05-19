@@ -1,11 +1,11 @@
 <template>
     <div class="cascader-item" :style="{height: height}">
-        <div class="cascader-item-left">
-            <div class="label" v-for="item in childData" :key="item.index" @click="onClickLabel(item)">
-                {{item.name}}
+        <ul class="cascader-item-left">
+            <li class="label" v-for="item in childData" :key="item.index" @click="onClickLabel(item)" :title="item.name">
+                <span class="label-name">{{item.name}}</span>
                 <s-icon class="icon label-arrow" name="right" v-if="!item.isLeaf"></s-icon>
-            </div>
-        </div>
+            </li>
+        </ul>
         <div class="cascader-item-right" v-if="rightCascaderData">
             <s-cascader-item
                 :child-data="rightCascaderData"
@@ -92,8 +92,16 @@
                 display: flex;
                 align-items: center;
                 color: $main-font-color-dark;
+                cursor: pointer;
+                background: $main-background-white;
+                &:hover {
+                    background: $cascader-label-selected-background-color;
+                }
+                > .label-name {
+                    margin-right: 1em;
+                }
                 .label-arrow {
-                    margin-left: 5px;
+                    margin-left: auto;
                     transform: scale(.75);
                     color: $main-icon-color-light;
                 }

@@ -296,4 +296,9 @@
 </script>
 
 <style lang="scss">
+    ul, ol, li {
+        list-style: noe;
+        padding:0;
+        margin:0;
+    }
 </style>
