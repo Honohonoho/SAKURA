@@ -224,17 +224,12 @@
                 })
             },
             onSelectedChanged(newSelectedItemArray) {
-                console.log('newSelectedItemArray', newSelectedItemArray);
                 this.cascaderSelectedChildren = newSelectedItemArray
                 let newSelectedItemId = newSelectedItemArray[newSelectedItemArray.length - 1].id;
                 ajax(newSelectedItemId).then(res => {
-                    console.log('3');
-                    console.log('cascaderSelectedChildren', this.cascaderSelectedChildren);
                     let lastLevelSelected = this.cascaderSelectedChildren.filter(item => {
-                        console.log(item)
                         return item.id === this.cascaderSelectedChildren[this.cascaderSelectedChildren.length - 1].id
                     });
-                    console.log('lastLevelSelected:', lastLevelSelected);
                     this.$set(lastLevelSelected[0], 'children', res);
                 })
             },

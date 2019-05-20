@@ -1,15 +1,15 @@
 <template>
-    <div class="s-cascader">
-        <div class="s-cascader-trigger" @click="popoverVisible = !popoverVisible">
+    <div class="s-cascader" ref="cascader">
+        <div class="s-cascader-trigger" @click="toggle">
             {{selectedResult || '&nbsp;'}}
         </div>
         <div class="s-cascader-popover" v-if="popoverVisible">
             <s-cascader-item
-                :child-data="cascaderData"
-                :selected="selectedChildren"
-                :loadData="loadData"
-                @update:selected="onSelectedChanged"
-                :height="popoverHeight"
+                    :child-data="cascaderData"
+                    :selected="selectedChildren"
+                    :loadData="loadData"
+                    @update:selected="onSelectedChanged"
+                    :height="popoverHeight"
             >
             </s-cascader-item>
         </div>
@@ -50,6 +50,30 @@
             }
         },
         methods: {
+            onClickDocument(e) {
+                let {cascader: EleCascader} = this.$refs;
+                let {target} = e;
+                if (EleCascader === target || EleCascader.contains(target)) { return }
+                this.close();
+            },
+            open() {
+                this.popoverVisible = true;
+                // DOM渲染出来再添加监听
+                this.$nextTick(() => {
+                    document.addEventListener('click', this.onClickDocument)
+                })
+            },
+            close() {
+                this.popoverVisible = false
+                document.removeEventListener('click', this.onClickDocument)
+            },
+            toggle() {
+                if (this.popoverVisible === true) {
+                    this.close()
+                } else {
+                    this.open()
+                }
+            },
             onSelectedChanged(newSelectedItemArray) {
                 this.$emit('update:selected', newSelectedItemArray)
                 let lastSelectedItem = newSelectedItemArray[newSelectedItemArray.length - 1]
@@ -60,14 +84,14 @@
                     let noChildren = []
                     let hasChildren = []
                     children.forEach(item => {
-                        if(item.children) {
+                        if (item.children) {
                             hasChildren.push(item)
                         } else {
                             noChildren.push(item)
                         }
                     })
                     let found = simplest(noChildren, id)
-                    if(found) {
+                    if (found) {
                         return found
                     } else {
                         return hasChildren.length > 0 ? complex(hasChildren, id) : undefined
@@ -91,6 +115,7 @@
     @import "common";
     .s-cascader {
         position: relative;
+        display: inline-block;
         .s-cascader-trigger {
             min-width: 10em;
             height: 32px;
