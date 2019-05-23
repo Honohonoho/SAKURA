@@ -1,5 +1,5 @@
 <template>
-    <div class="s-cascader" ref="cascader">
+    <div class="s-cascader" ref="cascader" v-click-outside="close">
         <div class="s-cascader-trigger" @click="toggle">
             {{selectedResult || '&nbsp;'}}
         </div>
@@ -18,11 +18,14 @@
 
 <script>
     import CascaderItem from './cascader-item'
-
+    import clickOutside from './custom_directives';
     export default {
         name: "s-cascader",
         components: {
             's-cascader-item': CascaderItem
+        },
+        directives: {
+            clickOutside
         },
         props: {
             cascaderData: {
@@ -50,22 +53,11 @@
             }
         },
         methods: {
-            onClickDocument(e) {
-                let {cascader: EleCascader} = this.$refs;
-                let {target} = e;
-                if (EleCascader === target || EleCascader.contains(target)) { return }
-                this.close();
-            },
             open() {
                 this.popoverVisible = true;
-                // DOM渲染出来再添加监听
-                this.$nextTick(() => {
-                    document.addEventListener('click', this.onClickDocument)
-                })
             },
             close() {
                 this.popoverVisible = false
-                document.removeEventListener('click', this.onClickDocument)
             },
             toggle() {
                 if (this.popoverVisible === true) {
