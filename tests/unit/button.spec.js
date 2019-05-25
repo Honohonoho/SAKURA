@@ -37,7 +37,7 @@ describe('Button', () => {
         expect(useElements.length).to.equal(1);
         expect(useElements[0].getAttribute('xlink:href')).to.equal('#i-dot-loading');
     });
-    it('icon 默认的 order 是 1', () => {
+    xit('icon 默认的 order 是 1', () => {
         const div = document.createElement('div');
         document.body.appendChild(div);
         const vm = new Constructor({
@@ -50,7 +50,7 @@ describe('Button', () => {
         vm.$el.remove();
         vm.$destroy()
     });
-    it('设置 iconPosition 可以改变 order', () => {
+    xit('设置 iconPosition 可以改变 order', () => {
         const div = document.createElement('div');
         document.body.appendChild(div);
         const wrapper = mount(Button, {
