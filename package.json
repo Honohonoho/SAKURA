@@ -27,6 +27,8 @@
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
+    "sinon": "^7.3.2",
+    "sinon-chai": "^3.3.0",
     "vue-template-compiler": "^2.5.21",
     "vuepress": "^0.14.8"
   },
