@@ -4,7 +4,7 @@ let onClickDocument = (e) => {
         if (target === item.el || item.el.contains(target)) {
             return
         } else {
-            item.callbakc()
+            item.callback()
         }
     })
 };

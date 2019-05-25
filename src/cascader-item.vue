@@ -4,7 +4,14 @@
             <li class="label" v-for="item in childData" :key="item.index" @click="onClickLabel(item)"
                 :title="item.name">
                 <span class="label-name">{{item.name}}</span>
-                <s-icon class="icon label-arrow" name="right" v-if="rightArrowVisible(item)"></s-icon>
+                <span class="icons">
+                    <template v-if="item.name === loadingItem.name">
+                        <s-icon class="icon icon-loading" name="line-loading"></s-icon>
+                    </template>
+                    <template v-else>
+                        <s-icon class="icon icon-arrow" name="right" v-if="rightArrowVisible(item)"></s-icon>
+                    </template>
+                </span>
             </li>
         </ul>
         <div class="cascader-item-right" v-if="rightCascaderData">
@@ -15,6 +22,7 @@
                     :level="level+1"
                     @update:selected="onSelectedChanged"
                     :height="height"
+                    :loading-item="loadingItem"
             >
             </s-cascader-item>
         </div>
@@ -46,6 +54,10 @@
             },
             loadData: {
                 type: Function
+            },
+            loadingItem: {
+                type: Object,
+                default: ()=> ({})
             }
         },
         computed: {
@@ -107,10 +119,16 @@
                 > .label-name {
                     margin-right: 1em;
                 }
-                .label-arrow {
+                > .icons {
                     margin-left: auto;
-                    transform: scale(.75);
-                    color: $main-icon-color-light;
+                    display: inline-flex;
+                    .icon-arrow {
+                        transform: scale(.75);
+                        color: $main-icon-color-light;
+                    }
+                    .icon-loading {
+                        animation: spin 2s infinite linear;
+                    }
                 }
             }
         }

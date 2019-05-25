@@ -124,15 +124,17 @@
                 popover-height="200px"
         >
         </s-cascader>
-        <s-cascader
-                :cascader-data="cascaderData"
-                :selected-children="cascaderSelectedChildren"
-                @update:cascaderData="onCascaderDataChanged"
-                @update:selected="onSelectedChanged"
-                :load-data="loadData"
-                popover-height="200px"
-        >
-        </s-cascader>
+        <div>
+            <s-cascader
+                    :cascader-data="cascaderData"
+                    :selected-children="cascaderSelectedChildren"
+                    @update:cascaderData="onCascaderDataChanged"
+                    @update:selected="onSelectedChanged"
+                    :load-data="loadData"
+                    popover-height="200px"
+            >
+            </s-cascader>
+        </div>
     </div>
 </template>
 
@@ -181,7 +183,7 @@
                     }
                 })
                 resolve(result)
-            }, 0)
+            }, 1500)
         })
     }
 

@@ -10,6 +10,7 @@
                     :loadData="loadData"
                     @update:selected="onSelectedChanged"
                     :height="popoverHeight"
+                    :loading-item="loadingItem"
             >
             </s-cascader-item>
         </div>
@@ -50,7 +51,8 @@
         },
         data() {
             return {
-                popoverVisible: false
+                popoverVisible: false,
+                loadingItem: {}
             }
         },
         methods: {
@@ -67,9 +69,9 @@
                     this.open()
                 }
             },
-            onSelectedChanged(newSelectedItemArray) {
-                this.$emit('update:selected', newSelectedItemArray)
-                let lastSelectedItem = newSelectedItemArray[newSelectedItemArray.length - 1]
+            onSelectedChanged: function (newSelectedItemArray) {
+                this.$emit('update:selected', newSelectedItemArray);
+                let lastSelectedItem = newSelectedItemArray[newSelectedItemArray.length - 1];
                 let simplest = (children, id) => {
                     return children.filter(item => item.id === id)
                 };
@@ -89,15 +91,17 @@
                     } else {
                         return hasChildren.length > 0 ? complex(hasChildren, id) : undefined
                     }
-                }
+                };
                 let updateCascaderData = (resData) => {
+                    this.loadingItem = {}
                     let deepCopy = JSON.parse(JSON.stringify(this.cascaderData))
                     let toUpdate = complex(deepCopy, lastSelectedItem.id)
                     toUpdate.children = resData
                     this.$emit('update:cascaderData', deepCopy)
-                }
-                if (!lastSelectedItem.isLeaf) {
-                    this.loadData && this.loadData(lastSelectedItem, updateCascaderData)
+                };
+                if (!lastSelectedItem.isLeaf && this.loadData) {
+                    this.loadData(lastSelectedItem, updateCascaderData);
+                    this.loadingItem = lastSelectedItem;
                 }
             }
         }
@@ -122,6 +126,7 @@
             position: absolute;
             left: 0;
             top: 100%;
+            z-index: 1;
             margin-top: 5px;
             background: $main-background-white;
             border-radius: $cascader-border-radius;
