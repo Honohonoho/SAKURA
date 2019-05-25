@@ -115,6 +115,7 @@
                 <s-footer>footer</s-footer>
             </s-layout>
         </s-layout> -->
+        <s-button icon="settings" :loading="false">设置</s-button>
         <s-cascader
                 :cascader-data="cascaderData"
                 :selected-children="cascaderSelectedChildren"
@@ -190,7 +191,7 @@
     export default {
         name: "app",
         components: {
-            // 's-button': Button,
+            's-button': Button,
             // 's-icon': Icon,
             // 's-button-group': ButtonGroup,
             // 's-input': Input,

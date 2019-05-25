@@ -1,8 +1,9 @@
 <template>
     <button class="s-button" :class="{[`icon-${iconPosition}`]: true}"
         @click="$emit('click')">
-        <s-icon class="icon" v-if="icon && !loading" name="icon"></s-icon>
-        <s-icon class="icon loading" v-if="loading" name="loading"></s-icon>
+        <s-icon class="icon" v-if="icon && !loading" :name="icon"></s-icon>
+        <!--loading 的 name 默认为 dot-loading-->
+        <s-icon class="icon loading" v-if="loading" name="dot-loading"></s-icon>
         <div class="button-content">
             <slot></slot>
         </div>
