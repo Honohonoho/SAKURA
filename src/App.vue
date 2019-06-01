@@ -115,26 +115,22 @@
                 <s-footer>footer</s-footer>
             </s-layout>
         </s-layout> -->
-        <s-button icon="settings" :loading="false">设置</s-button>
-        <s-cascader
-                :cascader-data="cascaderData"
-                :selected-children="cascaderSelectedChildren"
-                @update:cascaderData="onCascaderDataChanged"
-                @update:selected="onSelectedChanged"
-                :load-data="loadData"
-                popover-height="200px"
-        >
-        </s-cascader>
+        <!--<s-button icon="settings" :loading="false">设置</s-button>-->
+        <!--<s-cascader-->
+                <!--:cascader-data="cascaderData"-->
+                <!--:selected-children="cascaderSelectedChildren"-->
+                <!--@update:cascaderData="onCascaderDataChanged"-->
+                <!--@update:selected="onSelectedChanged"-->
+                <!--:load-data="loadData"-->
+                <!--popover-height="200px"-->
+        <!--&gt;-->
+        <!--</s-cascader>-->
         <div>
-            <s-cascader
-                    :cascader-data="cascaderData"
-                    :selected-children="cascaderSelectedChildren"
-                    @update:cascaderData="onCascaderDataChanged"
-                    @update:selected="onSelectedChanged"
-                    :load-data="loadData"
-                    popover-height="200px"
-            >
-            </s-cascader>
+            <g-slides>
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+            </g-slides>
         </div>
     </div>
 </template>
@@ -160,38 +156,40 @@
     import Popover from './popover';
     import Collapse from './collapse';
     import CollapseItem from './collapse-item';
-    import Cascader from './cascader';
+    // import Cascader from './cascader';
     import plugin from './plugin';
-    import city from './city';
+    // import city from './city';
+    import Slides from './slides';
 
     Vue.use(plugin);
 
-    function ajax(parent_id = 0) {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                let result = city.filter((item) => {
-                    return item.parent_id === parent_id
-                });
-                result.forEach(node => {
-                    // node.isLeaf = true / false
-                    let childrenOfNode = city.filter(item => {
-                        return item.parent_id === node.id
-                    });
-                    if (childrenOfNode.length > 0) {
-                        node.isLeaf = false // 没有children
-                    } else {
-                        node.isLeaf = true
-                    }
-                })
-                resolve(result)
-            }, 1500)
-        })
-    }
+    // function ajax(parent_id = 0) {
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             let result = city.filter((item) => {
+    //                 return item.parent_id === parent_id
+    //             });
+    //             result.forEach(node => {
+    //                 // node.isLeaf = true / false
+    //                 let childrenOfNode = city.filter(item => {
+    //                     return item.parent_id === node.id
+    //                 });
+    //                 if (childrenOfNode.length > 0) {
+    //                     node.isLeaf = false // 没有children
+    //                 } else {
+    //                     node.isLeaf = true
+    //                 }
+    //             })
+    //             resolve(result)
+    //         }, 1500)
+    //     })
+    // }
 
     export default {
         name: "app",
         components: {
-            's-button': Button,
+            's-slides': Slides
+            // 's-button': Button,
             // 's-icon': Icon,
             // 's-button-group': ButtonGroup,
             // 's-input': Input,
@@ -210,7 +208,7 @@
             // 's-popover': Popover,
             // 's-collapse': Collapse,
             // 's-collapse-item': CollapseItem,
-            's-cascader': Cascader
+            // 's-cascader': Cascader
         },
         data() {
             return {
@@ -224,77 +222,82 @@
             }
         },
         created() {
-            ajax(0).then(res => {
-                this.cascaderData = res;
-            })
+            // ajax(0).then(res => {
+            //     this.cascaderData = res;
+            // })
         },
         methods: {
-            loadData(node, updateData) {
-                let id = node.id;
-                ajax(id).then(res => {
-                    updateData(res);
-                })
-            },
-            onSelectedChanged(newSelectedItemArray) {
-                this.cascaderSelectedChildren = newSelectedItemArray
-                let newSelectedItemId = newSelectedItemArray[newSelectedItemArray.length - 1].id;
-                ajax(newSelectedItemId).then(res => {
-                    let lastLevelSelected = this.cascaderSelectedChildren.filter(item => {
-                        return item.id === this.cascaderSelectedChildren[this.cascaderSelectedChildren.length - 1].id
-                    });
-                    this.$set(lastLevelSelected[0], 'children', res);
-                })
-            },
-            onCascaderDataChanged(newSource) {
-                this.cascaderData = newSource
-            },
-            yyy() {
-
-            },
-            showToast1() {
-                this.$toast('段落段落段落段落段落', {
-                    position: 'top',
-                    enableHtml: false,
-                    closeButton: {
-                        text: '重置',
-                        callback() {
-                            console.log('reset successfully')
-                        }
-                    },
-                    autoClose: 1
-                })
-            },
-            showToast2() {
-                this.$toast('段落段落段落段落段落', {
-                    position: 'middle',
-                    enableHtml: false,
-                    closeButton: {
-                        text: '重置',
-                        callback() {
-                            console.log('reset successfully')
-                        }
-                    },
-                    autoClose: false
-                })
-            },
-            showToast3() {
-                this.$toast('段落段落段落段落段落', {
-                    position: 'bottom',
-                    enableHtml: false,
-                    closeButton: {
-                        text: '重置',
-                        callback() {
-                            console.log('reset successfully')
-                        }
-                    },
-                    autoClose: false
-                })
-            }
+            // loadData(node, updateData) {
+            //     let id = node.id;
+            //     ajax(id).then(res => {
+            //         updateData(res);
+            //     })
+            // },
+            // onSelectedChanged(newSelectedItemArray) {
+            //     this.cascaderSelectedChildren = newSelectedItemArray
+            //     let newSelectedItemId = newSelectedItemArray[newSelectedItemArray.length - 1].id;
+            //     ajax(newSelectedItemId).then(res => {
+            //         let lastLevelSelected = this.cascaderSelectedChildren.filter(item => {
+            //             return item.id === this.cascaderSelectedChildren[this.cascaderSelectedChildren.length - 1].id
+            //         });
+            //         this.$set(lastLevelSelected[0], 'children', res);
+            //     })
+            // },
+            // onCascaderDataChanged(newSource) {
+            //     this.cascaderData = newSource
+            // },
+            // yyy() {
+            //
+            // },
+            // showToast1() {
+            //     this.$toast('段落段落段落段落段落', {
+            //         position: 'top',
+            //         enableHtml: false,
+            //         closeButton: {
+            //             text: '重置',
+            //             callback() {
+            //                 console.log('reset successfully')
+            //             }
+            //         },
+            //         autoClose: 1
+            //     })
+            // },
+            // showToast2() {
+            //     this.$toast('段落段落段落段落段落', {
+            //         position: 'middle',
+            //         enableHtml: false,
+            //         closeButton: {
+            //             text: '重置',
+            //             callback() {
+            //                 console.log('reset successfully')
+            //             }
+            //         },
+            //         autoClose: false
+            //     })
+            // },
+            // showToast3() {
+            //     this.$toast('段落段落段落段落段落', {
+            //         position: 'bottom',
+            //         enableHtml: false,
+            //         closeButton: {
+            //             text: '重置',
+            //             callback() {
+            //                 console.log('reset successfully')
+            //             }
+            //         },
+            //         autoClose: false
+            //     })
+            // }
         }
     };
 </script>
 
 <style lang="scss">
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
     ul, ol, li {
         list-style: noe;
         padding:0;
