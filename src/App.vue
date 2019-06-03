@@ -126,11 +126,17 @@
         <!--&gt;-->
         <!--</s-cascader>-->
         <div>
-            <g-slides>
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
-            </g-slides>
+            <s-slides :selected="selected">
+                <s-slides-item name="1">
+                    <div class="box">1</div>
+                </s-slides-item>
+                <s-slides-item name="2">
+                    <div class="box">2</div>
+                </s-slides-item>
+                <s-slides-item name="3">
+                    <div class="box">3</div>
+                </s-slides-item>
+            </s-slides>
         </div>
     </div>
 </template>
@@ -160,6 +166,7 @@
     import plugin from './plugin';
     // import city from './city';
     import Slides from './slides';
+    import SlidesItem from './slides-item';
 
     Vue.use(plugin);
 
@@ -188,7 +195,8 @@
     export default {
         name: "app",
         components: {
-            's-slides': Slides
+            's-slides': Slides,
+            's-slides-item': SlidesItem
             // 's-button': Button,
             // 's-icon': Icon,
             // 's-button-group': ButtonGroup,
@@ -218,13 +226,17 @@
                 message: 'hi',
                 selectedTab: ['2'],
                 cascaderSelectedChildren: [], //级联选择器每级选中的记录都保存在这
-                cascaderData: []
+                cascaderData: [],
+                selected: '1'
             }
         },
         created() {
             // ajax(0).then(res => {
             //     this.cascaderData = res;
             // })
+            setTimeout(()=>{
+                this.selected = '2'
+            }, 2000)
         },
         methods: {
             // loadData(node, updateData) {
@@ -302,5 +314,11 @@
         list-style: noe;
         padding:0;
         margin:0;
+    }
+    .box {
+        width: 200px;
+        height: 150px;
+        background: grey;
+        border: 1px solid red;
     }
 </style>
