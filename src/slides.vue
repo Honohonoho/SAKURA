@@ -34,6 +34,10 @@
                 let selected = this.getSelected()
                 this.$children.forEach((vm) => {
                     vm.selected = selected
+                    const names = this.$children.map(vm => vm.name)
+                    let newIndex = names.indexOf(selected)
+                    let oldIndex = names.indexOf(vm.name)
+                    vm.negative = newIndex > oldIndex ?  false : true
                 })
             },
             getSelected() {
@@ -44,11 +48,18 @@
                 const names = this.$children.map(vm => vm.name)
                 let index = names.indexOf(this.getSelected())
                 let run = () => {
-                    if (index === names.length + 1) { index = 0 }
-                    this.$emit('update:selected', names[index + 1])
-                    index++
+                    let indexBack = index - 1
+                    if (indexBack === -1) { indexBack = names.length - 1 }
+                    if (indexBack === names.length) { indexBack = 0 }
+                    this.$emit('update:selected', names[indexBack])
                     setTimeout(run, 2000)
                 }
+                // let run = () => {
+                //     if (index === names.length + 1) { index = 0 }
+                //     this.$emit('update:selected', names[index + 1])
+                //     index++
+                //     setTimeout(run, 2000)
+                // }
                 setTimeout(run, 2000)
             }
         }
@@ -57,8 +68,9 @@
 
 <style scoped lang="scss">
     .s-slides {
-        display: inline-block;
+        /*display: inline-block;*/
         &-view {
+            overflow: hidden;
         }
         .s-slides-wrapper {
             position: relative;

@@ -1,6 +1,6 @@
 <template>
     <transition name="slide">
-        <div class="s-slides-item" v-if="visible">
+        <div class="s-slides-item" v-if="visible" :class="{negative}">
             <slot></slot>
         </div>
     </transition>
@@ -22,7 +22,8 @@
         },
         data() {
             return {
-                selected: undefined
+                selected: undefined,
+                negative: false
             }
         }
     }
@@ -36,15 +37,22 @@
         position: absolute;
         top: 0;
         left: 0;
+        width: 100%;
+        height: 100%;
     }
     .slide-enter-active, .slide-leave-active {
         transition: all 1s;
-        transform: translateX(0);
     }
     .slide-enter {
         transform: translateX(100%);
     }
+    .slide-enter.negative {
+        transform: translateX(-100%);
+    }
     .slide-leave-to {
         transform: translateX(-100%);
+    }
+    .slide-leave-to.negative {
+        transform: translateX(100%);
     }
 </style>

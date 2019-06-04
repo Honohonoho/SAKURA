@@ -1,5 +1,5 @@
 <template>
-    <div id="app" style="padding: 100px;">
+    <div id="app" style="padding: 50px;">
         <!--<s-collapse :selected.sync="selectedTab" accordion>-->
         <!--<s-collapse-item title="标题1" name="1">内容1</s-collapse-item>-->
         <!--<s-collapse-item title="标题2" name="2">内容2</s-collapse-item>-->
@@ -227,7 +227,7 @@
                 selectedTab: ['2'],
                 cascaderSelectedChildren: [], //级联选择器每级选中的记录都保存在这
                 cascaderData: [],
-                selected: '1'
+                selected: '2'
             }
         },
         created() {
@@ -319,7 +319,7 @@
         margin:0;
     }
     .box {
-        width: 200px;
+        width: 100%;
         height: 150px;
         background: grey;
         border: 1px solid red;
