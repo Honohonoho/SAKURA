@@ -16,22 +16,40 @@
         props: {
             selected: {
                 type: String
+            },
+            autoPlay: {
+                type: Boolean,
+                default: true
             }
         },
         mounted() {
-            console.log(this.selected);
             this.updateSlidesItem()
+            this.playAutomatically()
         },
         updated() {
             this.updateSlidesItem()
         },
         methods: {
             updateSlidesItem() {
-                let first = this.$children[0]
-                let selected = this.selected || first.name
+                let selected = this.getSelected()
                 this.$children.forEach((vm) => {
                     vm.selected = selected
                 })
+            },
+            getSelected() {
+                let first = this.$children[0]
+                return this.selected || first.name
+            },
+            playAutomatically() {
+                const names = this.$children.map(vm => vm.name)
+                let index = names.indexOf(this.getSelected())
+                let run = () => {
+                    if (index === names.length + 1) { index = 0 }
+                    this.$emit('update:selected', names[index + 1])
+                    index++
+                    setTimeout(run, 2000)
+                }
+                setTimeout(run, 2000)
             }
         }
     }

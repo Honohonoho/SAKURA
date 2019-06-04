@@ -126,7 +126,7 @@
         <!--&gt;-->
         <!--</s-cascader>-->
         <div>
-            <s-slides :selected="selected">
+            <s-slides :selected="selected" @update:selected="onSelectedChanged">
                 <s-slides-item name="1">
                     <div class="box">1</div>
                 </s-slides-item>
@@ -234,11 +234,14 @@
             // ajax(0).then(res => {
             //     this.cascaderData = res;
             // })
-            setTimeout(()=>{
-                this.selected = '2'
-            }, 2000)
+            // setTimeout(()=>{
+            //     this.selected = '2'
+            // }, 2000)
         },
         methods: {
+            onSelectedChanged(itemName) {
+                this.selected = itemName
+            }
             // loadData(node, updateData) {
             //     let id = node.id;
             //     ajax(id).then(res => {
