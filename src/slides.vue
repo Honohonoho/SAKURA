@@ -6,6 +6,15 @@
                     <slot></slot>
                 </div>
             </div>
+            <div class="s-slides-dots-wrapper">
+                <span class="s-slides-dot"
+                      :class="{active: selectedIndex === n - 1}"
+                      v-for="n in dotsLength" :key="n"
+                      @click="onDotSelect(n-1)"
+                >
+                    {{n}}
+                </span>
+            </div>
         </div>
     </transition>
 </template>
@@ -22,9 +31,24 @@
                 default: true
             }
         },
+        data() {
+            return {
+                dotsLength: 0,
+                lastSelected: undefined
+            }
+        },
+        computed: {
+            getNames() {
+                return this.$children.map(vm => vm.name)
+            },
+            selectedIndex() {
+                return this.getNames.indexOf(this.selected) || 0
+            }
+        },
         mounted() {
             this.updateSlidesItem()
             this.playAutomatically()
+            this.dotsLength = this.$children.length
         },
         updated() {
             this.updateSlidesItem()
@@ -34,9 +58,8 @@
                 let selected = this.getSelected()
                 this.$children.forEach((vm) => {
                     vm.selected = selected
-                    const names = this.$children.map(vm => vm.name)
-                    let newIndex = names.indexOf(selected)
-                    let oldIndex = names.indexOf(vm.name)
+                    let newIndex = this.getNames.indexOf(selected)
+                    let oldIndex = this.getNames.indexOf(vm.name)
                     vm.negative = newIndex > oldIndex ?  false : true
                 })
             },
@@ -44,14 +67,17 @@
                 let first = this.$children[0]
                 return this.selected || first.name
             },
+            updateSelected(index) {
+                console.log(index);
+                this.$emit('update:selected', this.getNames[index])
+            },
             playAutomatically() {
-                const names = this.$children.map(vm => vm.name)
-                let index = names.indexOf(this.getSelected())
+                let index = this.getNames.indexOf(this.getSelected())
                 let run = () => {
                     let indexBack = index - 1
-                    if (indexBack === -1) { indexBack = names.length - 1 }
-                    if (indexBack === names.length) { indexBack = 0 }
-                    this.$emit('update:selected', names[indexBack])
+                    if (indexBack === -1) { indexBack = this.getNames.length - 1 }
+                    if (indexBack === this.getNames.length) { indexBack = 0 }
+                    this.updateSelected(this.getNames[indexBack])
                     setTimeout(run, 2000)
                 }
                 // let run = () => {
@@ -61,6 +87,9 @@
                 //     setTimeout(run, 2000)
                 // }
                 setTimeout(run, 2000)
+            },
+            onDotSelect(index) {
+                this.updateSelected(index)
             }
         }
     }
@@ -75,6 +104,11 @@
         .s-slides-wrapper {
             position: relative;
             border: 1px solid green;
+        }
+        &-dot {
+            &.active {
+                color: red;
+            }
         }
     }
 </style>
