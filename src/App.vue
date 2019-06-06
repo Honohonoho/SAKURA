@@ -126,7 +126,7 @@
         <!--&gt;-->
         <!--</s-cascader>-->
         <div>
-            <s-slides :selected="selected" @update:selected="onSelectedChanged">
+            <s-slides :selected="selected" @update:selected="onSelectedChanged" :reverse="true">
                 <s-slides-item name="1">
                     <div class="box">1</div>
                 </s-slides-item>
@@ -321,7 +321,10 @@
     .box {
         width: 100%;
         height: 150px;
-        background: grey;
-        border: 1px solid red;
+        background: #ddd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 32px;
     }
 </style>

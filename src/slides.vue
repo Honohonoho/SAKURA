@@ -27,6 +27,10 @@
             autoPlay: {
                 type: Boolean,
                 default: true
+            },
+            reverse: {
+                type: Boolean,
+                default: false
             }
         },
         data() {
@@ -83,8 +87,8 @@
                 if (this.timerId) { return }
                 let run = () => {
                     let index = this.getNames.indexOf(this.getSelected())
-                    let nextIndex = index + 1
-                    if (nextIndex === -1) { nextIndex = this.getNames.length + 1 }
+                    let nextIndex = this.reverse ? index - 1 : index + 1
+                    if (nextIndex === -1) { nextIndex = this.reverse ? this.getNames.length - 1 : this.getNames.length + 1 }
                     if (nextIndex === this.getNames.length) { nextIndex = 0 }
                     this.updateSelected(nextIndex)
                     this.timerId = setTimeout(run, 2000)
