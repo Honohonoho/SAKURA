@@ -61,13 +61,16 @@
                 let selected = this.getSelected()
                 this.$children.forEach((vm) => {
                     let negative = this.selectedIndex > this.lastSelectedIndex ?  false : true
-                    if(this.lastSelectedIndex === this.$children.length - 1 && this.selectedIndex === 0) {
-                        // 当前位于最后一个且下一次要移向第一个，保证无缝效果
-                        negative = false
-                    }
-                    if(this.lastSelectedIndex === 0 && this.selectedIndex === this.$children.length - 1) {
-                        // 当前处于第一个且下一次要移向最后一个，保证无缝效果
-                        negative = true
+                    if(this.timerId) {
+                        // 只在自动播放时生效，用户切换不生效
+                        if(this.lastSelectedIndex === this.$children.length - 1 && this.selectedIndex === 0) {
+                            // 当前位于最后一个且下一次要移向第一个，保证无缝效果
+                            negative = false
+                        }
+                        if(this.lastSelectedIndex === 0 && this.selectedIndex === this.$children.length - 1) {
+                            // 当前处于第一个且下一次要移向最后一个，保证无缝效果
+                            negative = true
+                        }
                     }
                     vm.negative = negative
                     this.$nextTick(()=>{
