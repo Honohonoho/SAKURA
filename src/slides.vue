@@ -11,7 +11,7 @@
                   v-for="n in dotsLength" :key="n"
                   @click="onDotSelect(n-1)"
             >
-                {{n-1}}
+                {{n}}
             </span>
         </div>
     </div>
@@ -124,9 +124,33 @@
         .s-slides-wrapper {
             position: relative;
         }
+        &-dots-wrapper {
+            padding: 8px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         &-dot {
+            width: 1.2em;
+            height: 1.2em;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            margin: 0 8px;
+            text-align: center;
+            font-size: 12px;
+            color: #fff;
+            &:hover {
+                cursor: pointer;
+            }
             &.active {
-                color: red;
+                color: #fff;
+                background: #000;
+                &:hover {
+                    cursor: default;
+                }
             }
         }
     }
