@@ -8,11 +8,11 @@
             </div>
             <div class="s-slides-dots-wrapper">
                 <span class="s-slides-dot"
-                      :class="{active: selectedIndex === n - 1}"
+                      :class="{active: selectedIndex === n-1}"
                       v-for="n in dotsLength" :key="n"
                       @click="onDotSelect(n-1)"
                 >
-                    {{n}}
+                    {{n-1}}
                 </span>
             </div>
         </div>
@@ -57,10 +57,10 @@
             updateSlidesItem() {
                 let selected = this.getSelected()
                 this.$children.forEach((vm) => {
-                    vm.selected = selected
-                    let newIndex = this.getNames.indexOf(selected)
-                    let oldIndex = this.getNames.indexOf(vm.name)
-                    vm.negative = newIndex > oldIndex ?  false : true
+                    vm.negative = this.selectedIndex > this.lastSelected ?  false : true
+                    this.$nextTick(()=>{
+                        vm.selected = selected
+                    })
                 })
             },
             getSelected() {
@@ -68,7 +68,7 @@
                 return this.selected || first.name
             },
             updateSelected(index) {
-                console.log(index);
+                this.lastSelected = this.selectedIndex
                 this.$emit('update:selected', this.getNames[index])
             },
             playAutomatically() {
@@ -86,7 +86,7 @@
                 //     index++
                 //     setTimeout(run, 2000)
                 // }
-                setTimeout(run, 2000)
+                setTimeout(run, 2000) // 用 setTimeout 模拟 setInterval
             },
             onDotSelect(index) {
                 this.updateSelected(index)
