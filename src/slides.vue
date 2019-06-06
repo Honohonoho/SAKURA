@@ -1,22 +1,20 @@
 <template>
-    <transition name="slide">
-        <div class="s-slides">
-            <div class="s-slides-view">
-                <div class="s-slides-wrapper">
-                    <slot></slot>
-                </div>
-            </div>
-            <div class="s-slides-dots-wrapper">
-                <span class="s-slides-dot"
-                      :class="{active: selectedIndex === n-1}"
-                      v-for="n in dotsLength" :key="n"
-                      @click="onDotSelect(n-1)"
-                >
-                    {{n-1}}
-                </span>
+    <div class="s-slides" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+        <div class="s-slides-view">
+            <div class="s-slides-wrapper">
+                <slot></slot>
             </div>
         </div>
-    </transition>
+        <div class="s-slides-dots-wrapper">
+            <span class="s-slides-dot"
+                  :class="{active: selectedIndex === n-1}"
+                  v-for="n in dotsLength" :key="n"
+                  @click="onDotSelect(n-1)"
+            >
+                {{n-1}}
+            </span>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -34,7 +32,8 @@
         data() {
             return {
                 dotsLength: 0,
-                lastSelected: undefined
+                lastSelectedIndex: undefined,
+                timerId: undefined
             }
         },
         computed: {
@@ -57,7 +56,16 @@
             updateSlidesItem() {
                 let selected = this.getSelected()
                 this.$children.forEach((vm) => {
-                    vm.negative = this.selectedIndex > this.lastSelected ?  false : true
+                    let negative = this.selectedIndex > this.lastSelectedIndex ?  false : true
+                    if(this.lastSelectedIndex === this.$children.length - 1 && this.selectedIndex === 0) {
+                        // 当前位于最后一个且下一次要移向第一个，保证无缝效果
+                        negative = false
+                    }
+                    if(this.lastSelectedIndex === 0 && this.selectedIndex === this.$children.length - 1) {
+                        // 当前处于第一个且下一次要移向最后一个，保证无缝效果
+                        negative = true
+                    }
+                    vm.negative = negative
                     this.$nextTick(()=>{
                         vm.selected = selected
                     })
@@ -68,28 +76,33 @@
                 return this.selected || first.name
             },
             updateSelected(index) {
-                this.lastSelected = this.selectedIndex
+                this.lastSelectedIndex = this.selectedIndex
                 this.$emit('update:selected', this.getNames[index])
             },
             playAutomatically() {
-                let index = this.getNames.indexOf(this.getSelected())
+                if (this.timerId) { return }
                 let run = () => {
-                    let indexBack = index - 1
-                    if (indexBack === -1) { indexBack = this.getNames.length - 1 }
-                    if (indexBack === this.getNames.length) { indexBack = 0 }
-                    this.updateSelected(this.getNames[indexBack])
-                    setTimeout(run, 2000)
+                    let index = this.getNames.indexOf(this.getSelected())
+                    let nextIndex = index + 1
+                    if (nextIndex === -1) { nextIndex = this.getNames.length + 1 }
+                    if (nextIndex === this.getNames.length) { nextIndex = 0 }
+                    this.updateSelected(nextIndex)
+                    this.timerId = setTimeout(run, 2000)
                 }
-                // let run = () => {
-                //     if (index === names.length + 1) { index = 0 }
-                //     this.$emit('update:selected', names[index + 1])
-                //     index++
-                //     setTimeout(run, 2000)
-                // }
-                setTimeout(run, 2000) // 用 setTimeout 模拟 setInterval
+                this.timerId = setTimeout(run, 2000) // 用 setTimeout 模拟 setInterval
             },
             onDotSelect(index) {
                 this.updateSelected(index)
+            },
+            onMouseEnter() {
+                this.pauseAnimation()
+            },
+            onMouseLeave() {
+                this.playAutomatically()
+            },
+            pauseAnimation() {
+                window.clearTimeout(this.timerId)
+                this.timerId = undefined
             }
         }
     }
@@ -103,7 +116,6 @@
         }
         .s-slides-wrapper {
             position: relative;
-            border: 1px solid green;
         }
         &-dot {
             &.active {
