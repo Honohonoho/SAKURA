@@ -1,5 +1,11 @@
 <template>
-    <div class="s-slides" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+    <div class="s-slides"
+         @mouseenter="onMouseEnter"
+         @mouseleave="onMouseLeave"
+         @touchstart="onTouchStart"
+         @touchmove="onTouchMove"
+         @touchend="onTouchEnd"
+    >
         <div class="s-slides-view">
             <div class="s-slides-wrapper">
                 <slot></slot>
@@ -37,7 +43,8 @@
             return {
                 dotsLength: 0,
                 lastSelectedIndex: undefined,
-                timerId: undefined
+                timerId: undefined,
+                startTouch: undefined
             }
         },
         computed: {
@@ -45,7 +52,8 @@
                 return this.$children.map(vm => vm.name)
             },
             selectedIndex() {
-                return this.getNames.indexOf(this.selected) || 0
+                let index = this.getNames.indexOf(this.selected)
+                return index === -1 ? 0 : index
             }
         },
         mounted() {
@@ -82,17 +90,17 @@
                 let first = this.$children[0]
                 return this.selected || first.name
             },
-            updateSelected(index) {
-                this.lastSelectedIndex = this.selectedIndex
-                this.$emit('update:selected', this.getNames[index])
+            updateSelected(nextIndex) {
+                this.lastSelectedIndex = this.selectedIndex // 保存上一次选中的index
+                if (nextIndex === -1) { nextIndex = this.getNames.length - 1 }
+                if (nextIndex === this.getNames.length) { nextIndex = 0 }
+                this.$emit('update:selected', this.getNames[nextIndex])
             },
             playAutomatically() {
                 if (this.timerId) { return }
                 let run = () => {
                     let index = this.getNames.indexOf(this.getSelected())
                     let nextIndex = this.reverse ? index - 1 : index + 1
-                    if (nextIndex === -1) { nextIndex = this.reverse ? this.getNames.length - 1 : this.getNames.length + 1 }
-                    if (nextIndex === this.getNames.length) { nextIndex = 0 }
                     this.updateSelected(nextIndex)
                     this.timerId = setTimeout(run, 2000)
                 }
@@ -106,6 +114,38 @@
             },
             onMouseLeave() {
                 this.playAutomatically()
+            },
+            onTouchStart(e) {
+                if(e.touches.length > 1){ return } // length > 1 则有多点触控
+                this.pauseAnimation()
+                this.startTouch = e.touches[0]
+            },
+            onTouchMove() {
+            },
+            onTouchEnd(e) {
+                let endTouch = e.changedTouches[0]
+                let {clientX: x1, clientY: y1} = this.startTouch // 起点坐标
+                let {clientX: x2, clientY: y2} = endTouch // 终点坐标
+                /* 当水平方向距离是垂直方向距离的两倍，为判断用户触发左右滑动逻辑*/
+                let distance = Math.sqrt(Math.pow(x2-x1,2) + Math.pow(y2-y1,2))
+                let deltaY = Math.abs(y2 -y1)
+                let rate = distance / deltaY
+                if (rate > 2) {
+                    if (x2 > x1) {
+                        console.log('right');
+                        console.log('lastSelected', this.selectedIndex);
+                        console.log('this.getSelected - 1:', this.selectedIndex - 1);
+                        this.updateSelected(this.selectedIndex - 1)
+                    } else {
+                        console.log('left');
+                        console.log('lastSelected', typeof this.selectedIndex);
+                        console.log('this.getSelected + 1:',this.selectedIndex + 1);
+                        this.updateSelected(this.selectedIndex + 1)
+                    }
+                }
+                this.$nextTick(() => {
+                    this.playAutomatically()
+                })
             },
             pauseAnimation() {
                 window.clearTimeout(this.timerId)

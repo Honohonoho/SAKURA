@@ -126,7 +126,7 @@
         <!--&gt;-->
         <!--</s-cascader>-->
         <div>
-            <s-slides :selected="selected" @update:selected="onSelectedChanged" :reverse="true">
+            <s-slides :selected="selected" @update:selected="onSelectedChanged">
                 <s-slides-item name="1">
                     <div class="box">1</div>
                 </s-slides-item>
@@ -227,7 +227,7 @@
                 selectedTab: ['2'],
                 cascaderSelectedChildren: [], //级联选择器每级选中的记录都保存在这
                 cascaderData: [],
-                selected: '2'
+                selected: '1'
             }
         },
         created() {
