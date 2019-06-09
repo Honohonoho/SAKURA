@@ -12,6 +12,9 @@
             </div>
         </div>
         <div class="s-slides-dots-wrapper">
+            <span class=" s-slides-dot left-arrow" @click="updateSelected(selectedIndex - 1)">
+                <s-icon name="left"></s-icon>
+            </span>
             <span class="s-slides-dot"
                   :class="{active: selectedIndex === n-1}"
                   v-for="n in dotsLength" :key="n"
@@ -19,13 +22,20 @@
             >
                 {{n}}
             </span>
+            <span class=" s-slides-dot right-arrow" @click="updateSelected(selectedIndex + 1)">
+                <s-icon name="right"></s-icon>
+            </span>
         </div>
     </div>
 </template>
 
 <script>
+    import Icon from './icon';
     export default {
         name: "s-slides",
+        components: {
+          's-icon': Icon
+        },
         props: {
             selected: {
                 type: String
@@ -49,17 +59,21 @@
         },
         computed: {
             getNames() {
-                return this.$children.map(vm => vm.name)
+                return this.getDotItems.map(vm => vm.name)
             },
             selectedIndex() {
                 let index = this.getNames.indexOf(this.selected)
                 return index === -1 ? 0 : index
+            },
+            // 添加左右icon之后要过滤掉
+            getDotItems() {
+                return this.$children.filter(vm => vm.$options.name === 's-slides-item')
             }
         },
         mounted() {
             this.updateSlidesItem()
             this.playAutomatically()
-            this.dotsLength = this.$children.length
+            this.dotsLength = this.getDotItems.length
         },
         updated() {
             this.updateSlidesItem()
@@ -67,15 +81,15 @@
         methods: {
             updateSlidesItem() {
                 let selected = this.getSelected()
-                this.$children.forEach((vm) => {
+                this.getDotItems.forEach((vm) => {
                     let negative = this.selectedIndex > this.lastSelectedIndex ?  false : true
                     if(this.timerId) {
                         // 只在自动播放时生效，用户切换不生效
-                        if(this.lastSelectedIndex === this.$children.length - 1 && this.selectedIndex === 0) {
+                        if(this.lastSelectedIndex === this.getDotItems.length - 1 && this.selectedIndex === 0) {
                             // 当前位于最后一个且下一次要移向第一个，保证无缝效果
                             negative = false
                         }
-                        if(this.lastSelectedIndex === 0 && this.selectedIndex === this.$children.length - 1) {
+                        if(this.lastSelectedIndex === 0 && this.selectedIndex === this.getDotItems.length - 1) {
                             // 当前处于第一个且下一次要移向最后一个，保证无缝效果
                             negative = true
                         }
@@ -87,9 +101,10 @@
                 })
             },
             getSelected() {
-                let first = this.$children[0]
+                let first = this.getDotItems[0]
                 return this.selected || first.name
             },
+            // 更新的index是下一个要显示的
             updateSelected(nextIndex) {
                 this.lastSelectedIndex = this.selectedIndex // 保存上一次选中的index
                 if (nextIndex === -1) { nextIndex = this.getNames.length - 1 }
@@ -132,14 +147,8 @@
                 let rate = distance / deltaY
                 if (rate > 2) {
                     if (x2 > x1) {
-                        console.log('right');
-                        console.log('lastSelected', this.selectedIndex);
-                        console.log('this.getSelected - 1:', this.selectedIndex - 1);
                         this.updateSelected(this.selectedIndex - 1)
                     } else {
-                        console.log('left');
-                        console.log('lastSelected', typeof this.selectedIndex);
-                        console.log('this.getSelected + 1:',this.selectedIndex + 1);
                         this.updateSelected(this.selectedIndex + 1)
                     }
                 }
