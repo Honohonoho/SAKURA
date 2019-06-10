@@ -101,8 +101,7 @@ describe('Slides', () => {
             }
         });
         setTimeout(() => {
-            // expect(callback).to.have.been.called
-            expect(callback).to.have.been.called
+            expect(callback).to.have.been.calledWith('2')
             done()
         }, 301)
     });
