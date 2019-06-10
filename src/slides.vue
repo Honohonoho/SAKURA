@@ -3,7 +3,6 @@
          @mouseenter="onMouseEnter"
          @mouseleave="onMouseLeave"
          @touchstart="onTouchStart"
-         @touchmove="onTouchMove"
          @touchend="onTouchEnd"
     >
         <div class="s-slides-view">
@@ -17,7 +16,7 @@
             </span>
             <span class="s-slides-dot"
                   :class="{active: selectedIndex === n-1}"
-                  v-for="n in dotsLength" :key="n"
+                  v-for="n in dotsLength" :key="n" :data-index="n-1"
                   @click="onDotSelect(n-1)"
             >
                 {{n}}
@@ -44,6 +43,10 @@
                 type: Boolean,
                 default: true
             },
+            autoPlayDelay: {
+                type: Number,
+                default: 3000
+            },
             reverse: {
                 type: Boolean,
                 default: false
@@ -51,9 +54,9 @@
         },
         data() {
             return {
-                dotsLength: 0,
+                dotsLength: 0, // 底部控件个数
                 lastSelectedIndex: undefined,
-                timerId: undefined,
+                timerId: undefined, // 自动播放的time id
                 startTouch: undefined
             }
         },
@@ -72,11 +75,16 @@
         },
         mounted() {
             this.updateSlidesItem()
-            this.playAutomatically()
+            if (this.autoPlay) {
+                this.playAutomatically()
+            }
             this.dotsLength = this.getDotItems.length
         },
         updated() {
             this.updateSlidesItem()
+        },
+        beforeDestroy () {
+            this.pauseAnimation()
         },
         methods: {
             updateSlidesItem() {
@@ -117,9 +125,9 @@
                     let index = this.getNames.indexOf(this.getSelected())
                     let nextIndex = this.reverse ? index - 1 : index + 1
                     this.updateSelected(nextIndex)
-                    this.timerId = setTimeout(run, 2000)
+                    this.timerId = setTimeout(run, this.autoPlayDelay)
                 }
-                this.timerId = setTimeout(run, 2000) // 用 setTimeout 模拟 setInterval
+                this.timerId = setTimeout(run, this.autoPlayDelay) // 用 setTimeout 模拟 setInterval
             },
             onDotSelect(index) {
                 this.updateSelected(index)
@@ -131,18 +139,16 @@
                 this.playAutomatically()
             },
             onTouchStart(e) {
-                if(e.touches.length > 1){ return } // length > 1 则有多点触控
                 this.pauseAnimation()
+                if(e.touches.length > 1){ return } // length > 1 则有多点触控
                 this.startTouch = e.touches[0]
-            },
-            onTouchMove() {
             },
             onTouchEnd(e) {
                 let endTouch = e.changedTouches[0]
                 let {clientX: x1, clientY: y1} = this.startTouch // 起点坐标
                 let {clientX: x2, clientY: y2} = endTouch // 终点坐标
                 /* 当水平方向距离是垂直方向距离的两倍，为判断用户触发左右滑动逻辑*/
-                let distance = Math.sqrt(Math.pow(x2-x1,2) + Math.pow(y2-y1,2))
+                let distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2))
                 let deltaY = Math.abs(y2 -y1)
                 let rate = distance / deltaY
                 if (rate > 2) {
