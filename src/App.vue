@@ -160,8 +160,8 @@
     import TabsItem from './tabs/tabs-item';
     import TabsPane from './tabs/tabs-pane';
     import Popover from './popover';
-    import Collapse from './collapse';
-    import CollapseItem from './collapse-item';
+    import Collapse from './collapse/collapse';
+    import CollapseItem from './collapse/collapse-item';
     // import Cascader from './cascader';
     import plugin from './plugin';
     // import city from './city';
