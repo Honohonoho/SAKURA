@@ -46,7 +46,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import 'common';
+@import '../common';
 
 .tabs-item {
     height: 100%;

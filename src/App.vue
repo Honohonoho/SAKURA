@@ -154,11 +154,11 @@
     import Sider from './sider';
     import Footer from './footer';
     import Toast from './toast';
-    import Tabs from './tabs';
-    import Tabshead from './tabs-head';
-    import TabsBody from './tabs-body';
-    import TabsItem from './tabs-item';
-    import TabsPane from './tabs-pane';
+    import Tabs from './tabs/tabs';
+    import Tabshead from './tabs/tabs-head';
+    import TabsBody from './tabs/tabs-body';
+    import TabsItem from './tabs/tabs-item';
+    import TabsPane from './tabs/tabs-pane';
     import Popover from './popover';
     import Collapse from './collapse';
     import CollapseItem from './collapse-item';

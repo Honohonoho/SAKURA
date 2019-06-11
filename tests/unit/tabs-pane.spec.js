@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import {shallowMount, mount} from "@vue/test-utils";
 
-import TabsPane from '../../src/tabs-pane';
+import TabsPane from '../../src/tabs/tabs-pane';
 chai.use(sinonChai);
 
 describe('tabs-pane', () => {
