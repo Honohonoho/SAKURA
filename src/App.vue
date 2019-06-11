@@ -147,7 +147,7 @@
     import Icon from './icon';
     import ButtonGroup from './button/button-group';
     import Input from './input';
-    import Row from './row';
+    import Row from './grid/row';
     import Layout from './layout';
     import Header from './header';
     import Content from './content';
