@@ -16,7 +16,7 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '../common';
+@import '../../styles/common';
 
 .s-button-group {
     display: inline-flex;

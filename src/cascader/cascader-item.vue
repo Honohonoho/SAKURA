@@ -96,7 +96,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import "../common";
+    @import "../../styles/common";
     .cascader-item {
         min-height: 100px;
         display: flex;

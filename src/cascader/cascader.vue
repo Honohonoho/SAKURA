@@ -109,7 +109,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import "../common";
+    @import "../../styles/common";
     .s-cascader {
         position: relative;
         display: inline-block;

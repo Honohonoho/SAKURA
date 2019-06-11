@@ -39,7 +39,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import 'common';
+@import '../styles/common';
 
 .wrapper {
     font-size: $font-size;

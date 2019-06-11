@@ -26,7 +26,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '../common';
+@import '../../styles/common';
 
 .tabs-head {
     display: flex;

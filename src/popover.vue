@@ -143,7 +143,7 @@ export default {
 }
 </script>
 <style lang="scss">
-@import 'common';
+@import '../styles/common';
 
 .popover {
     display: inline-block;

@@ -48,7 +48,7 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '../common';
+@import '../../styles/common';
 .collapse-item {
     > .collapse-title {
         // border-bottom: 1px solid $grey;
