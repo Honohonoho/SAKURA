@@ -148,11 +148,11 @@
     import ButtonGroup from './button/button-group';
     import Input from './input';
     import Row from './grid/row';
-    import Layout from './layout';
-    import Header from './header';
-    import Content from './content';
-    import Sider from './sider';
-    import Footer from './footer';
+    import Layout from './layout/layout';
+    import Header from './layout/header';
+    import Content from './layout/content';
+    import Sider from './layout/sider';
+    import Footer from './layout/footer';
     import Toast from './toast';
     import Tabs from './tabs/tabs';
     import Tabshead from './tabs/tabs-head';
