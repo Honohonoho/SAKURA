@@ -59,7 +59,7 @@ export default {
             this.$refs.popover.addEventListener('mouseleave', this.onMouseLeave)
         }
     },
-    destroyed() {
+    beforeDestroy() {
         if (!this.$refs.popover) return
         if (this.trigger === 'click') {
             this.$refs.popover.removeEventListener('click', this.onClick)
