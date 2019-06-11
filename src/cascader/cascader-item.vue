@@ -30,7 +30,7 @@
 </template>
 
 <script>
-    import Icon from './icon';
+    import Icon from '../icon';
 
     export default {
         name: "s-cascader-item",
@@ -96,7 +96,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import "common";
+    @import "../common";
     .cascader-item {
         min-height: 100px;
         display: flex;

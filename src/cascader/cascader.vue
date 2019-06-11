@@ -19,7 +19,7 @@
 
 <script>
     import CascaderItem from './cascader-item'
-    import clickOutside from './custom_directives';
+    import clickOutside from '../custom_directives';
 
     export default {
         name: "s-cascader",
@@ -109,7 +109,7 @@
 </script>
 
 <style scoped lang="scss">
-    @import "common";
+    @import "../common";
     .s-cascader {
         position: relative;
         display: inline-block;
