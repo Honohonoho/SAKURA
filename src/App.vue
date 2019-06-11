@@ -165,8 +165,8 @@
     // import Cascader from './cascader';
     import plugin from './plugin';
     // import city from './city';
-    import Slides from './slides';
-    import SlidesItem from './slides-item';
+    import Slides from './slides/slides';
+    import SlidesItem from './slides/slides-item';
 
     Vue.use(plugin);
 
