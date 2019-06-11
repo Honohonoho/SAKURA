@@ -90,8 +90,8 @@
     </div>
 </template>
 <script>
-import Button from "../../../src/button";
-import ButtonGroup from "../../../src/button-group";
+import Button from "../../../src/button/button";
+import ButtonGroup from "../../../src/button/button-group";
 
 export default {
   components: {

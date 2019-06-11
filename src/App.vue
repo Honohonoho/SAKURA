@@ -143,9 +143,9 @@
 
 <script>
     import Vue from 'vue';
-    import Button from './button';
+    import Button from './button/button';
     import Icon from './icon';
-    import ButtonGroup from './button-group';
+    import ButtonGroup from './button/button-group';
     import Input from './input';
     import Row from './row';
     import Layout from './layout';

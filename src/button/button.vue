@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Icon from './icon'
+import Icon from '../icon'
 export default {
     components: {
         's-icon': Icon
@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "common";
+@import "../common";
 
 @keyframes spin {
     0% {
