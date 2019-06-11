@@ -3,8 +3,8 @@ import chai, {expect} from "chai";
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import {shallowMount, mount} from "@vue/test-utils";
-import Slides from '@/slides.vue'
-import SlidesItem from '@/slides-item.vue'
+import Slides from '../../src/slides/slides.vue'
+import SlidesItem from '../../src/slides/slides-item.vue'
 
 chai.use(sinonChai);
 // Vue.config.productionTip = false
