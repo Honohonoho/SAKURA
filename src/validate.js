@@ -5,6 +5,7 @@ export default function validate(data, rules) {
         if (rule.required) {
             if (!value && value !== 0) {
                 errors[rule.key] = {required: '必填'}
+                return
             }
         }
         if(rule.pattern) {
@@ -13,6 +14,14 @@ export default function validate(data, rules) {
             }
             if(rule.pattern.test(value) === false) {
                 errors[rule.key] = {pattern: '格式不正确'}
+            }
+        }
+        if(rule.minLength) {
+            if(value.length < rule.minLength) {
+                if(!rule.minLength) {
+                    errors[rule.key] = {}
+                }
+                errors[rule.key].minLength = '长度太短'
             }
         }
     })
