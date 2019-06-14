@@ -127,19 +127,59 @@ describe('Validate', () => {
         expect(errors.email.pattern).to.exist
     });
 
-    it('maxLength', () => {
+    it('测试多个rules中的key，包含自定义的', () => {
         let data = {
             email: '123123123123'
         }
         let rules = [
             {
                 key: 'email',
+                required: true,
                 pattern: 'email',
-                maxLength: 10
+                minLength: 5,
+                maxLength: 10,
+                hasUpperCase: true
             }
         ]
-        let errors = validate(data, rules)
-        expect(errors.email.maxLength).to.exist
+        let fn = () => {
+            validate(data, rules)
+        }
+        expect(fn).to.throw()
+        // let errors = validate(data, rules)
+        // expect(errors.email.required).to.exist
+        // expect(errors.email.minLength).to.not.exist
+        // expect(errors.email.maxLength).to.exist
+        // expect(errors.email.hasUpperCase).to.not.exist
+    });
+
+    it('测试可以添加自定义规则', () => {
+        let data = {
+            email: '123123123'
+        }
+        validate.hasUpperCase = (value)=> {
+            if (!/[A-Z]/.test(value)) {
+                return '必须含有大写字母'
+            }
+        }
+        let rules = [
+            {
+                key: 'email',
+                required: true,
+                pattern: 'email',
+                minLength: 5,
+                maxLength: 10,
+                hasUpperCase: true
+            }
+        ]
+        let errors
+        let fn = () => {
+            errors = validate(data, rules)
+        }
+        expect(fn).to.not.throw()
+        expect(errors.email.hasUpperCase).to.eq('必须含有大写字母')
+        // expect(errors.email.minLength).to.not.exist
+        // expect(errors.email.maxLength).to.exist
+        // expect(errors.email.hasUpperCase).to.not.exist
     });
 
 });

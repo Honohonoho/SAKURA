@@ -10,27 +10,40 @@ export default function validate(data, rules) {
                 return
             }
         }
-        if(rule.pattern) {
-            let error = validate.pattern(value, rule.pattern)
-            if (error) {
-                fix2Object(errors, rule.key)
-                errors[rule.key].pattern  = error
+        // 遍历 validators, 并逐一调用对应的函数
+        let validators = Object.keys(rule).filter(key => key !== 'key' && key !== 'required')
+        validators.forEach((validatorKey)=> {
+            if (validate[validatorKey]) {
+                let error = validate[validatorKey](value, rule[validatorKey])
+                if (error) {
+                    fix2Object(errors, rule.key)
+                    errors[rule.key][validatorKey]  = error
+                }
+            } else {
+                throw `invalidate pattern: ${validatorKey}`
             }
-        }
-        if(rule.minLength) {
-            let error = validate.minLength(value, rule.minLength)
-            if (error) {
-                fix2Object(errors, rule.key)
-                errors[rule.key].minLength = error
-            }
-        }
-        if(rule.maxLength) {
-            let error = validate.maxLength(value, rule.maxLength)
-            if (error) {
-                fix2Object(errors, rule.key)
-                errors[rule.key].maxLength = error
-            }
-        }
+        })
+    //     if(rule.pattern) {
+    //         let error = validate.pattern(value, rule.pattern)
+    //         if (error) {
+    //             fix2Object(errors, rule.key)
+    //             errors[rule.key].pattern  = error
+    //         }
+    //     }
+    //     if(rule.minLength) {
+    //         let error = validate.minLength(value, rule.minLength)
+    //         if (error) {
+    //             fix2Object(errors, rule.key)
+    //             errors[rule.key].minLength = error
+    //         }
+    //     }
+    //     if(rule.maxLength) {
+    //         let error = validate.maxLength(value, rule.maxLength)
+    //         if (error) {
+    //             fix2Object(errors, rule.key)
+    //             errors[rule.key].maxLength = error
+    //         }
+    //     }
     })
     return errors
 }
