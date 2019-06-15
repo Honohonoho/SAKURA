@@ -1,14 +1,14 @@
 import chai, {expect} from "chai";
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
-import validate from '../../src/validate'
+import Validate from '../../src/validate'
 
 chai.use(sinonChai);
 
 describe('Validate', () => {
 
     it('存在.', () => {
-        expect(validate).to.exist
+        expect(new Validate()).to.exist
     });
 
     it('required true 报错', () => {
@@ -21,7 +21,8 @@ describe('Validate', () => {
                 required: true
             }
         ]
-        let errors = validate(data, rules)
+        let validator = new Validate()
+        let errors = validator.validate(data, rules)
         expect(errors.email.required).to.eq('必填')
     });
 
@@ -35,7 +36,8 @@ describe('Validate', () => {
                 required: true
             }
         ]
-        let errors = validate(data, rules)
+        let validator = new Validate()
+        let errors = validator.validate(data, rules)
         expect(errors.email).to.not.exist
     });
 
@@ -49,7 +51,8 @@ describe('Validate', () => {
                 pattern: /^.+@.+$/
             }
         ]
-        let errors = validate(data, rules)
+        let validator = new Validate()
+        let errors = validator.validate(data, rules)
         expect(errors.email.pattern).to.eq('格式不正确')
     });
 
@@ -63,7 +66,8 @@ describe('Validate', () => {
                 pattern: /^.+@.+$/
             }
         ]
-        let errors = validate(data, rules)
+        let validator = new Validate()
+        let errors = validator.validate(data, rules)
         expect(errors.email).to.not.exist
     });
 
@@ -77,7 +81,8 @@ describe('Validate', () => {
                 pattern: 'email'
             }
         ]
-        let errors = validate(data, rules)
+        let validator = new Validate()
+        let errors = validator.validate(data, rules)
         expect(errors.email.pattern).to.eq('格式不正确')
     });
 
@@ -91,7 +96,8 @@ describe('Validate', () => {
                 pattern: 'email'
             }
         ]
-        let errors = validate(data, rules)
+        let validator = new Validate()
+        let errors = validator.validate(data, rules)
         expect(errors.email).to.not.exist
     });
 
@@ -106,7 +112,8 @@ describe('Validate', () => {
                 required: true
             }
         ]
-        let errors = validate(data, rules)
+        let validator = new Validate()
+        let errors = validator.validate(data, rules)
         expect(errors.email.required).to.exist
         expect(errors.email.pattern).to.not.exist
     });
@@ -122,7 +129,8 @@ describe('Validate', () => {
                 minLength: 8
             }
         ]
-        let errors = validate(data, rules)
+        let validator = new Validate()
+        let errors = validator.validate(data, rules)
         expect(errors.email.minLength).to.exist
         expect(errors.email.pattern).to.exist
     });
@@ -142,21 +150,18 @@ describe('Validate', () => {
             }
         ]
         let fn = () => {
-            validate(data, rules)
+            let validator = new Validate()
+            validator.validate(data, rules)
         }
         expect(fn).to.throw()
-        // let errors = validate(data, rules)
-        // expect(errors.email.required).to.exist
-        // expect(errors.email.minLength).to.not.exist
-        // expect(errors.email.maxLength).to.exist
-        // expect(errors.email.hasUpperCase).to.not.exist
     });
 
-    it('测试可以添加自定义规则', () => {
+    it('validator实例可以添加自己的自定义规则', () => {
         let data = {
             email: '123123123'
         }
-        validate.hasUpperCase = (value)=> {
+        let validator = new Validate()
+        validator.hasUpperCase = (value)=> {
             if (!/[A-Z]/.test(value)) {
                 return '必须含有大写字母'
             }
@@ -173,13 +178,61 @@ describe('Validate', () => {
         ]
         let errors
         let fn = () => {
-            errors = validate(data, rules)
+            errors = validator.validate(data, rules)
         }
         expect(fn).to.not.throw()
         expect(errors.email.hasUpperCase).to.eq('必须含有大写字母')
-        // expect(errors.email.minLength).to.not.exist
-        // expect(errors.email.maxLength).to.exist
-        // expect(errors.email.hasUpperCase).to.not.exist
     });
 
+    it('不同Validator实例互不影响', () => {
+        let data = {
+            email: '123123123'
+        }
+        let validator1 = new Validate()
+        let validator2 = new Validate()
+        validator1.hasUpperCase = (value)=> {
+            if (!/[A-Z]/.test(value)) {
+                return '必须含有大写字母'
+            }
+        }
+        let rules = [
+            {
+                key: 'email',
+                required: true,
+                hasUpperCase: true
+            }
+        ]
+        expect(() => {
+            validator1.validate(data, rules)
+        }).to.not.throw()
+        expect(() => {
+            validator2.validate(data, rules)
+        }).to.throw()
+    });
+
+    it('可以在原型上添加rule', () => {
+        let data = {
+            email: '123123123'
+        }
+        let validator1 = new Validate()
+        let validator2 = new Validate()
+        Validate.addCommonRule('hasUpperCase', (value)=>{
+            if (!/[A-Z]/.test(value)) {
+                return '必须含有大写字母'
+            }
+        })
+        let rules = [
+            {
+                key: 'email',
+                required: true,
+                hasUpperCase: true
+            }
+        ]
+        expect(() => {
+            validator1.validate(data, rules)
+        }).to.not.throw()
+        expect(() => {
+            validator2.validate(data, rules)
+        }).to.not.throw()
+    });
 });
