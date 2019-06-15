@@ -7,6 +7,7 @@
     import './svg.js'
 
     export default {
+        name: 's-icon',
         props: {
             name: {}
         }

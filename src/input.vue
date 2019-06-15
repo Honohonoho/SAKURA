@@ -6,7 +6,7 @@
             @focus="$emit('focus', $event.target.value)"
             @blur="$emit('blur', $event.target.value)">
         <template v-if="error">
-            <icon class="icon-error" name="error"></icon>
+            <s-icon class="icon-error" name="error"></s-icon>
             <span class="error-message">{{error}}</span>
         </template>
     </div>
@@ -14,8 +14,9 @@
 <script>
 import Icon from './icon'
 export default {
+    name: 's-input',
     components: {
-        icon: Icon
+        's-icon': Icon
     },
     props: {
         value: {
