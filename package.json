@@ -1,10 +1,11 @@
 {
-  "name": "sakura_ui",
-  "version": "0.0.3",
+  "name": "sakura-ui",
+  "version": "0.0.4",
   "description": "A VUE UI Library",
   "scripts": {
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build:lib": "vue-cli-service build --target lib --name sakura-ui src/index.js",
     "lint": "vue-cli-service lint",
     "test": "karma start --single-run",
     "test:unit": "karma start",
