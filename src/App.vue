@@ -117,24 +117,24 @@
         </s-layout> -->
         <!--<s-button icon="settings" :loading="false">设置</s-button>-->
         <!--<s-cascader-->
-                <!--:cascader-data="cascaderData"-->
-                <!--:selected-children="cascaderSelectedChildren"-->
-                <!--@update:cascaderData="onCascaderDataChanged"-->
-                <!--@update:selected="onSelectedChanged"-->
-                <!--:load-data="loadData"-->
-                <!--popover-height="200px"-->
+        <!--:cascader-data="cascaderData"-->
+        <!--:selected-children="cascaderSelectedChildren"-->
+        <!--@update:cascaderData="onCascaderDataChanged"-->
+        <!--@update:selected="onSelectedChanged"-->
+        <!--:load-data="loadData"-->
+        <!--popover-height="200px"-->
         <!--&gt;-->
         <!--</s-cascader>-->
         <!--<s-slides :selected="selected" @update:selected="onSelectedChanged">-->
-            <!--<s-slides-item name="1">-->
-                <!--<div class="box">1</div>-->
-            <!--</s-slides-item>-->
-            <!--<s-slides-item name="2">-->
-                <!--<div class="box">2</div>-->
-            <!--</s-slides-item>-->
-            <!--<s-slides-item name="3">-->
-                <!--<div class="box">3</div>-->
-            <!--</s-slides-item>-->
+        <!--<s-slides-item name="1">-->
+        <!--<div class="box">1</div>-->
+        <!--</s-slides-item>-->
+        <!--<s-slides-item name="2">-->
+        <!--<div class="box">2</div>-->
+        <!--</s-slides-item>-->
+        <!--<s-slides-item name="3">-->
+        <!--<div class="box">3</div>-->
+        <!--</s-slides-item>-->
         <!--</s-slides>-->
         <div class="parent" ref="parent">
             <div class="child" ref="child">
@@ -238,7 +238,7 @@
                 <p>98</p>
                 <p>99</p>
                 <p>100</p>
-            </div ref>
+            </div>
         </div>
     </div>
 </template>
@@ -343,22 +343,43 @@
         mounted() {
             let parent = this.$refs.parent
             let child = this.$refs.child
-            child.style.transition = `transform 1s`
+            child.style.transition = `transform 0.1s ease`
             let translateY = 0
-            parent.addEventListener('wheel', (e)=> {
-                if (e.deltaY > 0) {
-                    console.log('look down');
-                    translateY -= 10
-                    child.style.transform = `translateY(${translateY}px)`
-                } else if (e.deltaY < 0) {
-                    console.log('look up');
-                    translateY += 10
-                    child.style.transform = `translateY(${translateY}px)`
-                } else if (e.deltaY === 0) {
-                    console.log('did not move');
+
+            // 计算什么时候滑到底部了...
+            let {height: childHeight} = child.getBoundingClientRect()
+            let {height: parentHeight} = parent.getBoundingClientRect()
+            let {borderTopWidth, borderBottomWidth, paddingTop, paddingBottom} = window.getComputedStyle(parent)
+            borderTopWidth = parseInt(borderTopWidth)
+            borderBottomWidth = parseInt(borderBottomWidth)
+            paddingTop = parseInt(paddingTop)
+            paddingBottom = parseInt(paddingBottom)
+            // 最大可滑动距离
+            let maxHeight = childHeight - parentHeight + (borderTopWidth + borderBottomWidth + paddingTop + paddingBottom)
+
+            parent.addEventListener('wheel', (e) => {
+                // 限制最大滑动距离，要不然滑的快滚得快
+                if (e.deltaY > 20) {
+                    translateY -= 20 * 3
+                } else if (e.deltaY < -20) {
+                    translateY -= -20 * 3
+                } else {
+                    translateY -= e.deltaY * 3
                 }
+
+                if (translateY > 0) {
+                    // 到顶部了，不能再滑了
+                    translateY = 0
+                } else if (translateY < -maxHeight) {
+                    // 到低部了，不能再滑了
+                    translateY = -maxHeight
+                }
+                child.style.transform = `translateY(${translateY}px)`
             })
-            console.log(parent, child)
+            // 兼容移动端
+            // parent.addEventListener('touchmove', () => {
+            //     console.log('touchmove');
+            // })
         },
         methods: {
             // onSelectedChanged(itemName) {
@@ -437,16 +458,16 @@
     }
     ul, ol, li {
         list-style: noe;
-        padding:0;
-        margin:0;
+        padding: 0;
+        margin: 0;
     }
     .parent {
         width: 400px;
         height: 400px;
         overflow: hidden;
-        border: 1px solid red;
-      .child {
-        border: 1px solid blue;
-      }
+        border: 5px solid red;
+        .child {
+            border: 5px solid blue;
+        }
     }
 </style>
