@@ -41,6 +41,9 @@
                 } else if (translateY < -maxHeight) {
                     // 到低部了，不能再滑了
                     translateY = -maxHeight
+                } else {
+                    // 如果内部内容滚到顶部或底部，则滚动外面页面
+                    e.preventDefault()
                 }
                 child.style.transform = `translateY(${translateY}px)`
             })
