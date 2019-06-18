@@ -1,7 +1,12 @@
 <template>
-    <div class="s-scroll-wrapper" ref="parent">
+    <div class="s-scroll-wrapper" ref="parent" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
         <div class="s-scroll" ref="child">
             <slot></slot>
+        </div>
+        <div class="s-scroll-track" v-show="scrollBarVisible">
+            <div class="s-scroll-bar" ref="bar">
+                <div class="s-scroll-bar-inner"></div>
+            </div>
         </div>
     </div>
 </template>
@@ -9,6 +14,11 @@
 <script>
     export default {
         name: "s-scroll",
+        data(){
+            return {
+                scrollBarVisible: false
+            }
+        },
         mounted() {
             let parent = this.$refs.parent
             let child = this.$refs.child
@@ -46,11 +56,32 @@
                     e.preventDefault()
                 }
                 child.style.transform = `translateY(${translateY}px)`
+                this.calcScrollBarHeight(parentHeight, childHeight, translateY)
             })
             // 兼容移动端
             // parent.addEventListener('touchmove', () => {
             //     console.log('touchmove');
             // })
+            this.calcScrollBarHeight(parentHeight, childHeight, translateY)
+        },
+        methods: {
+            // 计算scroll bar高度
+            calcScrollBarHeight (parentHeight, childHeight, translateY){
+                // bar 的高度可以通过等比关系计算出来
+                // barHeight / parentHeight = parentHeight / childHeight
+                let barHeight = parentHeight * parentHeight / childHeight
+                let bar = this.$refs.bar
+                bar.style.height = barHeight + 'px'
+                // deltaHeight: bar滚动距离可以通过等比关系计算出来
+                let deltaHeight = parentHeight * translateY / childHeight
+                bar.style.transform = `translateY(${-deltaHeight}px)`
+            },
+            onMouseEnter () {
+                this.scrollBarVisible = true
+            },
+            onMouseLeave () {
+                this.scrollBarVisible = false
+            }
         }
     }
 </script>
@@ -58,10 +89,36 @@
 <style scoped lang="scss">
     .s-scroll-wrapper {
         overflow: hidden;
-        border: 5px solid red;
+        border: 1px solid red;
+        position: relative;
        .s-scroll {
-           border: 5px solid blue;
            transition: transform 0.05s ease;
        }
+        .s-scroll-track {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 14px;
+            height: 100%;
+            border-left: 1px solid #e8e7e8;
+            background: #fafafa;
+            .s-scroll-bar {
+                position: absolute;
+                left: 50%;
+                margin-left: -4px;
+                padding: 4px 0;
+                height: 40px;
+                width: 8px;
+                transition: transform 0.05s ease;
+                .s-scroll-bar-inner {
+                    height: 100%;
+                    background: #c2c2c2;
+                    border-radius: 4px;
+                    &:hover {
+                        background: #7d7d7d;
+                    }
+                }
+            }
+        }
     }
 </style>
