@@ -1,5 +1,8 @@
 <template>
     <div id="app" style="padding: 50px;">
+        <div>
+            <div id="test" style="width: 100px;height:100px;border: 1px solid red;position:absolute;top:0;left: 0;">test</div>
+        </div>
         <!--<s-collapse :selected.sync="selectedTab" accordion>-->
         <!--<s-collapse-item title="标题1" name="1">内容1</s-collapse-item>-->
         <!--<s-collapse-item title="标题2" name="2">内容2</s-collapse-item>-->
@@ -136,6 +139,7 @@
         <!--<div class="box">3</div>-->
         <!--</s-slides-item>-->
         <!--</s-slides>-->
+        <div>
         <s-scroll style="width: 400px;height: 400px;">
             <p>11111111111111111112312312312321123123123213122321</p>
             <p>2</p>
@@ -238,6 +242,7 @@
             <p>99</p>
             <p>100</p>
         </s-scroll>
+        </div>
     </div>
 </template>
 
@@ -341,7 +346,33 @@
             // }, 2000)
         },
         mounted() {
-
+            let test = document.querySelector('#test')
+            let startPosition
+            let endPosition
+            let translateX = 0
+            let translateY = 0
+            let isMoving = false
+            test.addEventListener('mousedown', (e) => {
+                isMoving = true
+                let {screenX, screenY} = e
+                startPosition = {x:screenX, y:screenY}
+            })
+            test.addEventListener('slectstart', (e)=> {
+                e.preventDefault()
+            })
+            document.addEventListener('mousemove', (e) => {
+                if (!isMoving) { return }
+                let {screenX, screenY} = e
+                endPosition = {x:screenX, y:screenY}
+                let delta = {x: endPosition.x - startPosition.x, y: endPosition.y - startPosition.y}
+                // translateX = parseInt(translateX) + delta.x
+                translateY = parseInt(translateY) + delta.y
+                startPosition = endPosition
+                test.style.transform = `translate(0px, ${parseInt(translateY) + delta.y}px)`
+            })
+            document.addEventListener('mouseup', (e) => {
+                isMoving = false
+            })
         },
         methods: {
             // onSelectedChanged(itemName) {
