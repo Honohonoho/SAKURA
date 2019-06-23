@@ -1,3 +1,4 @@
+const path = require('path')
 module.exports = {
     base: '/SAKURA/',
     title: 'SAKURA UI 官网',
@@ -14,7 +15,7 @@ module.exports = {
             ['/quick_start/', '快速上手'],
             {
                 title: '组件',
-                collapsable: true,
+                collapsable: false,
                 children: [
                     ['/components/grid', 'Grid 网格'],
                     ['/components/layout', 'Layout 布局'],
@@ -27,5 +28,8 @@ module.exports = {
                 ]
             },
         ]
+    },
+    scss:{
+        includePaths: [path.join(__dirname, '../../styles')]
     }
 }
