@@ -1,13 +1,66 @@
-$main-color-dark: #314659;
+/* 颜色 */
+
+// 蓝色主色调
+$main-color: #3d9ff9;
+
+// primary
+$main-primary: #3495ed;
+$lightly-primary: #57aef6;
+$deep-primary: #0f74e1;
+
+// info
+$main-info: #35b9f4;
+$lightly-info: #5bc5f6;
+$deep-info: #29abe5;
+
+// success
+$main-success: #1dbe6d;
+$lightly-success: #48ce8b;
+$deep-success: #18b666;
+
+// waring
+$main-waring: #f89603;
+$lightly-waring: #fcab34;
+$deep-waring: #f19204;
+
+// error
+$main-error: #f14013;
+$lightly-error: #f66c49;
+$deep-error: #e13e14;
+
+/* 基础样式 */
+$main-color-dark: #515a6e;
 $main-background-white: #ffffff;
 $main-border-radius: 4px;
 $main-icon-color-light: rgba(0, 0, 0, 0.45);
 $main-font-color-dark: $main-color-dark;
-
 $border-color-hover: #666;
-$border-color: #999;
+$border-color: #b6b8bc;
 $border-color-toast: #333;
+$color: #485060;
+$main-font-color: #485060;
+$error-border-color: #f1453d;
+$error-color: #f1453d;
+$font-size: 14px;
+$basic-height: 32px;
+$tab-height: 40px;
+$grey: #ddd;
+$border-radius: 4px;
+$box-shadow-color: rgba(0, 0, 0, .5);
 
+
+/* 组件 */
+// button
+$button-font-color: $main-font-color;
+$button-border-radius: $border-radius;
+$button-border-color: $border-color;
+$button-active-background: #eeeeee;
+$disabled-background-color: #f5f7fa;
+$button-background: #ffffff;
+$button-height: $basic-height;
+$button-box-shadow: 0 0 0 2px rgba(45,140,240,.2);
+
+// cascader
 $cascader-border-color: #e8e8e8;
 $cascader-border-radius: $main-border-radius;
 $cascader-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -15,24 +68,10 @@ $cascader-label-selected-background-color: #f5f5f5;
 
 $input-border-color: #d9d9d9;
 
-$grey: #ddd;
-$border-radius: 4px;
-$box-shadow-color: rgba(0, 0, 0, .5);
-$button-active-background: #eeeeee;
-$disabled-background-color: #f5f7fa;
-$button-background: #ffffff;
-$button-height: 32px;
-$color: #999;
-$error-border-color: #f1453d;
-$error-color: #f1453d;
-$font-size: 14px;
-$height: 32px;
-$tab-height: 40px;
+
 $blue: #409EFF;
 
-/*
-* Animation
-*/
+/* Animation */
 // spin
 @keyframes spin {
   0% {

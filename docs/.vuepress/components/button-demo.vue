@@ -5,7 +5,13 @@
         <h3 class="section">基础用法</h3>
         <p>基础的按钮用法。</p>
         <div class="demo-wrapper">
-            <s-button>默认按钮</s-button>
+            <s-button>默认 Default</s-button>
+            <s-button type="primary">普通 Primary</s-button>
+            <br>
+            <s-button type="info">提示 Info</s-button>
+            <s-button type="waring">警告 Waring</s-button>
+            <s-button type="success">成功 Success</s-button>
+            <s-button type="error">错误 Error</s-button>
             <pre><code>{{code1}}</code></pre>
         </div>
 
@@ -58,6 +64,13 @@
             </thead>
             <tbody>
                 <tr>
+                    <td>type</td>
+                    <td>按钮类型</td>
+                    <td>string</td>
+                    <td>primary / info / success / waring / error</td>
+                    <td>不设置type即为默认样式</td>
+                </tr>
+                <tr>
                     <td>icon</td>
                     <td>图标</td>
                     <td>string</td>
@@ -101,7 +114,12 @@ export default {
   data() {
     return {
         code1:
-        `<s-button>默认按钮</s-button>
+        `<s-button>默认 Default</s-button>
+        <s-button type="primary">普通 Primary</s-button>
+        <s-button type="info">提示 Info</s-button>
+        <s-button type="waring">警告 Waring</s-button>
+        <s-button type="success">成功 Success</s-button>
+        <s-button type="error">错误 Error</s-button>
         `.replace(/^ {8}/gm, "").trim(),
         code2: 
         `<s-button icon="settings">设置</s-button>
@@ -127,7 +145,7 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .s-button {
     margin-right: 10px;
     margin-bottom: 10px;
