@@ -14,7 +14,7 @@ module.exports = {
             ['/quick_start/', '快速上手'],
             {
                 title: '组件',
-                collapsable: true,
+                collapsable: false,
                 children: [
                     ['/components/grid', 'Grid 网格'],
                     ['/components/layout', 'Layout 布局'],
