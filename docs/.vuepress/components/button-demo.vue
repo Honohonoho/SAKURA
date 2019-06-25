@@ -6,13 +6,15 @@
         <p>基础的按钮用法。</p>
         <div class="demo-wrapper">
             <s-button>默认 Default</s-button>
-            <s-button type="primary">普通 Primary</s-button>
+            <s-button type="primary">主要 Primary</s-button>
             <br>
             <s-button type="info">提示 Info</s-button>
-            <s-button type="waring">警告 Waring</s-button>
+            <s-button type="waring">警告 Warning</s-button>
             <s-button type="success">成功 Success</s-button>
             <s-button type="error">错误 Error</s-button>
-            <pre><code>{{code1}}</code></pre>
+            <div class="code-wrapper" v-highlight>
+                <pre><code class="html">{{code1}}</code></pre>
+            </div>
         </div>
 
         <h3 class="section">图标按钮</h3>
@@ -103,6 +105,7 @@
     </div>
 </template>
 <script>
+
 import Button from "../../../src/button/button";
 import ButtonGroup from "../../../src/button/button-group";
 
