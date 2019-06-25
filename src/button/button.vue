@@ -1,5 +1,5 @@
 <template>
-    <button class="s-button" :class="{[`icon-${iconPosition}`]: true, [`s-button_${type}`]: true}"
+    <button class="s-button" :class="{[`icon-${iconPosition}`]: true, [`s-button_${type}`]: true, ['s-button_loading']: loading}"
         @click="$emit('click')">
         <s-icon class="icon" v-if="icon && !loading" :name="icon"></s-icon>
         <!--loading 的 name 默认为 dot-loading-->
@@ -56,7 +56,7 @@ export default {
     padding: 0 1em;
     border-radius: $button-border-radius;
     border: 1px solid $button-border-color;
-    background: $button-background;
+    background: $button-background-color;
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -76,6 +76,12 @@ export default {
             color: $deep-primary;
             border-color: $deep-primary;
         }
+        &.s-button_loading {
+            color: $lightly-primary;
+            border-color: $lightly-primary;
+            opacity: 0.8;
+            box-shadow: none;
+        }
     }
     &_primary {
         color: #ffffff;
@@ -92,6 +98,12 @@ export default {
         &:active {
             background-color: $deep-primary;
             border-color: $deep-primary;
+        }
+        &.s-button_loading {
+            background-color: $lightly-primary;
+            border-color: $lightly-primary;
+            opacity: 0.8;
+            box-shadow: none;
         }
     }
     &_info {
@@ -110,6 +122,12 @@ export default {
             background-color: $deep-info;
             border-color: $deep-info;
         }
+        &.s-button_loading {
+            background-color: $lightly-info;
+            border-color: $lightly-info;
+            opacity: 0.8;
+            box-shadow: none;
+        }
     }
     &_success {
         color: #ffffff;
@@ -126,6 +144,12 @@ export default {
         &:active {
             background-color: $deep-success;
             border-color: $deep-success;
+        }
+        &.s-button_loading {
+            background-color: $lightly-success;
+            border-color: $lightly-success;
+            opacity: 0.8;
+            box-shadow: none;
         }
     }
     &_waring {
@@ -144,6 +168,12 @@ export default {
             background-color: $deep-waring;
             border-color: $deep-waring;
         }
+        &.s-button_loading {
+            background-color: $lightly-waring;
+            border-color: $lightly-waring;
+            opacity: 0.8;
+            box-shadow: none;
+        }
     }
     &_error {
         color: #ffffff;
@@ -161,16 +191,33 @@ export default {
             background-color: $deep-error;
             border-color: $deep-error;
         }
+        &.s-button_loading {
+            background-color: $lightly-error;
+            border-color: $lightly-error;
+            opacity: 0.8;
+            box-shadow: none;
+        }
     }
     &[disabled] {
         cursor: not-allowed;
-        background: $button-active-background;
-    }
-    &[disabled]:hover {
-        border-color: $border-color;
-    }
-    &[disabled]:active {
-        background-color:$button-active-background;
+        color: $button-disabled-color;
+        background-color: $button-disabled-background-color;
+        border-color: $button-border-color;
+        &:hover {
+            color: $button-disabled-color;
+            background-color: $button-disabled-background-color;
+            border-color: $button-border-color;
+        }
+        &:active {
+            color: $button-disabled-color;
+            background-color: $button-disabled-background-color;
+            border-color: $button-border-color;
+        }
+        &:focus {
+            color: $button-disabled-color;
+            background-color: $button-disabled-background-color;
+            border-color: $button-border-color;
+        }
     }
     > .icon {
         order: 1;

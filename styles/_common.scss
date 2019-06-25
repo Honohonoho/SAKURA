@@ -38,6 +38,7 @@ $border-color-hover: #666;
 $border-color: #b6b8bc;
 $border-color-toast: #333;
 $color: #485060;
+$disable-background-color: #f7f7f7;
 $main-font-color: #485060;
 $error-border-color: #f1453d;
 $error-color: #f1453d;
@@ -55,10 +56,14 @@ $button-font-color: $main-font-color;
 $button-border-radius: $border-radius;
 $button-border-color: $border-color;
 $button-active-background: #eeeeee;
-$disabled-background-color: #f5f7fa;
-$button-background: #ffffff;
+$button-disabled-background-color: $disable-background-color;
+$button-background-color: #ffffff;
+$button-disabled-color: #c5c8ce;
 $button-height: $basic-height;
 $button-box-shadow: 0 0 0 2px rgba(45,140,240,.2);
+
+// input
+$input-disabled-background-color: $disable-background-color;
 
 // cascader
 $cascader-border-color: #e8e8e8;
