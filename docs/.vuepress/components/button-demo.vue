@@ -129,70 +129,56 @@
 </template>
 <script>
 
-    import Button from "../../../src/button/button";
-    import ButtonGroup from "../../../src/button/button-group";
+import Button from "../../../src/button/button";
+import ButtonGroup from "../../../src/button/button-group";
 
-    export default {
-        components: {
-            "s-button": Button,
-            's-button-group': ButtonGroup
-        },
+export default {
+    components: {
+        "s-button": Button,
+        's-button-group': ButtonGroup
+    },
+    data() {
+        return {
+            isLoading1: false,
+            isLoading2: false,
+            code1:
+                `<s-button>默认 Default</s-button>
+        <s-button type="primary">普通 Primary</s-button>
+        <s-button type="info">提示 Info</s-button>
+        <s-button type="waring">警告 Waring</s-button>
+        <s-button type="success">成功 Success</s-button>
+        <s-button type="error">错误 Error</s-button>
+                `.replace(/^ {8}/gm, "").trim(),
+            code2:
+                `<s-button icon="settings">设置</s-button>
+        <s-button icon="download">下载</s-button>
+        <s-button icon="search" type="primary">搜索</s-button>
+
+        <s-button icon="left">上一页</s-button>
+        <s-button iconPosition="right" icon="right">下一页</s-button>
+                `.replace(/^ {8}/gm, "").trim(),
+            code3:
+                `<s-button-group>
+            <s-button icon="left">上一页</s-button>
+            <s-button iconPosition="right" icon="right">下一页</s-button>
+        </s-button-group>
+        <s-button-group>
+            <s-button icon="left" type="primary">后退</s-button>
+            <s-button iconPosition="right" icon="right" type="primary">前进</s-button>
+        </s-button-group>
+                `.replace(/^ {8}/gm, "").trim(),
+            code4:
+                `<s-button :loading="isLoading1" @click="toggleLoading1">默认按钮</s-button>
+        <s-button type="primary" icon="download"
+            :loading="isLoading2" @click="toggleLoading2"
+         >
+            点我下载
+        </s-button>
         data() {
             return {
                 isLoading1: false,
-                isLoading2: false,
-                code1:
-                    `<s-button>默认 Default</s-button>
-            <s-button type="primary">普通 Primary</s-button>
-            <s-button type="info">提示 Info</s-button>
-            <s-button type="waring">警告 Waring</s-button>
-            <s-button type="success">成功 Success</s-button>
-            <s-button type="error">错误 Error</s-button>
-                    `.replace(/^ {8}/gm, "").trim(),
-                code2:
-                    `<s-button icon="settings">设置</s-button>
-            <s-button icon="download">下载</s-button>
-            <s-button icon="search" type="primary">搜索</s-button>
-
-            <s-button icon="left">上一页</s-button>
-            <s-button iconPosition="right" icon="right">下一页</s-button>
-                    `.replace(/^ {8}/gm, "").trim(),
-                code3:
-                    `<s-button-group>
-                <s-button icon="left">上一页</s-button>
-                <s-button iconPosition="right" icon="right">下一页</s-button>
-            </s-button-group>
-            <s-button-group>
-                <s-button icon="left" type="primary">后退</s-button>
-                <s-button iconPosition="right" icon="right" type="primary">前进</s-button>
-            </s-button-group>
-                    `.replace(/^ {8}/gm, "").trim(),
-                code4:
-                    `<s-button :loading="isLoading1" @click="toggleLoading1">默认按钮</s-button>
-            <s-button type="primary" icon="download"
-                :loading="isLoading2" @click="toggleLoading2"
-             >
-                点我下载
-            </s-button>
-            data() {
-                return {
-                    isLoading1: false,
-                    isLoading2: false
-                }
-            },
-            methods: {
-                toggleLoading1() {
-                    this.isLoading1 = true
-                },
-                toggleLoading2() {
-                    this.isLoading2 = true
-                }
+                isLoading2: false
             }
-                    `.replace(/^ {8}/gm, "").trim(),
-                code5:
-                    `<s-button disabled>禁用的按钮</s-button>
-                    `.replace(/^ {8}/gm, "").trim()
-            };
         },
         methods: {
             toggleLoading1() {
@@ -202,26 +188,40 @@
                 this.isLoading2 = true
             }
         }
-    };
+                `.replace(/^ {8}/gm, "").trim(),
+            code5:
+                `<s-button disabled>禁用的按钮</s-button>
+                `.replace(/^ {8}/gm, "").trim()
+        };
+    },
+    methods: {
+        toggleLoading1() {
+            this.isLoading1 = true
+        },
+        toggleLoading2() {
+            this.isLoading2 = true
+        }
+    }
+};
 </script>
 <style lang="scss">
-    .margin-bottom-0 {
-        .s-button {
-            margin-bottom: 0;
-        }
-    }
-    .margin-top-30 {
-        margin-top: 30px;
-    }
+.margin-bottom-0 {
     .s-button {
-        margin-right: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 0;
     }
-    .s-button-group {
-        .s-button {
-            margin-right: 0;
-        }
+}
+.margin-top-30 {
+    margin-top: 30px;
+}
+.s-button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.s-button-group {
+    .s-button {
+        margin-right: 0;
     }
+}
 </style>
 
 

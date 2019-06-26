@@ -62,7 +62,7 @@ export default {
     align-items: center;
     vertical-align: top;
     color: $button-font-color;
-    transition: color .2s linear,background-color .2s linear,border .2s linear,box-shadow .2s linear;
+    transition: $transition;
     &_default {
         &:hover {
             color: $lightly-primary;

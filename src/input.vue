@@ -48,24 +48,29 @@ export default {
     align-items: center;
     > input {
         font-size: inherit;
-        height: $height;
-        border: 1px solid $border-color;
+        height: $basic-height;
+        color: #000;
+        border: 1px solid $input-border-color;
         border-radius: $border-radius;
         padding: 0 8px;
         outline: none;
+        transition: $transition;
         &:hover {
-            border-color: $border-color-hover;
+            border-color: $input-hover-border-color;
         }
         &:focus {
-            border-color: $border-color-hover;
-            box-shadow: inset 0 0 1px $box-shadow-color;
+            border-color: $input-focus-border-color;
+            box-shadow: $input-box-shadow;
         }
         &[disabled], &[readonly] {
-            border-color: #bbb;
-            color: #bbb;
-            background-color: $disabled-background-color;
+            color: $input-disabled-color;
+            background-color: $input-disabled-background-color;
+            border-color: $input-border-color;
             &:focus {
                 box-shadow: none;
+            }
+            &:hover {
+                border-color: $input-border-color;
             }
         }
         &[disabled] {
@@ -74,18 +79,41 @@ export default {
         &[readonly] {
             cursor: pointer;
         }
+        &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+            color: $placeholder-color;
+        }
+        &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: $placeholder-color;
+            opacity: 1;
+        }
+        &::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: $placeholder-color;
+            opacity:  1;
+        }
+        &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: $placeholder-color;
+        }
+        &::-ms-input-placeholder { /* Microsoft Edge */
+            color: $placeholder-color;
+        }
+        &::placeholder { /* Most modern browsers support this now. */
+            color: $placeholder-color;
+        }
     }
     &.error {
         > input {
-            border-color: $error-border-color;
+            border-color: $main-error;
+            &:focus {
+                box-shadow: none;
+            }
         }
     }
     .icon-error {
-        fill: $error-color;
+        fill: $main-error;
         margin-left: .5em;
     }
     .error-message {
-        color: $error-color;
+        color: $main-error;
         margin-left: .5em;
     }
 }
