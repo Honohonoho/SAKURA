@@ -222,19 +222,6 @@
             margin-right: 0;
         }
     }
-    .section {
-        margin-top: 50px;
-    }
-    .demo-wrapper {
-        padding: 24px;
-        border: 1px solid #ebebeb;
-    }
-    .table {
-        th {
-            min-width: 50px;
-            text-align: left
-        }
-    }
 </style>
 
 
