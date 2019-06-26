@@ -1,6 +1,6 @@
 module.exports = {
     base: '/SAKURA/',
-    title: 'SAKURA UI 官网',
+    title: '❀ SAKURA UI 官网',
     description: '一个好用的 UI 组件库',
     sidebarDepth: 2,
     themeConfig: {
@@ -18,6 +18,7 @@ module.exports = {
                 children: [
                     ['/components/grid', 'Grid 网格'],
                     ['/components/layout', 'Layout 布局'],
+                    ['/components/icon', 'Icon 图标'],
                     ['/components/button', 'Button 按钮'],
                     ['/components/input', 'Input 输入框'],
                     ['/components/tabs', 'Tabs 标签页'],

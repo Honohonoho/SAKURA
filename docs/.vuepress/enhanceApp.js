@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/ocean.css'
+import './public/common.scss'
 
 Vue.directive('highlight',function (el) {
     let blocks = el.querySelectorAll('pre code');
