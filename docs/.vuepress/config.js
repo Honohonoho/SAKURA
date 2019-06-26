@@ -10,8 +10,14 @@ module.exports = {
             { text: 'GitHub', link: 'https://github.com/Honohonoho/SAKURA' },
         ],
         sidebar: [
-            ['/install/', '安装'],
-            ['/quick_start/', '快速上手'],
+            {
+                title: '入门',
+                collapsable: false,
+                children: [
+                    ['/install/', '安装'],
+                    ['/quick_start/', '快速上手']
+                ]
+            },
             {
                 title: '组件',
                 collapsable: false,
