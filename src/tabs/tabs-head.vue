@@ -1,5 +1,5 @@
 <template>
-    <div class="tabs-head">
+    <div class="s-tabs-head">
         <slot></slot>
         <div class="line" ref="line"></div>
         <div class="action-wrapper">
@@ -25,16 +25,16 @@ export default {
     }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../../styles/common';
 
-.tabs-head {
+.s-tabs-head {
     display: flex;
     height: $tab-height;
     justify-content: flex-start;
     align-items: center;
     position: relative;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid $border-color;
     > .action-wrapper {
         margin-left: auto;
         display: flex;
@@ -45,8 +45,8 @@ export default {
     > .line {
         position: absolute;
         bottom: -1px;
-        border-bottom: 1px solid $blue;
-        transition: all .3s;
+        border-bottom: 1px solid $deep-main-color;
+        transition: $transition;
     }
 }
 </style>

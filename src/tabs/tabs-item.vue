@@ -1,5 +1,5 @@
 <template>
-    <div class="tabs-item" @click="onClick" :class="classes" :data-name="name">
+    <div class="s-tabs-item" @click="onClick" :class="classes" :data-name="name">
         <slot></slot>
     </div>
 </template>
@@ -45,22 +45,27 @@ export default {
     }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../../styles/common';
-
-.tabs-item {
-    height: 100%;
-    flex-shrink: 0;
-    padding: 0 2em;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    &.active {
-        color: $blue;
-    }
-    &.disabled {
-        color: grey;
-        cursor: not-allowed;
+.s-tabs {
+    .s-tabs-item {
+        height: 100%;
+        flex-shrink: 0;
+        padding: 0 2em;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        transition: $transition;
+        &:hover {
+            color: $lightly-main-color;
+        }
+        &.active {
+            color: $deep-main-color;
+        }
+        &.disabled {
+            color: $disabled-color;
+            cursor: not-allowed;
+        }
     }
 }
 </style>

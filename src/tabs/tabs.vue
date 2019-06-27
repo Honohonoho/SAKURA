@@ -1,5 +1,5 @@
 <template>
-    <div class="tabs">
+    <div class="s-tabs">
         <slot></slot>
     </div>
 </template>
@@ -50,7 +50,7 @@ export default {
 }
 </script>
 <style lang="scss">
-.tabs {
+.s-tabs {
     
 }
 </style>

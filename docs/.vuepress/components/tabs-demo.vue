@@ -1,11 +1,9 @@
 <template>
-<div>
-        <h2>使用方法</h2>
-
+    <div>
         <h3 class="section">基础用法</h3>
         <div class="demo-wrapper">
             <s-tabs selected="tech">
-                <s-tabs-head> 
+                <s-tabs-head>
                     <s-tabs-item name="tech">科技</s-tabs-item>
                     <s-tabs-item name="finance">财经</s-tabs-item>
                     <s-tabs-item name="sport">体育</s-tabs-item>
@@ -28,14 +26,16 @@
                     </s-tabs-pane>
                 </s-tabs-body>
             </s-tabs>
-            <pre><code>{{code1}}</code></pre>
+            <div class="code-wrapper" v-highlight>
+                <pre><code class="html">{{code1}}</code></pre>
+            </div>
         </div>
 
         <h3 class="section">tab禁用状态</h3>
-        <p>在 <span class="code" v-text="text1"></span> 标签上添加 disabled 属性即可禁用当前 tab</p>
+        <p>在 <span class="code" v-text="text1"></span> 标签上添加 <code>disabled</code> 属性即可禁用当前 tab</p>
         <div class="demo-wrapper">
             <s-tabs selected="tech">
-                <s-tabs-head> 
+                <s-tabs-head>
                     <s-tabs-item name="tech">科技</s-tabs-item>
                     <s-tabs-item name="finance" disabled>财经</s-tabs-item>
                     <s-tabs-item name="sport">体育</s-tabs-item>
@@ -58,7 +58,9 @@
                     </s-tabs-pane>
                 </s-tabs-body>
             </s-tabs>
-            <pre><code>{{code1}}</code></pre>
+            <div class="code-wrapper" v-highlight>
+                <pre><code class="html">{{code2}}</code></pre>
+            </div>
         </div>
 
         <h3 class="section">属性 Attributes</h3>
@@ -82,7 +84,7 @@
                 </tr>
                 <tr>
                     <td>selected</td>
-                    <td>必填项，默认选中的 tab</td>
+                    <td>必填项，默认选中的 tab 的 name</td>
                     <td>string</td>
                     <td>-</td>
                     <td>-</td>
@@ -142,7 +144,7 @@ export default {
             </s-tabs-body>
         </s-tabs>
             `.replace(/^ {8}/gm, "").trim(),
-            code1: `
+            code2: `
             <s-tabs selected="tech" @update:selected="">
             <s-tabs-head> 
                 <s-tabs-item name="tech">科技</s-tabs-item>
@@ -183,18 +185,5 @@ export default {
     font-size: 0.85em;
     background-color: rgba(27,31,35,0.05);
     border-radius: 3px;
-}
-.section {
-    margin-top: 50px;
-}
-.demo-wrapper {
-    padding: 24px;
-    border: 1px solid #ebebeb;
-}
-.table {
-    th {
-        min-width: 50px;
-        text-align: left
-    }
 }
 </style>
