@@ -15,7 +15,9 @@
                 <s-content>content</s-content>
                 <s-footer>footer</s-footer>
             </s-layout>
-            <pre><code>{{code1}}</code></pre>
+            <div class="code-wrapper" v-highlight>
+                <pre><code class="html">{{code1}}</code></pre>
+            </div>
         </div>
 
         <h3 class="section">有侧边栏的上中下页面布局</h3>
@@ -40,7 +42,9 @@
                     </s-layout>
                 </s-layout>
             </s-layout>
-            <pre><code>{{code2}}</code></pre>
+            <div class="code-wrapper" v-highlight>
+                <pre><code class="html">{{code2}}</code></pre>
+            </div>
         </div>
 
         <h3 class="section">属性 Attributes</h3>
