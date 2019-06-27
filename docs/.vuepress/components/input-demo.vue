@@ -126,7 +126,7 @@ export default {
                 `<s-input placeholder="请输入内容" v-model="input1"></s-input>
         data() {
             return {
-            input1: ''
+                input1: ''
             }
         }
             `.replace(/^ {8}/gm, "").trim(),

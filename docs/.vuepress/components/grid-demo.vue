@@ -1,7 +1,12 @@
 <template>
     <div>
         <h2>使用方法</h2>
-        
+        <p>1. <code>s-row</code> 在水平方向创建行，<code>s-col</code> 作为 <code>s-row</code> 的直接子元素插入在 <code>s-row</code> 中。</p>
+        <p>2. 在每个 <code>s-col</code> 中，可以填入用户自定内容。</p>
+        <p>
+            3. 通过设置 <code>s-col</code> 的 <code>span</code> 参数，指定跨越的范围，其范围是1到24，
+            每个 <code>s-row</code> 中的 <code>s-col</code> 的 <code>span</code> 值总和应该为24。
+        </p>
         <h3 class="section">基础用法</h3>
         <div class="demo-wrapper">
             <s-row>
@@ -41,11 +46,13 @@
                 <s-col span="2"><div class="s-col-content">2</div></s-col>
                 <s-col span="2"><div class="s-col-content">2</div></s-col>
             </s-row>
-            <pre><code>{{code1}}</code></pre>
+            <div class="code-wrapper" v-highlight>
+                <pre><code class="html">{{code1}}</code></pre>
+            </div>
         </div>
 
         <h3 class="section">设置空隙 gutter</h3>
-        <p>通过在 <code>s-row</code> 标签上添加 <code>gutter</code> 属性来设置空隙</p>
+        <p>通过在 <code>s-row</code> 标签上添加 <code>gutter</code> 属性来设置空隙，其值表现为左右相邻的 <code>s-col</code> 元素 <code>padding</code> 之和。</p>
         <div class="demo-wrapper">
             <s-row gutter="10">
                 <s-col span="8"><div class="s-col-content">8</div></s-col>
@@ -58,7 +65,9 @@
                 <s-col span="6"><div class="s-col-content">6</div></s-col>
                 <s-col span="6"><div class="s-col-content">6</div></s-col>
             </s-row>
-            <pre><code>{{code2}}</code></pre>
+            <div class="code-wrapper" v-highlight>
+                <pre><code class="html">{{code2}}</code></pre>
+            </div>
         </div>
 
         <h3 class="section">设置偏移 offset</h3>
@@ -89,7 +98,9 @@
                 <s-col span="2" offset="2"><div class="s-col-content">2</div></s-col>
                 <s-col span="2"><div class="s-col-content">2</div></s-col>
             </s-row>
-            <pre><code>{{code3}}</code></pre>
+            <div class="code-wrapper" v-highlight>
+                <pre><code class="html">{{code3}}</code></pre>
+            </div>
         </div>
 
         <h3 class="section">设置横向对齐方式</h3>
@@ -135,7 +146,9 @@
                 <s-col span="2"><div class="s-col-content">2</div></s-col>
                 <s-col span="2"><div class="s-col-content">2</div></s-col>
             </s-row>
-            <pre><code>{{code4}}</code></pre>
+            <div class="code-wrapper" v-highlight>
+                <pre><code class="html">{{code4}}</code></pre>
+            </div>
         </div>
 
         <h3 class="section">属性 Attributes</h3>
@@ -328,8 +341,8 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        border: 1px solid #ccc;
-        background: #eee;
+        border: 1px solid #b6b8bc;
+        background: #f7f7f7;
     }
 }
 .section {
