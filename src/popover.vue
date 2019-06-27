@@ -1,9 +1,9 @@
 <template>
-    <div class="popover" ref="popover">
-        <div ref="contentWrapper" class="content-wrapper" :class="{[`position-${position}`]: true}" v-if="visible">
+    <div class="s-popover" ref="popover">
+        <div ref="contentWrapper" class="s-content-wrapper" :class="{[`position-${position}`]: true}" v-if="visible">
             <slot name="content" :close="closeContentAndRemoveListener"></slot>
         </div>
-        <span ref="triggerWrapper" class="trigger-wrapper">
+        <span ref="triggerWrapper" class="s-trigger-wrapper">
             <slot></slot>
         </span>
     </div>
@@ -103,7 +103,7 @@ export default {
             document.body.appendChild(contentWrapper)
             const {width, height, top, left} = triggerWrapper.getBoundingClientRect()
             const {height: selfHeight} = contentWrapper.getBoundingClientRect()
-            let positoinData = {
+            let positionData = {
                 top: {
                     top: top + window.scrollY,
                     left: left + window.scrollX
@@ -121,8 +121,8 @@ export default {
                     left: left + width + window.scrollX
                 }
             }
-            contentWrapper.style.top = positoinData[this.position].top + 'px'
-            contentWrapper.style.left = positoinData[this.position].left + 'px'
+            contentWrapper.style.top = positionData[this.position].top + 'px'
+            contentWrapper.style.left = positionData[this.position].left + 'px'
         },
         onClickDocument(e) {
             if (
@@ -145,24 +145,26 @@ export default {
 <style lang="scss">
 @import '../styles/common';
 
-.popover {
+.s-popover {
     display: inline-block;
     vertical-align: top;
     position: relative;
-    .trigger-wrapper {
+    .s-trigger-wrapper {
         display: inline-block;
     }
 }
-.content-wrapper {
+.s-content-wrapper {
     position: absolute;
-    border: 1px solid $border-color-toast;
+    border: 1px solid $border-color;
     border-radius: $border-radius;
-    filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
     background: #fff;
     padding: .5em 1em;
     max-width: 20em;
     word-break: break-all;
     z-index: 999;
+    opacity: 1;
+    transition: all .2s;
     &::before, &::after {
         content: '';
         display: block;
@@ -178,7 +180,7 @@ export default {
             left: 10px;
         }
         &::before {
-            border-top-color: $border-color-toast;
+            border-top-color: $border-color;
             border-bottom: none;
             top: 100%;
         }
@@ -194,7 +196,7 @@ export default {
             left: 10px;
         }
         &::before {
-            border-bottom-color: $border-color-toast;
+            border-bottom-color: $border-color;
             border-top: none;
             bottom: 100%;
         }
@@ -212,7 +214,7 @@ export default {
             transform: translateY(-50%);
         }
         &::before {
-            border-left-color: $border-color-toast;
+            border-left-color: $border-color;
             border-right: none;
             left: 100%;
         }
@@ -229,7 +231,7 @@ export default {
             transform: translateY(-50%);
         }
         &::before {
-            border-right-color: $border-color-toast;
+            border-right-color: $border-color;
             border-left: none;
             right: 100%;
         }

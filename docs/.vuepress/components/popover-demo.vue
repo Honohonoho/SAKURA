@@ -1,11 +1,9 @@
 <template>
-<div class="popover-demo">
-        <h2>使用方法</h2>
-
+    <div class="popover-demo">
         <h3 class="section">基本用法</h3>
         <p>最常见的时鼠标悬浮在按钮上方，然后出现提示信息。</p>
         <div class="demo-wrapper">
-            <p style="margin-top: 0;">click 触发</p>
+            <p style="margin-top: 0;">通过点击触发：</p>
             <p class="wrapper-title">
                 通过 <span class="code">position</span> 属性来指定消息出现的位置，可设置 <span class="code">top</span>，<span class="code">left</span>
                 ，<span class="code">right</span>，<span class="code">bottom</span>。
@@ -57,13 +55,15 @@
             </div>
             <p class="wrapper-title">
                 特别的，在 <span class="code">slot</span> 为 <span class="code">content</span> 的模板中添加按钮，
-                并绑定与 <span class="code">slot-scop</span> 属性相同的 <span class="code">close</span> 事件
+                并绑定与 <span class="code">slot-scope</span> 属性相同的 <span class="code">close</span> 事件，
                 那么点击这个按钮可以关闭当前消息提示。
             </p>
-            <pre><code>{{code1}}</code></pre>
+            <div class="code-wrapper" v-highlight>
+                <pre><code class="html">{{code1}}</code></pre>
+            </div>
         </div>
         <div class="demo-wrapper" style="margin-top: 20px;">
-            <p style="margin-top: 0;">hover触发</p>
+            <p style="margin-top: 0;">通过悬浮触发：</p>
             <p class="wrapper-title">
                 在 <span class="code" v-text="text1"></span> 标签上设置属性 <span class="code">trigger</span> 为 <span class="code">hover</span>
                 那么现实消息信息的方式就会变为悬浮时出现。
@@ -105,7 +105,6 @@
                     <s-popover position="bottom" trigger="hover">
                         <template slot="content" slot-scope="{close}">
                             <div>下方出现的提示信息</div>
-                            <s-button @click="close">关闭</s-button>
                         </template>
                         <template>
                             <s-button>下方</s-button>
@@ -113,7 +112,9 @@
                     </s-popover>
                 </div>
             </div>
-            <pre><code>{{code1}}</code></pre>
+            <div class="code-wrapper" v-highlight>
+                <pre><code class="html">{{code2}}</code></pre>
+            </div>
         </div>
 
         <h3 class="section">属性 Attributes</h3>
@@ -207,7 +208,7 @@ export default {
             </template>
         </s-popover>
             `.replace(/^ {8}/gm, "").trim(),
-            code1: `
+            code2: `
             <s-popover>
             <template slot="content" trigger="hover">
                 <div>上方出现的提示信息</div>
@@ -235,7 +236,6 @@ export default {
         <s-popover position="bottom" trigger="hover">
             <template slot="content" slot-scope="{close}">
                 <div>下方出现的提示信息</div>
-                <s-button @click="close">关闭</s-button>
             </template>
             <template>
                 <s-button>下方</s-button>
@@ -251,11 +251,11 @@ export default {
 <style lang="scss" scoped>
 .popover-demo {
     .box {
-        max-width: 450px;
-        display: inline-flex;
+        width: 100%;
+        display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: flex-start;
+        align-items: center;
         .box-item {
             display: flex;
         }
@@ -285,19 +285,6 @@ export default {
         font-size: 0.85em;
         background-color: rgba(27,31,35,0.05);
         border-radius: 3px;
-    }
-    .section {
-        margin-top: 50px;
-    }
-    .demo-wrapper {
-        padding: 24px;
-        border: 1px solid #ebebeb;
-    }
-    .table {
-        th {
-            min-width: 50px;
-            text-align: left
-        }
     }
 }
 </style>
