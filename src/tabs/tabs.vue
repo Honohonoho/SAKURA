@@ -37,6 +37,11 @@ export default {
         if (this.$children.length === 0) {
             console.warn('children of Tabs component should be tabs-head or tabs-body.')
         }
+        if (this.eventBus) {
+            this.eventBus.$on('tab-click', (name, vm) => {
+                this.$emit('tab-click', name)
+            })
+        }
         this.$children.forEach((child)=>{
             if(child.$options.name === 's-tabs-head') {
                 child.$children.forEach((item)=> {
