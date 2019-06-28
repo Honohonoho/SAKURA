@@ -1,8 +1,9 @@
 <template>
     <div>
         <h3 class="section">基础用法</h3>
+        <p>基本的标签页，适用于大部分场景。在 <code>s-tabs</code> 上监听 <code>tab-click</code> 事件，可以获得 tab 选中时的对应的tab name。</p>
         <div class="demo-wrapper">
-            <s-tabs selected="tech">
+            <s-tabs selected="tech" @tab-click="onTabClick">
                 <s-tabs-head>
                     <s-tabs-item name="tech">科技</s-tabs-item>
                     <s-tabs-item name="finance">财经</s-tabs-item>
@@ -98,6 +99,23 @@
                 </tr>
             </tbody>
         </table>
+        <h3 class="section">事件 Event</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>事件名称</th>
+                <th>说明</th>
+                <th>回调参数</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>tab-click</td>
+                <td>在 tab 被选中时触发</td>
+                <td>(name: string)，被选中 tab 的 name</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 <script>
@@ -119,7 +137,7 @@ export default {
         return {
             text1: '<s-tabs-item>',
             code1: `
-            <s-tabs selected="tech">
+            <s-tabs selected="tech" @tab-click="onTabClick">
             <s-tabs-head> 
                 <s-tabs-item name="tech">科技</s-tabs-item>
                 <s-tabs-item name="finance">财经</s-tabs-item>
@@ -143,9 +161,14 @@ export default {
                 </s-tabs-pane>
             </s-tabs-body>
         </s-tabs>
+        methods: {
+            onTabClick(name) {
+                alert('你点击的是：' + name);
+            }
+        }
             `.replace(/^ {8}/gm, "").trim(),
             code2: `
-            <s-tabs selected="tech" @update:selected="">
+            <s-tabs selected="tech">
             <s-tabs-head> 
                 <s-tabs-item name="tech">科技</s-tabs-item>
                 <s-tabs-item name="finance" disabled>财经</s-tabs-item>
@@ -173,10 +196,13 @@ export default {
         }
     },
     methods: {
+        onTabClick(name) {
+            alert('你点击的是：' + name);
+        }
     }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
     color: #476582;
