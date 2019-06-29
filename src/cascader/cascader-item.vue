@@ -1,6 +1,6 @@
 <template>
-    <div class="cascader-item" :style="{height: height}">
-        <ul class="cascader-item-left">
+    <div class="s-cascader-item" :style="{height: height}">
+        <ul class="s-cascader-item-left">
             <li class="label" v-for="item in childData" :key="item.index" @click="onClickLabel(item)"
                 :title="item.name">
                 <span class="label-name">{{item.name}}</span>
@@ -14,7 +14,7 @@
                 </span>
             </li>
         </ul>
-        <div class="cascader-item-right" v-if="rightCascaderData">
+        <div class="s-cascader-item-right" v-if="rightCascaderData">
             <s-cascader-item
                     :child-data="rightCascaderData"
                     :selected="selected"
@@ -95,14 +95,15 @@
     }
 </script>
 
-<style scoped lang="scss">
-    @import "../../styles/common";
-    .cascader-item {
+<style lang="scss">
+@import "../../styles/common";
+.s-cascader {
+    .s-cascader-item {
         min-height: 100px;
         display: flex;
         justify-content: flex-start;
         align-items: flex-start;
-        .cascader-item-left {
+        .s-cascader-item-left {
             height: 100%;
             overflow: auto;
             .label {
@@ -110,11 +111,11 @@
                 white-space: nowrap;
                 display: flex;
                 align-items: center;
-                color: $main-font-color-dark;
+                color: $color;
                 cursor: pointer;
                 background: $main-background-white;
                 &:hover {
-                    background: $cascader-label-selected-background-color;
+                    background: $disable-background-color;
                 }
                 > .label-name {
                     margin-right: 1em;
@@ -132,9 +133,10 @@
                 }
             }
         }
-        .cascader-item-right {
+        .s-cascader-item-right {
             height: 100%;
             border-left: 1px solid $cascader-border-color;
         }
     }
+}
 </style>

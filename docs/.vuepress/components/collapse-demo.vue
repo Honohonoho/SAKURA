@@ -177,7 +177,6 @@ export default {
                 </p>
             </s-collapse-item>
         </s-collapse>
-
         <script>
         export default {
             data() {

@@ -1,8 +1,9 @@
 <template>
     <div class="s-cascader" ref="cascader" v-click-outside="close">
-        <div class="s-cascader-trigger" @click="toggle">
-            {{selectedResult || '&nbsp;'}}
-        </div>
+        <!--<div class="s-cascader-trigger" @click="toggle">-->
+            <!--{{selectedResult || '&nbsp'}}-->
+        <!--</div>-->
+        <s-input class="s-cascader-trigger" :value="selectedResult" placeholder="请选择" @focus="toggle"></s-input>
         <div class="s-cascader-popover" v-if="popoverVisible">
             <s-cascader-item
                     :child-data="cascaderData"
@@ -20,11 +21,13 @@
 <script>
     import CascaderItem from './cascader-item'
     import clickOutside from '../custom_directives';
+    import Input from '../input'
 
     export default {
         name: "s-cascader",
         components: {
-            's-cascader-item': CascaderItem
+            's-cascader-item': CascaderItem,
+            's-input': Input
         },
         directives: {
             clickOutside
@@ -38,7 +41,8 @@
                 default: () => {return []}
             },
             popoverHeight: {
-                type: String
+                type: String,
+                default: () => {return '200px'}
             },
             loadData: {
                 type: Function
@@ -97,7 +101,7 @@
                     let deepCopy = JSON.parse(JSON.stringify(this.cascaderData))
                     let toUpdate = complex(deepCopy, lastSelectedItem.id)
                     toUpdate.children = resData
-                    this.$emit('update:cascaderData', deepCopy)
+                    this.$emit('childrenDataUpdate', resData)
                 };
                 if (!lastSelectedItem.isLeaf && this.loadData) {
                     this.loadData(lastSelectedItem, updateCascaderData);
@@ -108,19 +112,15 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
     @import "../../styles/common";
     .s-cascader {
         position: relative;
         display: inline-block;
         .s-cascader-trigger {
-            min-width: 10em;
-            height: 32px;
-            display: inline-flex;
-            align-items: center;
-            padding: 0 1em;
-            border-radius: $cascader-border-radius;
-            border: 1px solid $input-border-color;
+            input {
+                cursor: pointer;
+            }
         }
         .s-cascader-popover {
             position: absolute;

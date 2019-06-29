@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper" :class="{'error': error}">
+    <div class="s-input" :class="{'error': error}">
         <input type="text" :value="value" :disabled="disabled" :readonly="readonly" :placeholder="placeholder"
             @change="$emit('change', $event.target.value)"
             @input="$emit('input', $event.target.value)"
@@ -7,7 +7,7 @@
             @blur="$emit('blur', $event.target.value)">
         <template v-if="error">
             <s-icon class="icon-error" name="error"></s-icon>
-            <span class="error-message">{{error}}</span>
+            <span class="s-input-error-message">{{error}}</span>
         </template>
     </div>
 </template>
@@ -39,10 +39,10 @@ export default {
     }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../styles/common';
 
-.wrapper {
+.s-input {
     font-size: $font-size;
     display: inline-flex;
     align-items: center;
@@ -112,7 +112,7 @@ export default {
         fill: $main-error;
         margin-left: .5em;
     }
-    .error-message {
+    .s-input-error-message {
         color: $main-error;
         margin-left: .5em;
     }

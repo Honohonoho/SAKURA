@@ -35,7 +35,6 @@ $font-size: 14px;
 $basic-height: 32px;
 $main-color-dark: #515a6e;
 $main-background-white: #ffffff;
-$main-border-radius: 4px;
 $main-icon-color-light: rgba(0, 0, 0, 0.45);
 $main-font-color-dark: $main-color-dark;
 $border-color-hover: #666;
@@ -77,8 +76,9 @@ $input-disabled-color: $disabled-color;
 $input-placeholder-color: $placeholder-color;
 
 // cascader
-$cascader-border-color: #e8e8e8;
-$cascader-border-radius: $main-border-radius;
+$cascader-trigger-hover-border-color: $main-primary;
+$cascader-border-color: $border-color;
+$cascader-border-radius: $border-radius;
 $cascader-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 $cascader-label-selected-background-color: #f5f5f5;
 
