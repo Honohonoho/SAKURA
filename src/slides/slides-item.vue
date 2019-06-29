@@ -29,9 +29,9 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+.s-slides {
     .s-slides-item {
-
     }
     .slide-leave-active {
         position: absolute;
@@ -55,4 +55,5 @@
     .slide-leave-to.negative {
         transform: translateX(100%);
     }
+}
 </style>

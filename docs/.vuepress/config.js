@@ -32,6 +32,7 @@ module.exports = {
                     ['/components/toast', 'Toast 通知'],
                     ['/components/collapse', 'Collapse 折叠面板'],
                     ['/components/cascader', 'Cascader 级联选择器'],
+                    ['/components/slides', 'Slides 轮播'],
 
                 ]
             },

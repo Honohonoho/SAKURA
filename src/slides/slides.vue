@@ -21,7 +21,7 @@
             >
                 {{n}}
             </span>
-            <span class=" s-slides-dot right-arrow" @click="updateSelected(selectedIndex + 1)">
+            <span class=" s-slides-dot right-arrow" @click="onClickNext">
                 <s-icon name="right"></s-icon>
             </span>
         </div>
@@ -74,6 +74,7 @@
             }
         },
         mounted() {
+            console.log(this.selected);
             this.updateSlidesItem()
             if (this.autoPlay) {
                 this.playAutomatically()
@@ -118,6 +119,7 @@
                 if (nextIndex === -1) { nextIndex = this.getNames.length - 1 }
                 if (nextIndex === this.getNames.length) { nextIndex = 0 }
                 this.$emit('update:selected', this.getNames[nextIndex])
+                this.$emit('change', this.getNames[nextIndex])
             },
             playAutomatically() {
                 if (this.timerId) { return }
@@ -131,6 +133,9 @@
             },
             onDotSelect(index) {
                 this.updateSelected(index)
+            },
+            onClickNext () {
+                this.updateSelected(this.selectedIndex + 1)
             },
             onMouseEnter() {
                 this.pauseAnimation()
@@ -170,43 +175,42 @@
     }
 </script>
 
-<style scoped lang="scss">
-    .s-slides {
-        /*display: inline-block;*/
-        &-view {
-            overflow: hidden;
+<style lang="scss">
+@import '../../styles/common';
+.s-slides {
+    &-view {
+        overflow: hidden;
+    }
+    .s-slides-wrapper {
+        position: relative;
+    }
+    &-dots-wrapper {
+        padding: 8px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &-dot {
+        width: 1.3em;
+        height: 1.3em;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $main-color;
+        border-radius: 50%;
+        margin: 0 8px;
+        text-align: center;
+        color: #fff;
+        &:hover {
+            cursor: pointer;
+            background-color: $lightly-main-color;
         }
-        .s-slides-wrapper {
-            position: relative;
-        }
-        &-dots-wrapper {
-            padding: 8px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        &-dot {
-            width: 1.2em;
-            height: 1.2em;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 50%;
-            margin: 0 8px;
-            text-align: center;
-            font-size: 12px;
-            color: #fff;
+        &.active {
+            background-color: $deep-main-color;
             &:hover {
-                cursor: pointer;
-            }
-            &.active {
-                color: #fff;
-                background: #000;
-                &:hover {
-                    cursor: default;
-                }
+                cursor: default;
             }
         }
     }
+}
 </style>

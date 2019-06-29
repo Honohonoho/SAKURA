@@ -161,7 +161,6 @@
                 cascaderData1: [],
                 selectedItemArray2: [], //级联选择器每级选中的记录都保存在这
                 cascaderData2: [],
-                text1: '<s-tabs-item>',
                 code1: `
                 <s-cascader
                 :cascader-data="cascaderData2"
