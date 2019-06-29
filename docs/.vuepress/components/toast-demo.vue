@@ -1,7 +1,5 @@
 <template>
-<div class="toast-demo">
-        <h2>使用方法</h2>
-
+    <div class="toast-demo">
         <h3 class="section">基本用法</h3>
         <p>适用于大部分场景</p>
         <div class="demo-wrapper">

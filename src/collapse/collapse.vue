@@ -1,5 +1,5 @@
 <template>
-    <div class="collapse">
+    <div class="s-collapse">
         <slot></slot>
     </div>
 </template>
@@ -47,14 +47,17 @@ export default {
             this.$emit('update:selected', deepCopySelected)
             this.eventBus.$emit('update:selected', deepCopySelected)
         })
+        this.eventBus.$on('selectedChange', (name) => {
+            this.$emit('change', name)
+        })
     }
 }
 </script>
 <style lang="scss">
 @import '../../styles/common';
 
-.collapse {
-    border: 1px solid $grey;
+.s-collapse {
+    border: 1px solid $border-color;
     border-radius: $border-radius;
 }
 </style>
