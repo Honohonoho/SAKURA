@@ -53,7 +53,7 @@ describe('Validate', () => {
         ]
         let validator = new Validate()
         let errors = validator.validate(data, rules)
-        expect(errors.email.pattern).to.eq('格式不正确')
+        expect(errors.email.pattern).to.eq('邮箱格式不正确')
     });
 
     it('pattern 通过', () => {
@@ -83,7 +83,7 @@ describe('Validate', () => {
         ]
         let validator = new Validate()
         let errors = validator.validate(data, rules)
-        expect(errors.email.pattern).to.eq('格式不正确')
+        expect(errors.email.pattern).to.eq('邮箱格式不正确')
     });
 
     it('pattern email 通过', () => {

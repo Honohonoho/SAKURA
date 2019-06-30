@@ -21,7 +21,7 @@ describe('Popover', () => {
             }
         });
         wrapper.find('button').trigger('click')
-        let classes = wrapper.find('.content-wrapper').classes();
+        let classes = wrapper.find('.s-content-wrapper').classes();
         expect(classes).to.include('position-bottom')
     });
     it('设置 trigger: click/hover', () => {
@@ -35,8 +35,8 @@ describe('Popover', () => {
                 trigger: 'hover'
             }
         });
-        expect(wrapper.find('.content-wrapper').element).to.not.exist
-        wrapper.find('.popover').trigger('mouseenter')
-        expect(wrapper.find('.content-wrapper').element).to.exist
+        expect(wrapper.find('.s-content-wrapper').element).to.not.exist
+        wrapper.find('.s-popover').trigger('mouseenter')
+        expect(wrapper.find('.s-content-wrapper').element).to.exist
     })
 });
