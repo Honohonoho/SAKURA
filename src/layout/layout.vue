@@ -23,7 +23,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .s-layout {
     display: flex;
     flex-direction: column;

@@ -177,39 +177,39 @@
     }
 </script>
 
-<style scoped lang="scss">
-    .s-scroll-wrapper {
-        overflow: hidden;
-        border: 1px solid red;
-        position: relative;
-        .s-scroll {
-            transition: transform 0.05s ease;
-        }
-        .s-scroll-track {
+<style lang="scss">
+.s-scroll-wrapper {
+    overflow: hidden;
+    border: 1px solid red;
+    position: relative;
+    .s-scroll {
+        transition: transform 0.05s ease;
+    }
+    .s-scroll-track {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 14px;
+        height: 100%;
+        border-left: 1px solid #e8e7e8;
+        background: #fafafa;
+        .s-scroll-bar {
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 14px;
-            height: 100%;
-            border-left: 1px solid #e8e7e8;
-            background: #fafafa;
-            .s-scroll-bar {
-                position: absolute;
-                left: 50%;
-                margin-left: -4px;
-                padding: 4px 0;
-                height: 40px;
-                width: 8px;
-                transition: transform 0.05s ease;
-                .s-scroll-bar-inner {
-                    height: 100%;
-                    background: #c2c2c2;
-                    border-radius: 4px;
-                    &:hover {
-                        background: #7d7d7d;
-                    }
+            left: 50%;
+            margin-left: -4px;
+            padding: 4px 0;
+            height: 40px;
+            width: 8px;
+            transition: transform 0.05s ease;
+            .s-scroll-bar-inner {
+                height: 100%;
+                background: #c2c2c2;
+                border-radius: 4px;
+                &:hover {
+                    background: #7d7d7d;
                 }
             }
         }
     }
+}
 </style>

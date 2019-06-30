@@ -83,7 +83,7 @@ export default {
     }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .s-col {
     width: 50%;
     box-sizing: border-box; 
