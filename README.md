@@ -1,6 +1,9 @@
 # SAKURA UI
 
 [![Build Status](https://travis-ci.org/Honohonoho/SAKURA.svg?branch=master)](https://travis-ci.org/Honohonoho/SAKURA)
+<img src="https://img.shields.io/badge/dependencies-vue-green.svg" alt="Dependencies">
+<img src="https://img.shields.io/badge/npm-0.09-blue.svg" alt="Version">
+<img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License">
 
 ## 文档
 
