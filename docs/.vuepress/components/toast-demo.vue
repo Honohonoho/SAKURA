@@ -100,15 +100,13 @@
 </template>
 <script>
 import Vue from 'vue';
-import Toast from '../../../src/toast';
 import Button from "../../../src/button/button";
 import plugin from '../../../src/plugin';
 Vue.use(plugin);
 
 export default {
     components: {
-        's-button': Button,
-        's-toast': Toast
+        's-button': Button
     },
     data() {
         return {

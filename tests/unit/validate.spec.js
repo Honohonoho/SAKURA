@@ -23,7 +23,7 @@ describe('Validate', () => {
         ]
         let validator = new Validate()
         let errors = validator.validate(data, rules)
-        expect(errors.email.required).to.eq('必填')
+        expect(errors.email.required).to.eq('必填项')
     });
 
     it('required true 通过', () => {

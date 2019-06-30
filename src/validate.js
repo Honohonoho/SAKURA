@@ -36,7 +36,7 @@ class Validator {
 
     required(value) {
         if (!value && value !== 0) {
-            return '必填'
+            return '必填项'
         }
     }
 
@@ -45,7 +45,7 @@ class Validator {
             pattern = /^.+@.+$/
         }
         if (pattern.test(value) === false) {
-            return '格式不正确'
+            return '邮箱格式不正确'
         }
     }
 

@@ -208,123 +208,123 @@ export default {
         return {
             code1:
             `<s-row>
-            <s-col><div class="s-col-content">12</div></s-col>
-            <s-col><div class="s-col-content">12</div></s-col>
+            <s-col><div>12</div></s-col>
+            <s-col><div>12</div></s-col>
         </s-row>
         <s-row>
-            <s-col span="8"><div class="s-col-content">8</div></s-col>
-            <s-col span="8"><div class="s-col-content">8</div></s-col>
-            <s-col span="8"><div class="s-col-content">8</div></s-col>
+            <s-col span="8"><div>8</div></s-col>
+            <s-col span="8"><div>8</div></s-col>
+            <s-col span="8"><div>8</div></s-col>
         </s-row>
         <s-row>
-            <s-col span="6"><div class="s-col-content">6</div></s-col>
-            <s-col span="6"><div class="s-col-content">6</div></s-col>
-            <s-col span="6"><div class="s-col-content">6</div></s-col>
-            <s-col span="6"><div class="s-col-content">6</div></s-col>
+            <s-col span="6"><div>6</div></s-col>
+            <s-col span="6"><div>6</div></s-col>
+            <s-col span="6"><div>6</div></s-col>
+            <s-col span="6"><div>6</div></s-col>
         </s-row>
         <s-row>
-            <s-col span="4"><div class="s-col-content">4</div></s-col>
-            <s-col span="4"><div class="s-col-content">4</div></s-col>
-            <s-col span="4"><div class="s-col-content">4</div></s-col>
-            <s-col span="4"><div class="s-col-content">4</div></s-col>
-            <s-col span="4"><div class="s-col-content">4</div></s-col>
-            <s-col span="4"><div class="s-col-content">4</div></s-col>
+            <s-col span="4"><div>4</div></s-col>
+            <s-col span="4"><div>4</div></s-col>
+            <s-col span="4"><div>4</div></s-col>
+            <s-col span="4"><div>4</div></s-col>
+            <s-col span="4"><div>4</div></s-col>
+            <s-col span="4"><div>4</div></s-col>
         </s-row>
         <s-row>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
         </s-row>
             `.replace(/^ {8}/gm, "").trim(),
             code2: 
             `<s-row gutter="10">
-            <s-col span="8"><div class="s-col-content">8</div></s-col>
-            <s-col span="8"><div class="s-col-content">8</div></s-col>
-            <s-col span="8"><div class="s-col-content">8</div></s-col>
+            <s-col span="8"><div>8</div></s-col>
+            <s-col span="8"><div>8</div></s-col>
+            <s-col span="8"><div>8</div></s-col>
         </s-row>
         <s-row gutter="10">
-            <s-col span="6"><div class="s-col-content">6</div></s-col>
-            <s-col span="6"><div class="s-col-content">6</div></s-col>
-            <s-col span="6"><div class="s-col-content">6</div></s-col>
-            <s-col span="6"><div class="s-col-content">6</div></s-col>
+            <s-col span="6"><div>6</div></s-col>
+            <s-col span="6"><div>6</div></s-col>
+            <s-col span="6"><div>6</div></s-col>
+            <s-col span="6"><div>6</div></s-col>
         </s-row>
             `.replace(/^ {8}/gm, "").trim(),
             code3:
             `<s-row gutter="10">
-            <s-col span="8"><div class="s-col-content">8</div></s-col>
-            <s-col span="8" offset="8"><div class="s-col-content">8</div></s-col>
+            <s-col span="8"><div>8</div></s-col>
+            <s-col span="8" offset="8"><div>8</div></s-col>
         </s-row>
         <s-row gutter="10">
-            <s-col span="6"><div class="s-col-content">6</div></s-col>
-            <s-col span="6" offset="6"><div class="s-col-content">6</div></s-col>
-            <s-col span="6"><div class="s-col-content">6</div></s-col>
+            <s-col span="6"><div>6</div></s-col>
+            <s-col span="6" offset="6"><div>6</div></s-col>
+            <s-col span="6"><div>6</div></s-col>
         </s-row>
         <s-row gutter="10">
-            <s-col span="4"><div class="s-col-content">4</div></s-col>
-            <s-col span="4" offset="4"><div class="s-col-content">4</div></s-col>
-            <s-col span="4"><div class="s-col-content">4</div></s-col>
-            <s-col span="4" offset="4"><div class="s-col-content">4</div></s-col>
+            <s-col span="4"><div>4</div></s-col>
+            <s-col span="4" offset="4"><div>4</div></s-col>
+            <s-col span="4"><div>4</div></s-col>
+            <s-col span="4" offset="4"><div>4</div></s-col>
         </s-row>
         <s-row gutter="10">
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2" offset="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2" offset="4"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2" offset="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2" offset="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2" offset="4"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2" offset="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
         </s-row>
             `.replace(/^ {8}/gm, "").trim(),
             code4:
             `<s-row gutter="10" justify="center">
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2" offset="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2" offset="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
         </s-row>
         <s-row justify="left">
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2" offset="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2" offset="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
         </s-row>
         <s-row justify="space-between">
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2" offset="4"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2" offset="4"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
         </s-row>
         <s-row justify="space-around">
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2" offset="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
-            <s-col span="2"><div class="s-col-content">2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2" offset="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
+            <s-col span="2"><div>2</div></s-col>
         </s-row>
             `.replace(/^ {8}/gm, "").trim(),
         };
