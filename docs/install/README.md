@@ -2,6 +2,12 @@
 
 ### npm 安装
 
+```bash
+npm install sakura_ui
 ```
-npm install sakura_ui -S
+
+### 或 yarn 安装
+
+```bash
+yarn add sakura_ui
 ```

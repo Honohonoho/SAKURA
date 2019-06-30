@@ -1,11 +1,5 @@
 # SAKURA UI
 
-[![Build Status](https://travis-ci.org/Honohonoho/SAKURA.svg?branch=master)](https://travis-ci.org/Honohonoho/SAKURA)
-
-## 文档
-
-请访问[官方网站](https://honohonoho.github.io/SAKURA/)
-
 ## 介绍
 
 SAKURA UI 是一个不太一样的 UI 框架。
@@ -20,7 +14,7 @@ SAKURA UI 是一个不太一样的 UI 框架。
 
 1. 单元测试、覆盖率、持续集成等工程概念
 2. 重构、TDD/BDD、设计模式、单向数据流等技术概念
-3. Vue 2.0 的大部分功能。
+2. Vue 2.0 的大部分功能。
 
 
 ## 目前有哪些轮子
@@ -62,4 +56,4 @@ SAKURA UI 是一个不太一样的 UI 框架。
 
 欢迎添加微信交流 ^.^
 
-<img src="./img/weixin.png" width="300" />
+<img src="../../img/weixin.png" width="300" />

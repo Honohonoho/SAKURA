@@ -1,12 +1,13 @@
 module.exports = {
     base: '/SAKURA/',
-    title: '❀ SAKURA UI 官网',
-    description: '一个好用的 UI 组件库',
+    title: '❀ SAKURA UI',
+    description: '一个小而美的 UI 组件库， 基于 Vue 2.0 的移动端和 PC 端组件库',
     sidebarDepth: 2,
     themeConfig: {
         nav: [
             { text: '主页', link: '/' },
             { text: '文档', link: '/install/' },
+            { text: '指南', link: '/guide/'},
             { text: 'GitHub', link: 'https://github.com/Honohonoho/SAKURA' },
         ],
         sidebar: [
@@ -38,5 +39,8 @@ module.exports = {
                 ]
             },
         ]
+    },
+    markdown: {
+        lineNumbers: true
     }
 }
