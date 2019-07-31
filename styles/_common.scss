@@ -82,6 +82,15 @@ $cascader-border-radius: $border-radius;
 $cascader-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 $cascader-label-selected-background-color: #f5f5f5;
 
+// Pager
+$pager-item-font-color: $main-font-color;
+$pager-item-border-radius: $border-radius;
+$pager-item-border-color: $border-color;
+$pager-item-active-background: #eeeeee;
+$pager-item-disabled-background-color: $disable-background-color;
+$pager-item-background-color: #ffffff;
+$pager-item-height: $basic-height;
+$pager-box-shadow: $box-shadow;
 
 $blue: #409EFF;
 
