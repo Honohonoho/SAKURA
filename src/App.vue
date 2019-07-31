@@ -242,7 +242,7 @@
             <!--<p>100</p>-->
         <!--</s-scroll>-->
         <div>
-            <s-pager :total-page="20" :current-page="3" :hide-when-one-page="false"></s-pager>
+            <s-pager :total-page="20" :current-page="20" :hide-when-one-page="false"></s-pager>
         </div>
     </div>
 </template>

@@ -1,15 +1,31 @@
 <template>
     <div class="s-pager">
-        <span v-for="page in pages" class="s-pager-item"
-            :class="{'s-pager-item-active': page === currentPage, 's-pager-item-separator': page === '...'}"
-        >
-            {{page}}
+        <span class="s-pager-nav s-pager-nav-pre" :class="{disabled: currentPage === 1}">
+            <s-icon name="left"></s-icon>
+        </span>
+        <template v-for="page in pages">
+            <template v-if="page === currentPage">
+                <span class="s-pager-item s-pager-item-active">{{page}}</span>
+            </template>
+            <template v-else-if="page === '···'">
+                <span class="s-pager-item s-pager-item-separator">···</span>
+            </template>
+            <template v-else>
+                <span class="s-pager-item">{{page}}</span>
+            </template>
+        </template>
+        <span class="s-pager-nav s-pager-nav-next" :class="{disabled: currentPage === totalPage}">
+            <s-icon name="right"></s-icon>
         </span>
     </div>
 </template>
 
 <script>
+    import Icon from './icon';
     export default {
+        components: {
+            's-icon': Icon
+        },
         name: "s-pager",
         props: {
             totalPage: {
@@ -26,17 +42,18 @@
             }
         },
         data() {
-            let pages = [1, this.totalPage, this.currentPage, this.currentPage-1, this.currentPage-2, this.currentPage+1, this.currentPage+2]
-            let sortedPages = unique(pages.sort((a,b) => a-b))
-            let pagesWithDots = sortedPages.reduce((prev, current, index)=> {
-                prev.push(current)
-                sortedPages[index+1] !== undefined &&
-                sortedPages[index+1] - sortedPages[index] > 1 &&
-                prev.push('...')
-                return prev
-            }, [])
+            let pages = [1, this.totalPage, this.currentPage, this.currentPage-1, this.currentPage-2, this.currentPage+1, this.currentPage+2];
+            let result= unique(pages.sort((a,b) => a-b))
+                .filter(item => item >= 1 && item <= this.totalPage)
+                .reduce((prev, current, index, array)=> {
+                    prev.push(current)
+                    array[index+1] !== undefined &&
+                    array[index+1] - array[index] > 1 &&
+                    prev.push('···')
+                    return prev
+                }, [])
             return {
-                pages: pagesWithDots
+                pages: result
             }
         }
     }
@@ -54,6 +71,9 @@
 <style lang="scss">
     @import '../styles/common';
     .s-pager {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
         &-item {
             font-size: 12px;
             padding: 0 4px;
@@ -82,6 +102,23 @@
             cursor: default;
             border-color: $main-primary;
             color: $main-primary;
+        }
+        &-nav {
+            margin: 0 4px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            height: 20px;
+            width: 20px;
+            border-radius: $border-radius;
+            font-size: 12px;
+            color: $main-font-color;
+            background: $disable-background-color;
+            cursor: pointer;
+            &.disabled {
+                color: $disabled-color;
+                cursor: default;
+            }
         }
     }
 </style>
