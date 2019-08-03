@@ -242,7 +242,7 @@
             <!--<p>100</p>-->
         <!--</s-scroll>-->
         <div>
-            <s-pager :total-page="20" :current-page="20" :hide-when-one-page="false"></s-pager>
+            <s-pager :total-page="1" :current-page="currentPage" :hide-if-one-page="false" @pageChange="onPageChange"></s-pager>
         </div>
     </div>
 </template>
@@ -338,6 +338,7 @@
                 // cascaderSelectedChildren: [], //级联选择器每级选中的记录都保存在这
                 // cascaderData: [],
                 // selected: '1'
+                currentPage: 1
             }
         },
         created() {
@@ -378,6 +379,11 @@
             // })
         },
         methods: {
+            onPageChange(page) {
+                if(page >=1 || page <= this.totalPage) {
+                    this.currentPage = page
+                }
+            }
             // onSelectedChanged(itemName) {
             //     this.selected = itemName
             // }

@@ -1,6 +1,9 @@
 <template>
-    <div class="s-pager">
-        <span class="s-pager-nav s-pager-nav-pre" :class="{disabled: currentPage === 1}">
+    <div class="s-pager" :class="{'s-pager-hide': hideIfOnePage === true && totalPage <= 1}">
+        <span class="s-pager-nav s-pager-nav-pre"
+            :class="{disabled: currentPage === 1}"
+            @click="onClickPage(currentPage - 1)"
+        >
             <s-icon name="left"></s-icon>
         </span>
         <template v-for="page in pages">
@@ -11,10 +14,13 @@
                 <span class="s-pager-item s-pager-item-separator">···</span>
             </template>
             <template v-else>
-                <span class="s-pager-item">{{page}}</span>
+                <span class="s-pager-item" @click="onClickPage(page)">{{page}}</span>
             </template>
         </template>
-        <span class="s-pager-nav s-pager-nav-next" :class="{disabled: currentPage === totalPage}">
+        <span class="s-pager-nav s-pager-nav-next"
+            :class="{disabled: currentPage === totalPage}"
+            @click="onClickPage(currentPage + 1)"
+        >
             <s-icon name="right"></s-icon>
         </span>
     </div>
@@ -36,15 +42,23 @@
                 type: Number,
                 default: 1
             },
-            hideWhenOnePage: {
+            hideIfOnePage: {
                 type: Boolean,
                 default: false
             }
         },
         data() {
-            let pages = [1, this.totalPage, this.currentPage, this.currentPage-1, this.currentPage-2, this.currentPage+1, this.currentPage+2];
-            let result= unique(pages.sort((a,b) => a-b))
-                .filter(item => item >= 1 && item <= this.totalPage)
+            return {
+            }
+        },
+        computed: {
+            pages() {
+                let pages = [1, this.totalPage, this.currentPage, this.currentPage-1, this.currentPage-2, this.currentPage+1, this.currentPage+2];
+                let result = unique(
+                    pages
+                        .filter(item => item >= 1 && item <= this.totalPage)
+                        .sort((a,b) => a-b)
+                )
                 .reduce((prev, current, index, array)=> {
                     prev.push(current)
                     array[index+1] !== undefined &&
@@ -52,8 +66,12 @@
                     prev.push('···')
                     return prev
                 }, [])
-            return {
-                pages: result
+                return result
+            }
+        },
+        methods: {
+            onClickPage(page) {
+                this.$emit('pageChange', page)
             }
         }
     }
@@ -74,6 +92,10 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
+        user-select: none;
+        &-hide {
+            display: none;
+        }
         &-item {
             font-size: 12px;
             padding: 0 4px;
