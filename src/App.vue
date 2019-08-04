@@ -242,7 +242,8 @@
             <!--<p>100</p>-->
         <!--</s-scroll>-->
         <div>
-            <s-pager :total-page="1" :current-page="currentPage" :hide-if-one-page="false" @pageChange="onPageChange"></s-pager>
+            <!--<s-pager :total-page="1" :current-page="currentPage" :hide-if-one-page="false" @pageChange="onPageChange"></s-pager>-->
+            <s-table :columns="columns" :data-source="dataSource" bordered compact @rowChange="onRowchange"></s-table>
         </div>
     </div>
 </template>
@@ -274,7 +275,8 @@
     import Slides from './slides/slides';
     import SlidesItem from './slides/slides-item';
     import Scroll from './scroll'
-    import Pager from './pager'
+    // import Pager from './pager'
+    import Table from './table/table'
 
     Vue.use(plugin);
 
@@ -326,7 +328,8 @@
             // 's-collapse-item': CollapseItem,
             // 's-cascader': Cascader
             // 's-scroll': Scroll
-            's-pager': Pager
+            // 's-pager': Pager
+            's-table': Table
         },
         data() {
             return {
@@ -338,7 +341,17 @@
                 // cascaderSelectedChildren: [], //级联选择器每级选中的记录都保存在这
                 // cascaderData: [],
                 // selected: '1'
-                currentPage: 1
+                // currentPage: 1
+                dataSource: [
+                    {id: 1,name: '张三',records: 90},
+                    {id: 2,name: '李四',records: 87},
+                    {id: 3,name: '小明',records: 90},
+                    {d: 4,name: '狗蛋',records: 60}
+                ],
+                columns: [
+                    {text: '姓名', field: 'name'},
+                    {text: '分数', field: 'records'}
+                ]
             }
         },
         created() {
@@ -379,11 +392,14 @@
             // })
         },
         methods: {
-            onPageChange(page) {
-                if(page >=1 || page <= this.totalPage) {
-                    this.currentPage = page
-                }
+            onRowchange(rowData) {
+                console.log(rowData);
             }
+            // onPageChange(page) {
+            //     if(page >=1 || page <= this.totalPage) {
+            //         this.currentPage = page
+            //     }
+            // }
             // onSelectedChanged(itemName) {
             //     this.selected = itemName
             // }
