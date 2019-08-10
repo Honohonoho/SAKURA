@@ -10,7 +10,7 @@
       <tr>
         <th>
           <input type="checkbox" ref="checkAll"
-             :checked="this.selectedItems.length === this.dataSource.length"
+             :checked="isAllChecked"
              @change="onChangeAllItems"
           />
         </th>
@@ -75,6 +75,23 @@
       striped: {
         type: Boolean,
         default: true
+      }
+    },
+    computed: {
+      isAllChecked() {
+        const dataSource = this.dataSource.map(item => item.id).sort()
+        const selecedItems = this.selectedItems.map(item => item.id).sort()
+        if (dataSource.length !== selecedItems.length) {
+          return false
+        }
+        let isEqual = true
+        for (let i=0; i < dataSource.length; i++) {
+          if (dataSource[i] !== selecedItems[i]) {
+            isEqual = false
+            break
+          }
+        }
+        return isEqual
       }
     },
     watch: {
