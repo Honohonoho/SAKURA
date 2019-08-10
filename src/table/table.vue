@@ -15,13 +15,13 @@
           />
         </th>
         <th v-if="dataIndexVisible">#</th>
-        <th v-for="column in columns">
+        <th v-for="column in columns" :key="column.field">
           {{column.text}}
         </th>
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(item,index) in dataSource">
+      <tr v-for="(item,index) in dataSource" :key="item.id">
         <th>
           <input type="checkbox"
              :checked="selectedItems.filter((i) => i.id === item.id).length > 0"
@@ -29,7 +29,7 @@
           </th>
         <td v-if="dataIndexVisible">{{index+1}}</td>
         <template v-for="column in columns">
-          <td>{{item[column.field]}}</td>
+          <td :key="column.field">{{item[column.field]}}</td>
         </template>
       </tr>
       </tbody>
@@ -79,7 +79,6 @@
     },
     watch: {
       selectedItems() {
-        console.log(1);
         if (this.selectedItems.length === this.dataSource.length) {
           this.$refs.checkAll.indeterminate = false
         } else if (this.selectedItems.length === 0) {
@@ -96,8 +95,7 @@
         if (selected) {
           copySelectedItems.push(row)
         } else {
-          let index = copySelectedItems.indexOf(row)
-          copySelectedItems.splice(index, 1)
+          copySelectedItems = copySelectedItems.filter(item => item.id !== row.id)
         }
         this.$emit('rowChange', copySelectedItems)
       },
