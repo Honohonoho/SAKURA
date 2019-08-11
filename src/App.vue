@@ -243,8 +243,8 @@
     <!--</s-scroll>-->
     <div>
       <!--<s-pager :total-page="1" :current-page="currentPage" :hide-if-one-page="false" @pageChange="onPageChange"></s-pager>-->
-      <s-table :columns="columns" :data-source="dataSource" :selected-items="selectedItems" bordered compact
-               @rowChange="onRowchange"></s-table>
+      <s-table :columns="columns" :data-source="dataSource" :selected-items.sync="selectedItems" bordered compact :order-by.sync="orderBy"
+               @update:selectedItems="onRowChange" @update:orderBy="changeOrderBY"></s-table>
     </div>
   </div>
 </template>
@@ -349,6 +349,10 @@
           {id: 3, name: '小明', records: 90},
           {id: 4, name: '狗蛋', records: 60}
         ],
+        orderBy: {
+          name: true,
+          records: 'decrease'
+        },
         selectedItems: [],
         columns: [
           {text: '姓名', field: 'name'},
@@ -394,8 +398,12 @@
       // })
     },
     methods: {
-      onRowchange(newData) {
+      onRowChange(newData) {
         this.selectedItems = newData
+      },
+      changeOrderBY(orderBY) {
+        console.log(orderBY);
+        // this.orderBy = orderBY
       }
       // onPageChange(page) {
       //     if(page >=1 || page <= this.totalPage) {

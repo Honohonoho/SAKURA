@@ -8,15 +8,23 @@
     >
       <thead>
       <tr>
+        <th v-if="dataIndexVisible">#</th>
         <th>
           <input type="checkbox" ref="checkAll"
              :checked="isAllChecked"
-             @change="onChangeAllItems"
+             @change="onSelectAllItems"
           />
         </th>
-        <th v-if="dataIndexVisible">#</th>
         <th v-for="column in columns" :key="column.field">
-          {{column.text}}
+          <div class="s-table-head">
+            <span class="field-name">{{column.text}}</span>
+            <span class="s-table-sort-icons" v-if="column.field in orderBy"
+              @click="changeOrder(column.field)"
+            >
+              <s-icon name="ascending" :class="{active: orderBy[column.field] === 'ascending'}" />
+              <s-icon name="descending" :class="{active: orderBy[column.field] === 'descending'}" />
+            </span>
+          </div>
         </th>
       </tr>
       </thead>
@@ -25,7 +33,7 @@
         <th>
           <input type="checkbox"
              :checked="selectedItems.filter((i) => i.id === item.id).length > 0"
-             @change="onRowChange(item, index, $event)"/>
+             @change="onSelectItem(item, index, $event)"/>
           </th>
         <td v-if="dataIndexVisible">{{index+1}}</td>
         <template v-for="column in columns">
@@ -38,8 +46,13 @@
 </template>
 
 <script>
+  import Icon from '../icon'
+
   export default {
     name: "s-table",
+    components: {
+      's-icon': Icon
+    },
     props: {
       columns: {
         type: Array,
@@ -75,18 +88,22 @@
       striped: {
         type: Boolean,
         default: true
+      },
+      orderBy: {
+        type: Object,
+        default: () => ({})
       }
     },
     computed: {
       isAllChecked() {
         const dataSource = this.dataSource.map(item => item.id).sort()
-        const selecedItems = this.selectedItems.map(item => item.id).sort()
-        if (dataSource.length !== selecedItems.length) {
+        const selectedItems = this.selectedItems.map(item => item.id).sort()
+        if (dataSource.length !== selectedItems.length) {
           return false
         }
         let isEqual = true
         for (let i=0; i < dataSource.length; i++) {
-          if (dataSource[i] !== selecedItems[i]) {
+          if (dataSource[i] !== selectedItems[i]) {
             isEqual = false
             break
           }
@@ -106,7 +123,7 @@
       }
     },
     methods: {
-      onRowChange(row, index, e) {
+      onSelectItem(row, index, e) {
         let selected = e.target.checked
         let copySelectedItems = JSON.parse(JSON.stringify(this.selectedItems))
         if (selected) {
@@ -114,15 +131,27 @@
         } else {
           copySelectedItems = copySelectedItems.filter(item => item.id !== row.id)
         }
-        this.$emit('rowChange', copySelectedItems)
+        this.$emit('update:selectedItems', copySelectedItems)
       },
-      onChangeAllItems(e) {
+      onSelectAllItems(e) {
         let selected = e.target.checked
         if (selected) {
-          this.$emit('rowChange', this.dataSource)
+          this.$emit('update:selectedItems', this.dataSource)
         } else {
-          this.$emit('rowChange', [])
+          this.$emit('update:selectedItems', [])
         }
+      },
+      changeOrder(fieldName) {
+        let orderBy = JSON.parse(JSON.stringify(this.orderBy))
+        let oldOrderValue = orderBy[fieldName]
+        if (oldOrderValue === 'ascending') {
+          orderBy[fieldName] = 'descending'
+        } else if (oldOrderValue === 'descending') {
+          orderBy[fieldName] = true
+        } else {
+          orderBy[fieldName] = 'ascending'
+        }
+        this.$emit('update:orderBy', orderBy)
       }
     }
   }
@@ -147,6 +176,11 @@
       > tr {
         background: $table-background-color-even;
       }
+      .s-table-head {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
     }
     &-bordered {
       border: 1px solid $table-border-color;
@@ -168,6 +202,27 @@
             background: $table-background-color-even;
           }
         }
+      }
+    }
+    &-sort-icons {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      margin-left: 4px;
+      .s-icon {
+        width: 10px;
+        height: 10px;
+        fill: #999999;
+        &:first-child {
+        position: relative;
+        bottom: -2px;
+      }
+        &.active {
+          fill: $deep-main-color;
+        }
+
       }
     }
   }
