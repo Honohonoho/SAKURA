@@ -42,6 +42,9 @@
       </tr>
       </tbody>
     </table>
+    <div class="s-table-loading">
+      <s-icon name="dot-loading"></s-icon>
+    </div>
   </div>
 </template>
 
@@ -92,6 +95,9 @@
       orderBy: {
         type: Object,
         default: () => ({})
+      },
+      loading: {
+        type: Boolean
       }
     },
     computed: {
@@ -223,6 +229,11 @@
           fill: $deep-main-color;
         }
 
+      }
+    }
+    &-loading {
+      svg {
+        @include spin;
       }
     }
   }

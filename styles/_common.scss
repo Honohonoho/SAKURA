@@ -52,6 +52,18 @@ $box-shadow: 0 0 0 2px rgba(45,140,240,.2);
 $placeholder-color: #b6b8bc;
 $transition: color .2s linear,background-color .2s linear,border .2s linear,box-shadow .2s linear;
 
+/* 基础动画 */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@mixin spin {
+  animation: spin 1.5s infinite linear;
+}
 
 /* 组件 */
 // button
