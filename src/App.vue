@@ -243,7 +243,7 @@
     <!--</s-scroll>-->
     <div>
       <!--<s-pager :total-page="1" :current-page="currentPage" :hide-if-one-page="false" @pageChange="onPageChange"></s-pager>-->
-      <s-table :columns="columns" :data-source="dataSource" :selected-items.sync="selectedItems"
+      <s-table height="400px" :columns="columns" :data-source="dataSource" :selected-items.sync="selectedItems"
         bordered compact :order-by.sync="orderBy" :loading="tableLoading"
         @update:selectedItems="onRowChange" @update:orderBy="changeOrderBY">
       </s-table>
@@ -349,7 +349,19 @@
           {id: 1, name: '张三', records: 90},
           {id: 2, name: '李四', records: 87},
           {id: 3, name: '小明', records: 90},
-          {id: 4, name: '狗蛋', records: 60}
+          {id: 4, name: '狗蛋', records: 60},
+          {id: 5, name: '张三', records: 90},
+          {id: 6, name: '李四', records: 87},
+          {id: 7, name: '小明', records: 90},
+          {id: 8, name: '狗蛋', records: 60},
+          {id: 9, name: '张三', records: 90},
+          {id: 10, name: '李四', records: 87},
+          {id: 11, name: '小明', records: 90},
+          {id: 12, name: '狗蛋', records: 60},
+          {id: 13, name: '张三', records: 90},
+          {id: 14, name: '李四', records: 87},
+          {id: 15, name: '小明', records: 90},
+          {id: 16, name: '狗蛋', records: 60}
         ],
         orderBy: {
           name: true,

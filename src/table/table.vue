@@ -2,46 +2,48 @@
 需求：有边框， 紧凑/松散， 单双行颜色， 选中数据（单选，全选), 排序，固定表头。展开
 -->
 <template>
-  <div class="s-table-wrapper">
-    <table class="s-table"
-       :class="{'s-table-bordered': bordered, 's-table-compact': compact, 's-table-striped': striped}"
-    >
-      <thead>
-      <tr>
-        <th v-if="dataIndexVisible">#</th>
-        <th>
-          <input type="checkbox" ref="checkAll"
-             :checked="isAllChecked"
-             @change="onSelectAllItems"
-          />
-        </th>
-        <th v-for="column in columns" :key="column.field">
-          <div class="s-table-head">
-            <span class="field-name">{{column.text}}</span>
-            <span class="s-table-sort-icons" v-if="column.field in orderBy"
-              @click="changeOrder(column.field)"
-            >
-              <s-icon name="ascending" :class="{active: orderBy[column.field] === 'ascending'}" />
-              <s-icon name="descending" :class="{active: orderBy[column.field] === 'descending'}" />
-            </span>
-          </div>
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr v-for="(item,index) in dataSource" :key="item.id">
-        <th>
-          <input type="checkbox"
-             :checked="selectedItems.filter((i) => i.id === item.id).length > 0"
-             @change="onSelectItem(item, index, $event)"/>
+  <div class="s-table-wrapper" ref="wrapper">
+    <div :style="{height, overflow: 'auto'}">
+      <table class="s-table" ref="table"
+         :class="{'s-table-bordered': bordered, 's-table-compact': compact, 's-table-striped': striped}"
+      >
+        <thead>
+        <tr>
+          <th v-if="dataIndexVisible">#</th>
+          <th>
+            <input type="checkbox" ref="checkAll"
+               :checked="isAllChecked"
+               @change="onSelectAllItems"
+            />
           </th>
-        <td v-if="dataIndexVisible">{{index+1}}</td>
-        <template v-for="column in columns">
-          <td :key="column.field">{{item[column.field]}}</td>
-        </template>
-      </tr>
-      </tbody>
-    </table>
+          <th v-for="column in columns" :key="column.field">
+            <div class="s-table-head">
+              <span class="field-name">{{column.text}}</span>
+              <span class="s-table-sort-icons" v-if="column.field in orderBy"
+                @click="changeOrder(column.field)"
+              >
+                <s-icon name="ascending" :class="{active: orderBy[column.field] === 'ascending'}" />
+                <s-icon name="descending" :class="{active: orderBy[column.field] === 'descending'}" />
+              </span>
+            </div>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(item,index) in dataSource" :key="item.id">
+          <th>
+            <input type="checkbox"
+               :checked="selectedItems.filter((i) => i.id === item.id).length > 0"
+               @change="onSelectItem(item, index, $event)"/>
+            </th>
+          <td v-if="dataIndexVisible">{{index+1}}</td>
+          <template v-for="column in columns">
+            <td :key="column.field">{{item[column.field]}}</td>
+          </template>
+        </tr>
+        </tbody>
+      </table>
+    </div>
     <div class="s-table-loading" v-if="loading">
       <s-icon name="dot-loading"></s-icon>
     </div>
@@ -98,6 +100,9 @@
       },
       loading: {
         type: Boolean
+      },
+      height: {
+        type: [Number, String]
       }
     },
     computed: {
@@ -128,7 +133,46 @@
         }
       }
     },
+    mounted () {
+      let table2 = this.$refs.table.cloneNode(true)
+      this.table2 = table2
+      table2.classList.add('s-table-copy')
+      let tableHeader2 = this.updateHeaderWidth()
+
+      // 添加一个空th抵消滚动条的17px
+      let gutter = document.createElement('th')
+      gutter.classList.add('th-gutter')
+      tableHeader2.children[0].appendChild(gutter)
+
+      this.$refs.wrapper.appendChild(table2)
+      this.onWindowResize = () => this.updateHeaderWidth()
+      window.addEventListener('resize', this.onWindowResize)
+    },
+    beforeDestroy() {
+      this.table2.remove()
+      window.removeEventListener('resize', this.onWindowResize)
+    },
     methods: {
+      updateHeaderWidth () {
+        let table2 = this.table2
+        let tableHeader = Array.from(this.$refs.table.children).filter(node => {
+          return node.tagName.toLowerCase() === 'thead'
+        })[0]
+        let tableHeader2
+        Array.from(table2.children).map((node) => {
+          if (node.tagName.toLowerCase() !== 'thead') {
+            node.remove()
+          } else {
+            tableHeader2 = node
+          }
+        })
+        Array.from(tableHeader.children[0].children).map((th, i) => {
+          const {width} = th.getBoundingClientRect()
+          tableHeader2.children[0].children[i].style.width = width + 'px'
+
+        })
+        return tableHeader2
+      },
       onSelectItem(row, index, e) {
         let selected = e.target.checked
         let copySelectedItems = JSON.parse(JSON.stringify(this.selectedItems))
@@ -167,6 +211,7 @@
   @import '../../styles/common';
   .s-table-wrapper {
     position: relative;
+    overflow: auto;
   }
   .s-table {
     width: 100%;
@@ -247,6 +292,15 @@
         height: 50px;
         fill: $main-color;
         @include spin;
+      }
+    }
+    &-copy {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      th.th-gutter {
+        width: 17px;
       }
     }
   }
