@@ -243,8 +243,10 @@
     <!--</s-scroll>-->
     <div>
       <!--<s-pager :total-page="1" :current-page="currentPage" :hide-if-one-page="false" @pageChange="onPageChange"></s-pager>-->
-      <s-table :columns="columns" :data-source="dataSource" :selected-items.sync="selectedItems" bordered compact :order-by.sync="orderBy"
-               @update:selectedItems="onRowChange" @update:orderBy="changeOrderBY"></s-table>
+      <s-table :columns="columns" :data-source="dataSource" :selected-items.sync="selectedItems"
+        bordered compact :order-by.sync="orderBy" :loading="tableLoading"
+        @update:selectedItems="onRowChange" @update:orderBy="changeOrderBY">
+      </s-table>
     </div>
   </div>
 </template>
@@ -357,7 +359,8 @@
         columns: [
           {text: '姓名', field: 'name'},
           {text: '分数', field: 'records'}
-        ]
+        ],
+        tableLoading: false
       }
     },
     created() {
@@ -403,6 +406,10 @@
       },
       changeOrderBY(orderBY) {
         console.log(orderBY);
+        this.tableLoading = true
+        setTimeout(()=> {
+          this.tableLoading = false
+        }, 2000)
         // this.orderBy = orderBY
       }
       // onPageChange(page) {

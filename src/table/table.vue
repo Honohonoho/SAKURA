@@ -42,7 +42,7 @@
       </tr>
       </tbody>
     </table>
-    <div class="s-table-loading">
+    <div class="s-table-loading" v-if="loading">
       <s-icon name="dot-loading"></s-icon>
     </div>
   </div>
@@ -166,6 +166,7 @@
 <style lang="scss">
   @import '../../styles/common';
   .s-table-wrapper {
+    position: relative;
   }
   .s-table {
     width: 100%;
@@ -232,7 +233,19 @@
       }
     }
     &-loading {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(255, 255, 255, .9);
       svg {
+        width: 50px;
+        height: 50px;
+        fill: $main-color;
         @include spin;
       }
     }
