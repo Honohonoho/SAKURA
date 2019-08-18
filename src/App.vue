@@ -243,7 +243,7 @@
     <!--</s-scroll>-->
     <div>
       <!--<s-pager :total-page="1" :current-page="currentPage" :hide-if-one-page="false" @pageChange="onPageChange"></s-pager>-->
-      <s-table height="400px" :columns="columns" :data-source="dataSource" :selected-items.sync="selectedItems"
+      <s-table :height="400" :columns="columns" :data-source="dataSource" :selected-items.sync="selectedItems"
         bordered compact :order-by.sync="orderBy" :loading="tableLoading"
         @update:selectedItems="onRowChange" @update:orderBy="changeOrderBY">
       </s-table>
@@ -369,7 +369,7 @@
         },
         selectedItems: [],
         columns: [
-          {text: '姓名', field: 'name'},
+          {text: '姓名', field: 'name', width: 100},
           {text: '分数', field: 'records'}
         ],
         tableLoading: false

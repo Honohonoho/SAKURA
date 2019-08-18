@@ -3,20 +3,20 @@
 -->
 <template>
   <div class="s-table-wrapper" ref="wrapper">
-    <div :style="{height, overflow: 'auto'}">
+    <div :style="{height, overflow: 'auto'}" ref="tableWrapper">
       <table class="s-table" ref="table"
          :class="{'s-table-bordered': bordered, 's-table-compact': compact, 's-table-striped': striped}"
       >
         <thead>
         <tr>
-          <th v-if="dataIndexVisible">#</th>
-          <th>
+          <th :style="{width: '50px'}" v-if="dataIndexVisible">#</th>
+          <th :style="{width: '50px'}">
             <input type="checkbox" ref="checkAll"
                :checked="isAllChecked"
                @change="onSelectAllItems"
             />
           </th>
-          <th v-for="column in columns" :key="column.field">
+          <th :style="{width: column.width + 'px'}" v-for="column in columns" :key="column.field">
             <div class="s-table-head">
               <span class="field-name">{{column.text}}</span>
               <span class="s-table-sort-icons" v-if="column.field in orderBy"
@@ -31,14 +31,14 @@
         </thead>
         <tbody>
         <tr v-for="(item,index) in dataSource" :key="item.id">
-          <th>
+          <th :style="{width: '50px'}">
             <input type="checkbox"
                :checked="selectedItems.filter((i) => i.id === item.id).length > 0"
                @change="onSelectItem(item, index, $event)"/>
             </th>
-          <td v-if="dataIndexVisible">{{index+1}}</td>
+          <td :style="{width: '50px'}" v-if="dataIndexVisible">{{index+1}}</td>
           <template v-for="column in columns">
-            <td :key="column.field">{{item[column.field]}}</td>
+            <td :style="{width: column.width + 'px'}" :key="column.field">{{item[column.field]}}</td>
           </template>
         </tr>
         </tbody>
@@ -102,7 +102,7 @@
         type: Boolean
       },
       height: {
-        type: [Number, String]
+        type: Number
       }
     },
     computed: {
@@ -134,45 +134,27 @@
       }
     },
     mounted () {
-      let table2 = this.$refs.table.cloneNode(true)
+      // 单独复制一个tHead用作固定表头
+      let table2 = this.$refs.table.cloneNode(false)
       this.table2 = table2
       table2.classList.add('s-table-copy')
-      let tableHeader2 = this.updateHeaderWidth()
+      let tHead = this.$refs.table.children[0]
+      let {height} = tHead.getBoundingClientRect()
+      // 用margin-top来把第一行顶下来
+      this.$refs.tableWrapper.style.marginTop = height + 'px'
+      this.$refs.tableWrapper.style.height = this.height - height + 'px'
+      table2.appendChild(tHead)
 
       // 添加一个空th抵消滚动条的17px
       let gutter = document.createElement('th')
       gutter.classList.add('th-gutter')
-      tableHeader2.children[0].appendChild(gutter)
-
+      table2.children[0].children[0].appendChild(gutter)
       this.$refs.wrapper.appendChild(table2)
-      this.onWindowResize = () => this.updateHeaderWidth()
-      window.addEventListener('resize', this.onWindowResize)
     },
     beforeDestroy() {
       this.table2.remove()
-      window.removeEventListener('resize', this.onWindowResize)
     },
     methods: {
-      updateHeaderWidth () {
-        let table2 = this.table2
-        let tableHeader = Array.from(this.$refs.table.children).filter(node => {
-          return node.tagName.toLowerCase() === 'thead'
-        })[0]
-        let tableHeader2
-        Array.from(table2.children).map((node) => {
-          if (node.tagName.toLowerCase() !== 'thead') {
-            node.remove()
-          } else {
-            tableHeader2 = node
-          }
-        })
-        Array.from(tableHeader.children[0].children).map((th, i) => {
-          const {width} = th.getBoundingClientRect()
-          tableHeader2.children[0].children[i].style.width = width + 'px'
-
-        })
-        return tableHeader2
-      },
       onSelectItem(row, index, e) {
         let selected = e.target.checked
         let copySelectedItems = JSON.parse(JSON.stringify(this.selectedItems))
