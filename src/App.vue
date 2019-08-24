@@ -245,7 +245,12 @@
       <!--<s-pager :total-page="1" :current-page="currentPage" :hide-if-one-page="false" @pageChange="onPageChange"></s-pager>-->
       <s-table :height="400" :columns="columns" :data-source="dataSource" :selected-items.sync="selectedItems"
         bordered compact :order-by.sync="orderBy" :loading="tableLoading" expend-field="description" checkable
-        @update:selectedItems="onRowChange" @update:orderBy="changeOrderBY">
+        @update:selectedItems="onRowChange" @update:orderBy="changeOrderBY"
+      >
+        <template slot-scope="item">
+          <button @click="edit(item.item)">查看</button>
+          <button @click="view(item.item)">编辑</button>
+        </template>
       </s-table>
     </div>
   </div>
@@ -370,7 +375,7 @@
         selectedItems: [],
         columns: [
           {text: '姓名', field: 'name', width: 100},
-          {text: '分数', field: 'records'}
+          {text: '分数', field: 'records', width: 600}
         ],
         tableLoading: false
       }
@@ -423,6 +428,12 @@
           this.tableLoading = false
         }, 2000)
         // this.orderBy = orderBY
+      },
+      edit(item) {
+        console.log(item)
+      },
+      view(item) {
+        console.log(item)
       }
       // onPageChange(page) {
       //     if(page >=1 || page <= this.totalPage) {

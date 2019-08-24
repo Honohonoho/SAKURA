@@ -28,6 +28,7 @@
                 </span>
               </div>
             </th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -51,6 +52,9 @@
               <template v-for="column in columns">
                 <td :style="{width: column.width + 'px'}" :key="column.field">{{item[column.field]}}</td>
               </template>
+              <td>
+                <slot :item="item"></slot>
+              </td>
             </tr>
             <tr v-if="inExpendIds(item.id)" :key="`${item.id}-expend`">
               <td :colspan="columns.length + expendedCellColSpan">
