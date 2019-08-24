@@ -375,7 +375,7 @@
         selectedItems: [],
         columns: [
           {text: '姓名', field: 'name', width: 100},
-          {text: '分数', field: 'records', width: 600}
+          {text: '分数', field: 'records'}
         ],
         tableLoading: false
       }

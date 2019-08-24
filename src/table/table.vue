@@ -28,7 +28,7 @@
                 </span>
               </div>
             </th>
-            <th></th>
+            <th ref="actionsHeader" v-if="$scopedSlots.default"></th>
           </tr>
         </thead>
         <tbody>
@@ -52,8 +52,10 @@
               <template v-for="column in columns">
                 <td :style="{width: column.width + 'px'}" :key="column.field">{{item[column.field]}}</td>
               </template>
-              <td>
-                <slot :item="item"></slot>
+              <td v-if="$scopedSlots.default">
+                <div ref="actions" style="display: inline-block">
+                  <slot :item="item"></slot>
+                </div>
               </td>
             </tr>
             <tr v-if="inExpendIds(item.id)" :key="`${item.id}-expend`">
@@ -193,6 +195,24 @@
       gutter.classList.add('th-gutter')
       table2.children[0].children[0].appendChild(gutter)
       this.$refs.wrapper.appendChild(table2)
+
+      if (this.$scopedSlots.default) {
+        let div = this.$refs.actions[0]
+        let {width} = div.getBoundingClientRect()
+        let parent = div.parentNode
+        let styles = getComputedStyle(parent)
+        let paddingLeft = styles.getPropertyValue('padding-left')
+        let paddingRight = styles.getPropertyValue('padding-right')
+        let borderLeft = styles.getPropertyValue('border-left-width')
+        let borderRight = styles.getPropertyValue('border-right-width')
+        console.log(paddingLeft,paddingRight, borderLeft, borderRight)
+        let computedWidth = parseInt(width) + parseInt(paddingLeft) + parseInt(paddingRight) +
+          parseInt(borderLeft) + parseInt(borderRight) + 'px'
+        this.$refs.actionsHeader.style.width = computedWidth
+        this.$refs.actions.map(div => {
+          div.parentNode.style.width = computedWidth
+        })
+      }
     },
     beforeDestroy() {
       this.table2.remove()
@@ -353,6 +373,11 @@
       cursor: pointer;
       transition: all .1s;
       text-align: center;
+    }
+  }
+  @media (max-width: 500px) {
+    .s-table .th-gutter{
+      display: none;
     }
   }
 </style>
