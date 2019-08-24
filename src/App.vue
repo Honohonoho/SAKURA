@@ -244,7 +244,7 @@
     <div>
       <!--<s-pager :total-page="1" :current-page="currentPage" :hide-if-one-page="false" @pageChange="onPageChange"></s-pager>-->
       <s-table :height="400" :columns="columns" :data-source="dataSource" :selected-items.sync="selectedItems"
-        bordered compact :order-by.sync="orderBy" :loading="tableLoading"
+        bordered compact :order-by.sync="orderBy" :loading="tableLoading" expend-field="description" checkable
         @update:selectedItems="onRowChange" @update:orderBy="changeOrderBY">
       </s-table>
     </div>
@@ -346,8 +346,8 @@
         // selected: '1'
         // currentPage: 1
         dataSource: [
-          {id: 1, name: '张三', records: 90},
-          {id: 2, name: '李四', records: 87},
+          {id: 1, name: '张三', records: 90, description: 'xxxxxxxxxx'},
+          {id: 2, name: '李四', records: 87, description: 'xxxxxxxxxx'},
           {id: 3, name: '小明', records: 90},
           {id: 4, name: '狗蛋', records: 60},
           {id: 5, name: '张三', records: 90},

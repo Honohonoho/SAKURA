@@ -8,39 +8,56 @@
          :class="{'s-table-bordered': bordered, 's-table-compact': compact, 's-table-striped': striped}"
       >
         <thead>
-        <tr>
-          <th :style="{width: '50px'}" v-if="dataIndexVisible">#</th>
-          <th :style="{width: '50px'}">
-            <input type="checkbox" ref="checkAll"
-               :checked="isAllChecked"
-               @change="onSelectAllItems"
-            />
-          </th>
-          <th :style="{width: column.width + 'px'}" v-for="column in columns" :key="column.field">
-            <div class="s-table-head">
-              <span class="field-name">{{column.text}}</span>
-              <span class="s-table-sort-icons" v-if="column.field in orderBy"
-                @click="changeOrder(column.field)"
-              >
-                <s-icon name="ascending" :class="{active: orderBy[column.field] === 'ascending'}" />
-                <s-icon name="descending" :class="{active: orderBy[column.field] === 'descending'}" />
-              </span>
-            </div>
-          </th>
-        </tr>
+          <tr>
+            <th v-if="expendField" :style="{width: '50px'}" class="s-table-center"></th>
+            <th :style="{width: '50px'}" v-if="dataIndexVisible">#</th>
+            <th :style="{width: '50px'}" v-if="checkable" class="s-table-center">
+              <input type="checkbox" ref="checkAll"
+                 :checked="isAllChecked"
+                 @change="onSelectAllItems"
+              />
+            </th>
+            <th :style="{width: column.width + 'px'}" v-for="column in columns" :key="column.field">
+              <div class="s-table-head">
+                <span class="field-name">{{column.text}}</span>
+                <span class="s-table-sort-icons" v-if="column.field in orderBy"
+                  @click="changeOrder(column.field)"
+                >
+                  <s-icon name="ascending" :class="{active: orderBy[column.field] === 'ascending'}" />
+                  <s-icon name="descending" :class="{active: orderBy[column.field] === 'descending'}" />
+                </span>
+              </div>
+            </th>
+          </tr>
         </thead>
         <tbody>
-        <tr v-for="(item,index) in dataSource" :key="item.id">
-          <th :style="{width: '50px'}">
-            <input type="checkbox"
-               :checked="selectedItems.filter((i) => i.id === item.id).length > 0"
-               @change="onSelectItem(item, index, $event)"/>
-            </th>
-          <td :style="{width: '50px'}" v-if="dataIndexVisible">{{index+1}}</td>
-          <template v-for="column in columns">
-            <td :style="{width: column.width + 'px'}" :key="column.field">{{item[column.field]}}</td>
+          <template v-for="(item,index) in dataSource">
+            <tr :key="item.id">
+              <td :style="{width: '50px'}" v-if="expendField"
+                class="s-table-center" :class="{'s-table-row-expended': inExpendIds(item.id)}"
+              >
+                <s-icon name="right" class="s-table-expend-icon"
+                  @click="onRowExpend(item.id)"
+                >
+                </s-icon>
+              </td>
+              <td :style="{width: '50px'}" v-if="checkable" class="s-table-center">
+                <input type="checkbox"
+                   :checked="selectedItems.filter((i) => i.id === item.id).length > 0"
+                   @change="onSelectItem(item, index, $event)"
+                />
+              </td>
+              <td :style="{width: '50px'}" v-if="dataIndexVisible">{{index+1}}</td>
+              <template v-for="column in columns">
+                <td :style="{width: column.width + 'px'}" :key="column.field">{{item[column.field]}}</td>
+              </template>
+            </tr>
+            <tr v-if="inExpendIds(item.id)" :key="`${item.id}-expend`">
+              <td :colspan="columns.length + expendedCellColSpan">
+                {{item[expendField] || '暂无数据'}}
+              </td>
+            </tr>
           </template>
-        </tr>
         </tbody>
       </table>
     </div>
@@ -103,6 +120,18 @@
       },
       height: {
         type: Number
+      },
+      expendField: {
+        type: String
+      },
+      checkable: {
+        type: Boolean,
+        default: false
+      }
+    },
+    data () {
+      return {
+        expendIds: []
       }
     },
     computed: {
@@ -120,6 +149,16 @@
           }
         }
         return isEqual
+      },
+      expendedCellColSpan() {
+        let result = 0
+        if (this.checkable) {
+          result += 1
+        }
+        if (this.expendField) {
+          result += 1
+        }
+        return result
       }
     },
     watch: {
@@ -184,6 +223,16 @@
           orderBy[fieldName] = 'ascending'
         }
         this.$emit('update:orderBy', orderBy)
+      },
+      onRowExpend(id) {
+        if (this.inExpendIds(id)) {
+          this.expendIds.splice(this.expendIds.indexOf(id), 1)
+        } else {
+          this.expendIds.push(id)
+        }
+      },
+      inExpendIds(id) {
+        return this.expendIds.indexOf(id) >= 0
       }
     }
   }
@@ -238,6 +287,9 @@
         }
       }
     }
+    & &-center {
+      text-align: center;
+    }
     &-sort-icons {
       display: flex;
       flex-direction: column;
@@ -284,6 +336,19 @@
       th.th-gutter {
         width: 17px;
       }
+    }
+    &-row-expended {
+      .s-icon {
+        transform: rotate(90deg);
+      }
+    }
+    &-expend-icon {
+      width: 16px;
+      height: 16px;
+      padding: 2px;
+      cursor: pointer;
+      transition: all .1s;
+      text-align: center;
     }
   }
 </style>
