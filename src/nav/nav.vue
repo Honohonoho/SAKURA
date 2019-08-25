@@ -7,6 +7,11 @@
 <script>
   export default {
     name: 's-nav',
+    provide() {
+      return {
+        root: this
+      }
+    },
     props: {
       selected: {
         type: Array,
@@ -17,6 +22,11 @@
         default: false
       }
     },
+    data() {
+      return {
+        navItems: []
+      }
+    },
     mounted() {
       this.updateChildren()
       this.addChildrenListener()
@@ -25,11 +35,11 @@
       this.updateChildren()
     },
     computed: {
-      navItems() {
-        return this.$children.filter(vm => vm.$options.name === 's-nav-item')
-      }
     },
     methods: {
+      addItem(vm) {
+        this.navItems.push(vm)
+      },
       updateChildren() {
         this.navItems.forEach(vm => {
           if (this.selected.indexOf(vm.name) >= 0) {
