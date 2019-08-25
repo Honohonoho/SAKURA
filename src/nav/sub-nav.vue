@@ -3,7 +3,7 @@
     <span @click="onItemClick">
       <slot name="title"></slot>
     </span>
-    <div class="s-sub-nav-popover" v-if="open">
+    <div class="s-sub-nav-popover" v-show="open">
       <slot></slot>
     </div>
   </div>
