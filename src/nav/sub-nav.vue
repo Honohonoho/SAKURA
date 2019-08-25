@@ -1,9 +1,9 @@
 <template>
   <div class="s-sub-nav">
-    <span>
+    <span @click="onItemClick">
       <slot name="title"></slot>
     </span>
-    <div class="s-sub-nav-popover">
+    <div class="s-sub-nav-popover" v-if="open">
       <slot></slot>
     </div>
   </div>
@@ -11,7 +11,17 @@
 
 <script>
   export default {
-    name: 's-sub-nav'
+    name: 's-sub-nav',
+    data() {
+      return {
+        open: false
+      }
+    },
+    methods: {
+      onItemClick() {
+        this.open = !this.open
+      }
+    }
   }
 </script>
 
@@ -19,7 +29,12 @@
   @import '../../styles/common';
   .s-sub-nav {
     position: relative;
-    padding: 10px 5px;
+    > span {
+      display: inline-block;
+      vertical-align: top;
+      padding: 10px 5px;
+      cursor: pointer;
+    }
     &-popover {
       position: absolute;
       top: 100%;
