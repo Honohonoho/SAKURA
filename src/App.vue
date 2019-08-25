@@ -243,15 +243,20 @@
     <!--</s-scroll>-->
     <div>
       <!--<s-pager :total-page="1" :current-page="currentPage" :hide-if-one-page="false" @pageChange="onPageChange"></s-pager>-->
-      <s-table :height="400" :columns="columns" :data-source="dataSource" :selected-items.sync="selectedItems"
-        bordered compact :order-by.sync="orderBy" :loading="tableLoading" expend-field="description" checkable
-        @update:selectedItems="onRowChange" @update:orderBy="changeOrderBY"
-      >
-        <template slot-scope="item">
-          <button @click="edit(item.item)">查看</button>
-          <button @click="view(item.item)">编辑</button>
-        </template>
-      </s-table>
+      <!--<s-table :height="400" :columns="columns" :data-source="dataSource" :selected-items.sync="selectedItems"-->
+        <!--bordered compact :order-by.sync="orderBy" :loading="tableLoading" expend-field="description" checkable-->
+        <!--@update:selectedItems="onRowChange" @update:orderBy="changeOrderBY"-->
+      <!--&gt;-->
+        <!--<template slot-scope="item">-->
+          <!--<button @click="edit(item.item)">查看</button>-->
+          <!--<button @click="view(item.item)">编辑</button>-->
+        <!--</template>-->
+      <!--</s-table>-->
+      <s-nav :selected.sync="selected">
+        <s-nav-item name="home">首页</s-nav-item>
+        <s-nav-item name="hire">招聘</s-nav-item>
+        <s-nav-item name="about">关于</s-nav-item>
+      </s-nav>
     </div>
   </div>
 </template>
@@ -280,12 +285,14 @@
   // import Cascader from './cascader';
   import plugin from './plugin';
   // import city from './city';
-  import Slides from './slides/slides';
-  import SlidesItem from './slides/slides-item';
-  import Scroll from './scroll'
+  // import Slides from './slides/slides';
+  // import SlidesItem from './slides/slides-item';
+  // import Scroll from './scroll'
   // import Pager from './pager'
-  import Table from './table/table'
-
+  // import Table from './table/table'
+  import Nav from './nav/nav'
+  import NavItem from './nav/nav-item'
+  import SubNav from './nav/sub-nav'
   Vue.use(plugin);
 
   // function ajax(parent_id = 0) {
@@ -337,7 +344,10 @@
       // 's-cascader': Cascader
       // 's-scroll': Scroll
       // 's-pager': Pager
-      's-table': Table
+      // 's-table': Table
+      's-nav' : Nav,
+      's-nav-item': NavItem,
+      's-sub-nav': SubNav
     },
     data() {
       return {
@@ -350,34 +360,35 @@
         // cascaderData: [],
         // selected: '1'
         // currentPage: 1
-        dataSource: [
-          {id: 1, name: '张三', records: 90, description: 'xxxxxxxxxx'},
-          {id: 2, name: '李四', records: 87, description: 'xxxxxxxxxx'},
-          {id: 3, name: '小明', records: 90},
-          {id: 4, name: '狗蛋', records: 60},
-          {id: 5, name: '张三', records: 90},
-          {id: 6, name: '李四', records: 87},
-          {id: 7, name: '小明', records: 90},
-          {id: 8, name: '狗蛋', records: 60},
-          {id: 9, name: '张三', records: 90},
-          {id: 10, name: '李四', records: 87},
-          {id: 11, name: '小明', records: 90},
-          {id: 12, name: '狗蛋', records: 60},
-          {id: 13, name: '张三', records: 90},
-          {id: 14, name: '李四', records: 87},
-          {id: 15, name: '小明', records: 90},
-          {id: 16, name: '狗蛋', records: 60}
-        ],
-        orderBy: {
-          name: true,
-          records: 'decrease'
-        },
-        selectedItems: [],
-        columns: [
-          {text: '姓名', field: 'name', width: 100},
-          {text: '分数', field: 'records'}
-        ],
-        tableLoading: false
+        // dataSource: [
+        //   {id: 1, name: '张三', records: 90, description: 'xxxxxxxxxx'},
+        //   {id: 2, name: '李四', records: 87, description: 'xxxxxxxxxx'},
+        //   {id: 3, name: '小明', records: 90},
+        //   {id: 4, name: '狗蛋', records: 60},
+        //   {id: 5, name: '张三', records: 90},
+        //   {id: 6, name: '李四', records: 87},
+        //   {id: 7, name: '小明', records: 90},
+        //   {id: 8, name: '狗蛋', records: 60},
+        //   {id: 9, name: '张三', records: 90},
+        //   {id: 10, name: '李四', records: 87},
+        //   {id: 11, name: '小明', records: 90},
+        //   {id: 12, name: '狗蛋', records: 60},
+        //   {id: 13, name: '张三', records: 90},
+        //   {id: 14, name: '李四', records: 87},
+        //   {id: 15, name: '小明', records: 90},
+        //   {id: 16, name: '狗蛋', records: 60}
+        // ],
+        // orderBy: {
+        //   name: true,
+        //   records: 'decrease'
+        // },
+        // selectedItems: [],
+        // columns: [
+        //   {text: '姓名', field: 'name', width: 100},
+        //   {text: '分数', field: 'records'}
+        // ],
+        // tableLoading: false
+        selected: ['home']
       }
     },
     created() {
@@ -418,23 +429,23 @@
       // })
     },
     methods: {
-      onRowChange(newData) {
-        this.selectedItems = newData
-      },
-      changeOrderBY(orderBY) {
-        console.log(orderBY);
-        this.tableLoading = true
-        setTimeout(()=> {
-          this.tableLoading = false
-        }, 2000)
-        // this.orderBy = orderBY
-      },
-      edit(item) {
-        console.log(item)
-      },
-      view(item) {
-        console.log(item)
-      }
+      // onRowChange(newData) {
+      //   this.selectedItems = newData
+      // },
+      // changeOrderBY(orderBY) {
+      //   console.log(orderBY);
+      //   this.tableLoading = true
+      //   setTimeout(()=> {
+      //     this.tableLoading = false
+      //   }, 2000)
+      //   // this.orderBy = orderBY
+      // },
+      // edit(item) {
+      //   console.log(item)
+      // },
+      // view(item) {
+      //   console.log(item)
+      // }
       // onPageChange(page) {
       //     if(page >=1 || page <= this.totalPage) {
       //         this.currentPage = page
