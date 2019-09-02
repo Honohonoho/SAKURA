@@ -35,10 +35,30 @@
 <style lang="scss">
   @import '../../styles/common';
   .s-nav-item {
-    padding: 10px 5px;
+    padding: 10px 10px;
     cursor: pointer;
+    position: relative;
+    &:hover {
+      color: $main-color;
+    }
     &.active {
-      background: $main-background-color;
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        border-bottom: 2px solid $main-background-color;
+      }
+    }
+  }
+  .s-sub-nav .s-nav-item {
+    &.active {
+      color: $main-color;
+      background: $nav-item-active-background;
+      &::after {
+        display: none;
+      }
     }
   }
 </style>

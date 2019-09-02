@@ -255,11 +255,11 @@
       <s-nav :selected.sync="selected">
         <s-nav-item name="home">首页</s-nav-item>
         <s-nav-item name="hire">招聘</s-nav-item>
-        <s-sub-nav>
+        <s-sub-nav name="about">
           <template slot="title">关于</template>
           <s-nav-item name="culture">企业文化</s-nav-item>
           <s-nav-item name="team">开发团队</s-nav-item>
-          <s-sub-nav>
+          <s-sub-nav name="contact">
             <template slot="title">联系方式</template>
             <s-nav-item name="wechat">微信</s-nav-item>
             <s-nav-item name="qq">QQ</s-nav-item>
