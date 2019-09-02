@@ -258,8 +258,13 @@
         <s-sub-nav>
           <template slot="title">关于</template>
           <s-nav-item name="culture">企业文化</s-nav-item>
-          <s-nav-item name="team">卡发团队</s-nav-item>
-          <s-nav-item name="contact">联系我们</s-nav-item>
+          <s-nav-item name="team">开发团队</s-nav-item>
+          <s-sub-nav>
+            <template slot="title">联系方式</template>
+            <s-nav-item name="wechat">微信</s-nav-item>
+            <s-nav-item name="qq">QQ</s-nav-item>
+            <s-nav-item name="phone">手机</s-nav-item>
+          </s-sub-nav>
         </s-sub-nav>
       </s-nav>
     </div>

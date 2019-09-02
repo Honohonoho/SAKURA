@@ -30,7 +30,7 @@
   .s-sub-nav {
     position: relative;
     > span {
-      display: inline-block;
+      display: block;
       vertical-align: top;
       padding: 10px 5px;
       cursor: pointer;
@@ -42,5 +42,9 @@
       border: 1px solid $border-color;
       white-space: nowrap;
     }
+  }
+  .s-sub-nav .s-sub-nav .s-sub-nav-popover {
+    top: 0;
+    left: 100%;
   }
 </style>
