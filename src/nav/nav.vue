@@ -24,7 +24,8 @@
     },
     data() {
       return {
-        navItems: []
+        navItems: [],
+        namePath: []
       }
     },
     mounted() {

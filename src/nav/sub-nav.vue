@@ -1,5 +1,5 @@
 <template>
-  <div class="s-sub-nav">
+  <div class="s-sub-nav" :class="{selected}" v-click-outside="close">
     <span @click="onItemClick">
       <slot name="title"></slot>
     </span>
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+  import clickOutside from '../custom_directives';
   export default {
     name: 's-sub-nav',
     props: {
@@ -18,14 +19,34 @@
         required: true
       }
     },
+    directives: {
+      clickOutside
+    },
+    inject: ['root'],
     data() {
       return {
         open: false
       }
     },
+    computed: {
+      selected () {
+        return this.root.namePath.indexOf(this.name) >= 0
+      }
+    },
     methods: {
       onItemClick() {
         this.open = !this.open
+      },
+      close () {
+        this.open = false
+      },
+      updateNamePath() {
+        this.root.namePath.unshift(this.name)
+        if (this.$parent.updateNamePath) {
+          this.$parent.updateNamePath()
+        } else {
+            // this.root.namePath = []
+        }
       }
     }
   }
@@ -35,6 +56,16 @@
   @import '../../styles/common';
   .s-sub-nav {
     position: relative;
+    &.selected {
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        border-bottom: 2px solid $main-background-color;
+      }
+    }
     > span {
       display: block;
       vertical-align: top;
