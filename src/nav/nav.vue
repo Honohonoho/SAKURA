@@ -74,5 +74,6 @@
   .s-nav {
     display: flex;
     border: 1px solid $border-color;
+    user-select: none;
   }
 </style>

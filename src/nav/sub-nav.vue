@@ -1,7 +1,10 @@
 <template>
   <div class="s-sub-nav" :class="{selected}" v-click-outside="close">
-    <span @click="onItemClick">
+    <span @click="onItemClick" class="s-sub-nav-label">
       <slot name="title"></slot>
+      <span class="s-sub-nav-icon">
+        <s-icon name="left" :class="{'active': open}"></s-icon>
+      </span>
     </span>
     <div class="s-sub-nav-popover" v-show="open">
       <slot></slot>
@@ -10,9 +13,13 @@
 </template>
 
 <script>
+  import Icon from '../icon'
   import clickOutside from '../custom_directives';
   export default {
     name: 's-sub-nav',
+    components: {
+      's-icon': Icon
+    },
     props: {
       name: {
         type: String,
@@ -66,14 +73,19 @@
         border-bottom: 2px solid $main-background-color;
       }
     }
-    > span {
-      display: block;
+    &-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       vertical-align: top;
       padding: 10px 10px;
       cursor: pointer;
       &:hover {
         color: $main-color;
       }
+    }
+    &-icon {
+      display: none;
     }
     &-popover {
       background: #ffffff;
@@ -86,6 +98,23 @@
       border-radius: $border-radius;
       box-shadow: $nav-popover-box-shadow;
       min-width: 8em;
+      .s-sub-nav.selected {
+        &::after {
+          display: none;
+        }
+      }
+      .s-sub-nav-icon {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 2px;
+        .s-icon {
+          transition: transform .3s;
+        }
+        .s-icon.active {
+          transform: rotate(180deg);
+        }
+      }
     }
   }
   .s-sub-nav .s-sub-nav .s-sub-nav-popover {
