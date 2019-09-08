@@ -6,19 +6,26 @@
         <s-icon name="left" :class="{'active': open}"></s-icon>
       </span>
     </span>
-    <transition name="x"
-      @enter="enter"
-      @after-enter="afterEnter"
-      @enter-cancelled="enterCancelled"
-      @before-leave="beforeLeave"
-      @leave="leave"
-      @after-leave="afterLeave"
-      @leave-cancelled="leaveCancelled"
-    >
+    <template v-if="vertical">
+      <transition name="x"
+        @enter="enter"
+        @after-enter="afterEnter"
+        @enter-cancelled="enterCancelled"
+        @before-leave="beforeLeave"
+        @leave="leave"
+        @after-leave="afterLeave"
+        @leave-cancelled="leaveCancelled"
+      >
+        <div class="s-sub-nav-popover" v-show="open" :class="{vertical}">
+          <slot></slot>
+        </div>
+      </transition>
+    </template>
+    <template v-else>
       <div class="s-sub-nav-popover" v-show="open" :class="{vertical}">
         <slot></slot>
       </div>
-    </transition>
+    </template>
   </div>
 </template>
 
@@ -153,7 +160,6 @@
       border-radius: $border-radius;
       box-shadow: $nav-popover-box-shadow;
       min-width: 8em;
-      overflow: hidden;
       .s-sub-nav.selected {
         &::after {
           display: none;
@@ -177,6 +183,7 @@
         border: none;
         box-shadow: none;
         transition: height .3s;
+        overflow: hidden;
       }
     }
   }
