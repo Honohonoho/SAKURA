@@ -1,8 +1,8 @@
 <template>
-  <div class="s-sub-nav" :class="{selected}" v-click-outside="close">
+  <div class="s-sub-nav" :class="{selected, vertical}" v-click-outside="close">
     <span @click="onItemClick" class="s-sub-nav-label">
       <slot name="title"></slot>
-      <span class="s-sub-nav-icon">
+      <span class="s-sub-nav-icon" :class="{vertical}">
         <s-icon name="left" :class="{'active': open}"></s-icon>
       </span>
     </span>
@@ -85,18 +85,9 @@
         el.style.height = 'auto'
       },
       enterCancelled(el) {
-        // ...
       },
-
-      // --------
-      // 离开时
-      // --------
-
       beforeLeave(el) {
-        // ...
       },
-      // 当与 CSS 结合使用时
-      // 回调函数 done 是可选的
       leave(el, done) {
         let {height} = el.getBoundingClientRect()
         el.style.height = height + 'px'
@@ -111,7 +102,6 @@
       },
       // leaveCancelled 只用于 v-show 中
       leaveCancelled(el) {
-        // ...
       }
     }
   }
@@ -119,20 +109,34 @@
 
 <style lang="scss">
   @import '../../styles/common';
-  .x-enter-active, .x-leave-active {
-  }
-  .x-enter, .x-leave-to {
-  }
   .s-sub-nav {
     position: relative;
-    &.selected {
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        border-bottom: 2px solid $main-background-color;
+    &.vertical .s-sub-nav-icon {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2px;
+      .s-icon {
+        transition: transform .3s;
+      }
+      &.vertical {
+        transform: rotate(270deg);
+        .s-icon.active {
+          transform: rotate(-180deg);
+        }
+      }
+    }
+    &:not(.vertical) {
+      &.selected {
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          border-bottom: 2px solid $main-background-color;
+          transition: border-color .3s;
+        }
       }
     }
     &-label {
@@ -140,8 +144,9 @@
       justify-content: space-between;
       align-items: center;
       vertical-align: top;
-      padding: 10px 10px;
+      padding: 20px;
       cursor: pointer;
+      transition: color .3s;
       &:hover {
         color: $main-color;
       }
@@ -176,6 +181,12 @@
         .s-icon.active {
           transform: rotate(180deg);
         }
+        &.vertical {
+          transform: rotate(270deg);
+          .s-icon.active {
+            transform: rotate(-180deg);
+          }
+        }
       }
       &.vertical {
         position: static;
@@ -184,6 +195,13 @@
         box-shadow: none;
         transition: height .3s;
         overflow: hidden;
+        margin-top: 0;
+        >.s-nav-item {
+          padding-left: 40px;
+        }
+        >.s-sub-nav {
+          padding-left: 20px;
+        }
       }
     }
   }

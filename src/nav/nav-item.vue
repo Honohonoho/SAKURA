@@ -1,5 +1,5 @@
 <template>
-  <div class="s-nav-item" :class="{active: selected}"
+  <div class="s-nav-item" :class="{active: selected, vertical}"
     @click="onItemClick"
   >
     <slot></slot>
@@ -15,7 +15,7 @@
         required: true
       }
     },
-    inject: ['root'],
+    inject: ['root', 'vertical'],
     data () {
       return {
         selected: false
@@ -37,21 +37,32 @@
 <style lang="scss">
   @import '../../styles/common';
   .s-nav-item {
-    padding: 10px 10px;
+    padding: 20px;
     cursor: pointer;
     position: relative;
-    &:hover {
+    transition: color .3s, background-color .3s;
+    &.active.vertical {
+      background: $nav-item-active-background;
       color: $main-color;
     }
-    &.active {
+    &:not(.vertical) {
       &::after {
         content: '';
         position: absolute;
         bottom: 0;
         left: 0;
         width: 100%;
-        border-bottom: 2px solid $main-background-color;
+        border-bottom: 2px solid transparent;
+        transition: border-color .3s;
       }
+      &.active {
+        &::after {
+          border-bottom-color: $main-background-color;
+        }
+      }
+    }
+    &:hover {
+      color: $main-color;
     }
   }
   .s-sub-nav .s-nav-item {

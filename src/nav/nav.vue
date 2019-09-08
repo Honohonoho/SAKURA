@@ -78,10 +78,12 @@
   @import '../../styles/common';
   .s-nav {
     display: flex;
-    border: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
     user-select: none;
   }
   .s-nav.s-nav-vertical {
     flex-direction: column;
+    border: none;
+    border-right: 1px solid $border-color;
   }
 </style>
