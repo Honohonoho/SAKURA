@@ -6,9 +6,19 @@
         <s-icon name="left" :class="{'active': open}"></s-icon>
       </span>
     </span>
-    <div class="s-sub-nav-popover" v-show="open">
-      <slot></slot>
-    </div>
+    <transition name="x"
+      @enter="enter"
+      @after-enter="afterEnter"
+      @enter-cancelled="enterCancelled"
+      @before-leave="beforeLeave"
+      @leave="leave"
+      @after-leave="afterLeave"
+      @leave-cancelled="leaveCancelled"
+    >
+      <div class="s-sub-nav-popover" v-show="open" :class="{vertical}">
+        <slot></slot>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -29,7 +39,7 @@
     directives: {
       clickOutside
     },
-    inject: ['root'],
+    inject: ['root', 'vertical'],
     data() {
       return {
         open: false
@@ -54,6 +64,47 @@
         } else {
             // this.root.namePath = []
         }
+      },
+      enter(el, done) {
+        let {height} = el.getBoundingClientRect()
+        el.style.height = '0px'
+        el.getBoundingClientRect()
+        el.style.height = height + 'px'
+        el.addEventListener('transitionend', ()=> {
+          done()
+        })
+      },
+      afterEnter(el) {
+        el.style.height = 'auto'
+      },
+      enterCancelled(el) {
+        // ...
+      },
+
+      // --------
+      // 离开时
+      // --------
+
+      beforeLeave(el) {
+        // ...
+      },
+      // 当与 CSS 结合使用时
+      // 回调函数 done 是可选的
+      leave(el, done) {
+        let {height} = el.getBoundingClientRect()
+        el.style.height = height + 'px'
+        el.getBoundingClientRect()
+        el.style.height = '0px'
+        el.addEventListener('transitionend', ()=> {
+          done()
+        })
+      },
+      afterLeave(el) {
+        el.style.height = 'auto'
+      },
+      // leaveCancelled 只用于 v-show 中
+      leaveCancelled(el) {
+        // ...
       }
     }
   }
@@ -61,6 +112,10 @@
 
 <style lang="scss">
   @import '../../styles/common';
+  .x-enter-active, .x-leave-active {
+  }
+  .x-enter, .x-leave-to {
+  }
   .s-sub-nav {
     position: relative;
     &.selected {
@@ -88,7 +143,7 @@
       display: none;
     }
     &-popover {
-      background: #ffffff;
+      background: inherit;
       position: absolute;
       top: 100%;
       left: 0;
@@ -98,6 +153,7 @@
       border-radius: $border-radius;
       box-shadow: $nav-popover-box-shadow;
       min-width: 8em;
+      overflow: hidden;
       .s-sub-nav.selected {
         &::after {
           display: none;
@@ -114,6 +170,13 @@
         .s-icon.active {
           transform: rotate(180deg);
         }
+      }
+      &.vertical {
+        position: static;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+        transition: height .3s;
       }
     }
   }

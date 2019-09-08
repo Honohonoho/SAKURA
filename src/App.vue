@@ -252,9 +252,8 @@
           <!--<button @click="view(item.item)">编辑</button>-->
         <!--</template>-->
       <!--</s-table>-->
-      <s-nav :selected.sync="selected">
+      <s-nav :selected.sync="selected" vertical style="width: 200px">
         <s-nav-item name="home">首页</s-nav-item>
-        <s-nav-item name="hire">招聘</s-nav-item>
         <s-sub-nav name="about">
           <template slot="title">关于</template>
           <s-nav-item name="culture">企业文化</s-nav-item>
@@ -266,6 +265,7 @@
             <s-nav-item name="phone">手机</s-nav-item>
           </s-sub-nav>
         </s-sub-nav>
+        <s-nav-item name="hire">招聘</s-nav-item>
       </s-nav>
     </div>
   </div>
