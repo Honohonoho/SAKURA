@@ -252,7 +252,7 @@
           <!--<button @click="view(item.item)">编辑</button>-->
         <!--</template>-->
       <!--</s-table>-->
-      <s-nav :selected.sync="selected" vertical style="width: 200px">
+      <s-nav :selected.sync="selected" @update:selected="onChange" vertical style="width: 200px">
         <s-nav-item name="home">首页</s-nav-item>
         <s-sub-nav name="about">
           <template slot="title">关于</template>
@@ -413,7 +413,7 @@
         //   {text: '分数', field: 'records'}
         // ],
         // tableLoading: false
-        selected: ['home']
+        selected: 'home'
       }
     },
     created() {
@@ -453,7 +453,15 @@
       //     isMoving = false
       // })
     },
+    watch: {
+      selected(newValue) {
+        console.log('newValue:',newValue);
+      }
+    },
     methods: {
+      onChange (selected) {
+        console.log(selected);
+      }
       // onRowChange(newData) {
       //   this.selectedItems = newData
       // },
