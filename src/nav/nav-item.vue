@@ -1,6 +1,6 @@
 <template>
   <div class="s-nav-item" :class="{active: selected, vertical}"
-    @click="onItemClick"
+    @click="onItemClick" :data-name="name"
   >
     <slot></slot>
   </div>
