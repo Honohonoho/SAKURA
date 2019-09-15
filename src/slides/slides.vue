@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="s-slides-dots-wrapper">
-            <span class=" s-slides-dot left-arrow" @click="updateSelected(selectedIndex - 1)">
+            <span class="s-slides-dot left-arrow" @click="updateSelected(selectedIndex - 1)">
                 <s-icon name="left"></s-icon>
             </span>
             <span class="s-slides-dot"
@@ -91,18 +91,18 @@
             updateSlidesItem() {
                 let selected = this.getSelected()
                 this.getDotItems.forEach((vm) => {
-                    let negative = this.selectedIndex > this.lastSelectedIndex ?  false : true
-                    if(this.timerId) {
+                    let negative = this.selectedIndex > this.lastSelectedIndex
+                    // if(this.timerId) {
                         // 只在自动播放时生效，用户切换不生效
                         if(this.lastSelectedIndex === this.getDotItems.length - 1 && this.selectedIndex === 0) {
                             // 当前位于最后一个且下一次要移向第一个，保证无缝效果
-                            negative = false
+                            negative = true
                         }
                         if(this.lastSelectedIndex === 0 && this.selectedIndex === this.getDotItems.length - 1) {
                             // 当前处于第一个且下一次要移向最后一个，保证无缝效果
-                            negative = true
+                            negative = false
                         }
-                    }
+                    // }
                     vm.negative = negative
                     this.$nextTick(()=>{
                         vm.selected = selected

@@ -44,16 +44,16 @@
         transition: all 0.5s;
     }
     .slide-enter {
-        transform: translateX(100%);
+        transform: translateX(-100%);
     }
     .slide-enter.negative {
-        transform: translateX(-100%);
+        transform: translateX(100%);
     }
     .slide-leave-to {
-        transform: translateX(-100%);
+        transform: translateX(100%);
     }
     .slide-leave-to.negative {
-        transform: translateX(100%);
+        transform: translateX(-100%);
     }
 }
 </style>

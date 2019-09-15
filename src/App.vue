@@ -128,17 +128,17 @@
     <!--popover-height="200px"-->
     <!--&gt;-->
     <!--</s-cascader>-->
-    <!--<s-slides :selected="selected" @update:selected="onSelectedChanged">-->
-    <!--<s-slides-item name="1">-->
-    <!--<div class="box">1</div>-->
-    <!--</s-slides-item>-->
-    <!--<s-slides-item name="2">-->
-    <!--<div class="box">2</div>-->
-    <!--</s-slides-item>-->
-    <!--<s-slides-item name="3">-->
-    <!--<div class="box">3</div>-->
-    <!--</s-slides-item>-->
-    <!--</s-slides>-->
+    <s-slides :selected.sync="slidesSelected" :reverse="true">
+      <s-slides-item name="1">
+      <div class="box">1</div>
+      </s-slides-item>
+      <s-slides-item name="2">
+      <div class="box">2</div>
+      </s-slides-item>
+      <s-slides-item name="3">
+      <div class="box">3</div>
+      </s-slides-item>
+    </s-slides>
     <!--<s-scroll style="width: 400px;height: 400px;">-->
     <!--<p>11111111111111111112312312312321123123123213122321</p>-->
     <!--<p>2</p>-->
@@ -310,8 +310,8 @@
   // import Cascader from './cascader';
   import plugin from './plugin';
   // import city from './city';
-  // import Slides from './slides/slides';
-  // import SlidesItem from './slides/slides-item';
+  import Slides from './slides/slides';
+  import SlidesItem from './slides/slides-item';
   // import Scroll from './scroll'
   // import Pager from './pager'
   // import Table from './table/table'
@@ -345,8 +345,8 @@
   export default {
     name: "app",
     components: {
-      // 's-slides': Slides,
-      // 's-slides-item': SlidesItem
+      's-slides': Slides,
+      's-slides-item': SlidesItem,
       // 's-button': Button,
       // 's-icon': Icon,
       // 's-button-group': ButtonGroup,
@@ -383,7 +383,7 @@
         // selectedTab: ['2'],
         // cascaderSelectedChildren: [], //级联选择器每级选中的记录都保存在这
         // cascaderData: [],
-        // selected: '1'
+        slidesSelected: '1',
         // currentPage: 1
         // dataSource: [
         //   {id: 1, name: '张三', records: 90, description: 'xxxxxxxxxx'},
@@ -461,7 +461,7 @@
     methods: {
       onChange (selected) {
         console.log(selected);
-      }
+      },
       // onRowChange(newData) {
       //   this.selectedItems = newData
       // },
@@ -484,9 +484,9 @@
       //         this.currentPage = page
       //     }
       // }
-      // onSelectedChanged(itemName) {
-      //     this.selected = itemName
-      // }
+      onSelectedChanged(itemName) {
+          this.slidesSelected = itemName
+      }
       // loadData(node, updateData) {
       //     let id = node.id;
       //     ajax(id).then(res => {
@@ -562,5 +562,17 @@
     list-style: noe;
     padding: 0;
     margin: 0;
+  }
+  .s-slides-view {
+    width: 150px;
+    height: 100px;
+  }
+  .s-slides {
+    display: inline-block;
+  }
+  .s-slides-item{
+    width: 150px;
+    height: 100px;
+    background: red;
   }
 </style>
