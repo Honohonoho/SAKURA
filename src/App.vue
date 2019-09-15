@@ -484,9 +484,9 @@
       //         this.currentPage = page
       //     }
       // }
-      onSelectedChanged(itemName) {
-          this.slidesSelected = itemName
-      }
+      // onSelectedChanged(itemName) {
+      //     this.slidesSelected = itemName
+      // },
       // loadData(node, updateData) {
       //     let id = node.id;
       //     ajax(id).then(res => {

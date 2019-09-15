@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="s-slides-dots-wrapper">
-            <span class="s-slides-dot left-arrow" @click="updateSelected(selectedIndex - 1)">
+            <span class="s-slides-dot left-arrow" data-action="prev" @click="updateSelected(selectedIndex - 1)">
                 <s-icon name="left"></s-icon>
             </span>
             <span class="s-slides-dot"
@@ -21,7 +21,7 @@
             >
                 {{n}}
             </span>
-            <span class=" s-slides-dot right-arrow" @click="onClickNext">
+            <span class=" s-slides-dot right-arrow" data-action="next" @click="onClickNext">
                 <s-icon name="right"></s-icon>
             </span>
         </div>
@@ -74,7 +74,6 @@
             }
         },
         mounted() {
-            console.log(this.selected);
             this.updateSlidesItem()
             if (this.autoPlay) {
                 this.playAutomatically()
