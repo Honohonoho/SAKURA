@@ -128,17 +128,17 @@
     <!--popover-height="200px"-->
     <!--&gt;-->
     <!--</s-cascader>-->
-    <s-slides :selected.sync="slidesSelected" :reverse="true">
-      <s-slides-item name="1">
-      <div class="box">1</div>
-      </s-slides-item>
-      <s-slides-item name="2">
-      <div class="box">2</div>
-      </s-slides-item>
-      <s-slides-item name="3">
-      <div class="box">3</div>
-      </s-slides-item>
-    </s-slides>
+    <!--<s-slides :selected.sync="slidesSelected" :reverse="true">-->
+      <!--<s-slides-item name="1">-->
+      <!--<div class="box">1</div>-->
+      <!--</s-slides-item>-->
+      <!--<s-slides-item name="2">-->
+      <!--<div class="box">2</div>-->
+      <!--</s-slides-item>-->
+      <!--<s-slides-item name="3">-->
+      <!--<div class="box">3</div>-->
+      <!--</s-slides-item>-->
+    <!--</s-slides>-->
     <!--<s-scroll style="width: 400px;height: 400px;">-->
     <!--<p>11111111111111111112312312312321123123123213122321</p>-->
     <!--<p>2</p>-->
@@ -252,36 +252,43 @@
           <!--<button @click="view(item.item)">编辑</button>-->
         <!--</template>-->
       <!--</s-table>-->
-      <s-nav :selected.sync="selected" @update:selected="onChange" vertical style="width: 200px">
-        <s-nav-item name="home">首页</s-nav-item>
-        <s-sub-nav name="about">
-          <template slot="title">关于</template>
-          <s-nav-item name="culture">企业文化</s-nav-item>
-          <s-nav-item name="team">开发团队</s-nav-item>
-          <s-sub-nav name="contact">
-            <template slot="title">联系方式</template>
-            <s-nav-item name="wechat">微信</s-nav-item>
-            <s-nav-item name="qq">QQ</s-nav-item>
-            <s-nav-item name="phone">手机</s-nav-item>
-          </s-sub-nav>
-        </s-sub-nav>
-        <s-nav-item name="hire">招聘</s-nav-item>
-      </s-nav>
-      <s-nav :selected.sync="selected">
-        <s-nav-item name="home">首页</s-nav-item>
-        <s-sub-nav name="about">
-          <template slot="title">关于</template>
-          <s-nav-item name="culture">企业文化</s-nav-item>
-          <s-nav-item name="team">开发团队</s-nav-item>
-          <s-sub-nav name="contact">
-            <template slot="title">联系方式</template>
-            <s-nav-item name="wechat">微信</s-nav-item>
-            <s-nav-item name="qq">QQ</s-nav-item>
-            <s-nav-item name="phone">手机</s-nav-item>
-          </s-sub-nav>
-        </s-sub-nav>
-        <s-nav-item name="hire">招聘</s-nav-item>
-      </s-nav>
+      <!--<s-upload></s-upload>-->
+      <!--<s-nav :selected.sync="selected" @update:selected="onChange" vertical style="width: 200px">-->
+        <!--<s-nav-item name="home">首页</s-nav-item>-->
+        <!--<s-sub-nav name="about">-->
+          <!--<template slot="title">关于</template>-->
+          <!--<s-nav-item name="culture">企业文化</s-nav-item>-->
+          <!--<s-nav-item name="team">开发团队</s-nav-item>-->
+          <!--<s-sub-nav name="contact">-->
+            <!--<template slot="title">联系方式</template>-->
+            <!--<s-nav-item name="wechat">微信</s-nav-item>-->
+            <!--<s-nav-item name="qq">QQ</s-nav-item>-->
+            <!--<s-nav-item name="phone">手机</s-nav-item>-->
+          <!--</s-sub-nav>-->
+        <!--</s-sub-nav>-->
+        <!--<s-nav-item name="hire">招聘</s-nav-item>-->
+      <!--</s-nav>-->
+      <!--<s-nav :selected.sync="selected">-->
+        <!--<s-nav-item name="home">首页</s-nav-item>-->
+        <!--<s-sub-nav name="about">-->
+          <!--<template slot="title">关于</template>-->
+          <!--<s-nav-item name="culture">企业文化</s-nav-item>-->
+          <!--<s-nav-item name="team">开发团队</s-nav-item>-->
+          <!--<s-sub-nav name="contact">-->
+            <!--<template slot="title">联系方式</template>-->
+            <!--<s-nav-item name="wechat">微信</s-nav-item>-->
+            <!--<s-nav-item name="qq">QQ</s-nav-item>-->
+            <!--<s-nav-item name="phone">手机</s-nav-item>-->
+          <!--</s-sub-nav>-->
+        <!--</s-sub-nav>-->
+        <!--<s-nav-item name="hire">招聘</s-nav-item>-->
+      <!--</s-nav>-->
+      <s-upload accept="image/*" action="http://127.0.0.1:3000/upload" name="file" method="POST">
+        <s-button type="primary">上传</s-button>
+        <template slot="tips">
+          <div>只能上传 300kb 以内的 png、jpeg 文件</div>
+        </template>
+      </s-upload>
     </div>
   </div>
 </template>
@@ -318,6 +325,7 @@
   import Nav from './nav/nav'
   import NavItem from './nav/nav-item'
   import SubNav from './nav/sub-nav'
+  import Upload from './upload/upload';
   Vue.use(plugin);
 
   // function ajax(parent_id = 0) {
@@ -347,7 +355,7 @@
     components: {
       's-slides': Slides,
       's-slides-item': SlidesItem,
-      // 's-button': Button,
+      's-button': Button,
       // 's-icon': Icon,
       // 's-button-group': ButtonGroup,
       // 's-input': Input,
@@ -372,7 +380,8 @@
       // 's-table': Table
       's-nav' : Nav,
       's-nav-item': NavItem,
-      's-sub-nav': SubNav
+      's-sub-nav': SubNav,
+      's-upload': Upload
     },
     data() {
       return {
