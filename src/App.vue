@@ -283,7 +283,10 @@
         <!--</s-sub-nav>-->
         <!--<s-nav-item name="hire">招聘</s-nav-item>-->
       <!--</s-nav>-->
-      <s-upload accept="image/*" action="http://127.0.0.1:3000/upload" name="file" method="POST">
+      <s-upload accept="image/*" name="file" method="POST"
+        action="http://127.0.0.1:3000/upload"
+        :parseResponse="handleParseRes"
+      >
         <s-button type="primary">上传</s-button>
         <template slot="tips">
           <div>只能上传 300kb 以内的 png、jpeg 文件</div>
@@ -471,6 +474,12 @@
       onChange (selected) {
         console.log(selected);
       },
+      handleParseRes (res) {
+        console.log(res)
+        let obj = JSON.parse(res)
+        let url = `http://127.0.0.1:3000/preview/${obj.id}`
+        return url
+      }
       // onRowChange(newData) {
       //   this.selectedItems = newData
       // },
