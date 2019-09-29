@@ -286,6 +286,7 @@
       <s-upload accept="image/*" name="file" method="POST"
         action="http://127.0.0.1:3000/upload"
         :parseResponse="handleParseRes"
+        :file-list.sync="fileList"
       >
         <s-button type="primary">上传</s-button>
         <template slot="tips">
@@ -425,7 +426,8 @@
         //   {text: '分数', field: 'records'}
         // ],
         // tableLoading: false
-        selected: 'home'
+        selected: 'home',
+        fileList: []
       }
     },
     created() {
