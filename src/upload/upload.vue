@@ -8,6 +8,7 @@
       <li v-for="file in fileList" :key="file.name">
         <img :src="file.url" alt="" width="100" height="100">
         {{file.name}}
+        <button @click="onRemoveFile(file)">x</button>
       </li>
     </ul>
   </div>
@@ -44,6 +45,15 @@
       }
     },
     methods: {
+      onRemoveFile(file) {
+        let answer = window.confirm(`你确认要删除${file.name}吗`)
+        if (answer) {
+          let copy = [...this.fileList]
+          let index = copy.indexOf(file)
+          copy.splice(index, 1)
+          this.$emit('update:fileList', copy)
+        }
+      },
       onClickUpload() {
         let input = this.createInput()
         input.addEventListener('change', ()=>{
@@ -56,8 +66,13 @@
       uploadFile(file) {
         let formData = new FormData()
         formData.append(this.name, file)
-        console.log(file);
         let {name, size, type} = file
+        if (this.fileList.filter(i => i.name === name).length > 0) {
+          let answer = window.confirm(`请勿上传重复的文件`)
+          if (answer) {
+            return
+          }
+        }
         this.doUpdateLoadFile(formData, (res)=> {
           let url = this.parseResponse(res)
           this.url = url
