@@ -6,6 +6,9 @@
     <div ref="temp" style="width: 0; height: 0; overflow: hidden;"></div>
     <ul>
       <li v-for="file in fileList" :key="file.name">
+        <template v-if="file.status === 'uploading'">
+          loading
+        </template>
         <img :src="file.url" alt="" width="100" height="100">
         {{file.name}}
         <button @click="onRemoveFile(file)">x</button>
@@ -63,21 +66,42 @@
         })
         input.click()
       },
-      uploadFile(file) {
-        let formData = new FormData()
-        formData.append(this.name, file)
-        let {name, size, type} = file
+      beforeUploadFile(rawFile) {
+        let {name, size, type} = rawFile
+        this.$emit('update:fileList', [...this.fileList, {name, type, size, status: 'uploading'}])
+      },
+      afterUploadFile(name, url) {
+        let file = this.fileList.filter(i => i.name === name)[0]
+        let fileCopy = JSON.parse(JSON.stringify(file))
+        let index = this.fileList.indexOf(file)
+        fileCopy.url = url
+        fileCopy.status = 'success'
+        let fileListCopy = [...this.fileList]
+        fileListCopy.splice(index, 1, fileCopy)
+        this.$emit('update:fileList', fileListCopy)
+      },
+      uploadFile(rawFile) {
+        let {name, size, type} = rawFile
+        if(this.validateDuplicateName(name)) {
+          let formData = new FormData()
+          formData.append(this.name, rawFile)
+          this.beforeUploadFile(rawFile)
+          this.doUpdateLoadFile(formData, (res)=> {
+            let url = this.parseResponse(res)
+            this.url = url
+            this.afterUploadFile(name, url)
+          })
+        }
+      },
+      validateDuplicateName(name) {
         if (this.fileList.filter(i => i.name === name).length > 0) {
           let answer = window.confirm(`请勿上传重复的文件`)
           if (answer) {
-            return
+            return false
           }
+        } else {
+          return true
         }
-        this.doUpdateLoadFile(formData, (res)=> {
-          let url = this.parseResponse(res)
-          this.url = url
-          this.$emit('update:fileList', [...this.fileList, {name, type, size, url}])
-        })
       },
       createInput() {
         let input = document.createElement('input')
