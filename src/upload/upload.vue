@@ -4,6 +4,7 @@
       <slot></slot>
     </div>
     <div ref="temp" style="width: 0; height: 0; overflow: hidden;"></div>
+    {{this.fileList}}
     <ul>
       <li v-for="file in fileList" :key="file.name">
         <template v-if="file.status === 'uploading'">
@@ -12,6 +13,7 @@
         <img :src="file.url" alt="" width="100" height="100">
         {{file.name}}
         <button @click="onRemoveFile(file)">x</button>
+        <span>{{file.status}}</span>
       </li>
     </ul>
   </div>
@@ -80,6 +82,15 @@
         fileListCopy.splice(index, 1, fileCopy)
         this.$emit('update:fileList', fileListCopy)
       },
+      uploadError(name) {
+        let file = this.fileList.filter(i => i.name === name)[0]
+        let index = this.fileList.indexOf(file)
+        let fileCopy = JSON.parse(JSON.stringify(file))
+        fileCopy.status = 'fail'
+        let fileListCopy = [...this.fileList]
+        fileListCopy.splice(index, 1, fileCopy)
+        this.$emit('update:fileList', fileListCopy)
+      },
       uploadFile(rawFile) {
         let {name, size, type} = rawFile
         if(this.validateDuplicateName(name)) {
@@ -90,6 +101,8 @@
             let url = this.parseResponse(res)
             this.url = url
             this.afterUploadFile(name, url)
+          }, (err) => {
+            this.uploadError(name, err)
           })
         }
       },
@@ -109,11 +122,12 @@
         this.$refs.temp.appendChild(input)
         return input
       },
-      doUpdateLoadFile (formData, success) {
+      doUpdateLoadFile (formData, success, fail) {
         let xhr = new XMLHttpRequest()
         xhr.open('POST', this.action)
         xhr.onload = () => {
-          success(xhr.response)
+          fail()
+          // success(xhr.response)
         }
         xhr.send(formData)
       }
