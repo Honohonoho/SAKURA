@@ -283,15 +283,13 @@
         <!--</s-sub-nav>-->
         <!--<s-nav-item name="hire">招聘</s-nav-item>-->
       <!--</s-nav>-->
+      <div>只能上传 300kb 以内的 png、jpeg 文件</div>
       <s-upload accept="image/*" name="file" method="POST"
         action="http://127.0.0.1:3000/upload"
         :parseResponse="handleParseRes"
         :file-list.sync="fileList"
       >
-        <s-button type="primary">上传</s-button>
-        <template slot="tips">
-          <div>只能上传 300kb 以内的 png、jpeg 文件</div>
-        </template>
+        <s-button type="primary" icon="upload">上传</s-button>
       </s-upload>
     </div>
   </div>

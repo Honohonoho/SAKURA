@@ -3,25 +3,45 @@
     <div @click="onClickUpload">
       <slot></slot>
     </div>
-    <div ref="temp" style="width: 0; height: 0; overflow: hidden;"></div>
-    {{this.fileList}}
-    <ul>
+    <ol class="s-upload-file-list">
       <li v-for="file in fileList" :key="file.name">
-        <template v-if="file.status === 'uploading'">
-          loading
-        </template>
-        <img :src="file.url" alt="" width="100" height="100">
-        {{file.name}}
-        <button @click="onRemoveFile(file)">x</button>
-        <span>{{file.status}}</span>
+        <div class="s-upload-image-wrapper">
+          <template v-if="file.status === 'uploading'">
+            <s-icon name="line-loading"></s-icon>
+          </template>
+          <template v-else-if="file.type.indexOf('image') === 0">
+            <img :src="file.url" class="s-upload-image" alt="" width="32" height="32">
+          </template>
+          <template v-else>
+            <div class="s-upload-default-image"></div>
+          </template>
+        </div>
+        <span
+          class="s-upload-file-name"
+          :class="{
+            'success': file.status === 'success',
+            'uploading': file.status === 'uploading',
+            'fail': file.status === 'fail'
+          }"
+        >
+          {{file.name}}
+        </span>
+        <s-button @click="onRemoveFile(file)" type="error">删除</s-button>
       </li>
-    </ul>
+    </ol>
+    <div ref="temp" style="width: 0; height: 0; overflow: hidden;"></div>
   </div>
 </template>
 
 <script>
+  import Button from '../button/button'
+  import Icon from '../icon'
   export default {
     name: "s-upload",
+    components: {
+      's-button': Button,
+      's-icon': Icon
+    },
     props: {
       name: {
         type: String,
@@ -126,8 +146,11 @@
         let xhr = new XMLHttpRequest()
         xhr.open('POST', this.action)
         xhr.onload = () => {
-          fail()
-          // success(xhr.response)
+          if (Math.random() > 0.5) {
+            fail()
+          } else {
+            success(xhr.response)
+          }
         }
         xhr.send(formData)
       }
@@ -136,7 +159,48 @@
 </script>
 
 <style lang="scss">
+  @import '../../styles/common';
+
   .s-upload {
-    border: 1px solid red;
+    &-file-list {
+      list-style: none;
+      > li {
+        display: flex;
+        align-items: center;
+        margin: 8px 0;
+        border: 1px solid $border-color;
+      }
+    }
+    &-image-wrapper {
+      display: flex;
+      margin-right: 8px;
+      .s-icon {
+        margin-left: 10px;
+        margin-right: 6px;
+        @include spin;
+      }
+      .s-upload-image {
+        vertical-align: top;
+      }
+      s-upload-default-image {
+        vertical-align: top;
+        border: 1px solid $border-color;
+        width: 32px;
+        height: 32px;
+      }
+    }
+    &-file-name {
+      color: $main-font-color;
+      margin-right: auto;
+      &.success {
+        color: $main-success;
+      }
+      &.uploading {
+        color: $disabled-color;
+      }
+      &.fail {
+        color: $main-error;
+      }
+    }
   }
 </style>
