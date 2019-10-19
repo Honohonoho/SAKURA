@@ -9,7 +9,10 @@
     export default {
         name: 's-icon',
         props: {
-            name: {}
+            name: {
+                type: String,
+                default: ''
+            }
         }
     }
 </script>
