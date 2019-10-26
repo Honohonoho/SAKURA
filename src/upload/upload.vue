@@ -62,11 +62,14 @@
       fileList: {
         type: Array,
         default: () => []
+      },
+      sizeLimit: {
+        type: Number,
       }
     },
     data() {
       return {
-        url: 'about:blank'
+        url: 'about:blank',
       }
     },
     methods: {
@@ -90,7 +93,14 @@
       },
       beforeUploadFile(rawFile) {
         let {name, size, type} = rawFile
+        console.log('size', size)
+        // 单位为字节
+        if (size > this.sizeLimit) {
+          this.$emit('uploadError', `文件不能大于 ${this.sizeLimit / 1024 / 1024}MB`)
+          return false
+        }
         this.$emit('update:fileList', [...this.fileList, {name, type, size, status: 'uploading'}])
+        return true
       },
       afterUploadFile(name, url) {
         let file = this.fileList.filter(i => i.name === name)[0]
@@ -102,7 +112,7 @@
         fileListCopy.splice(index, 1, fileCopy)
         this.$emit('update:fileList', fileListCopy)
       },
-      uploadError(name) {
+      uploadError(name, xhr) {
         let file = this.fileList.filter(i => i.name === name)[0]
         let index = this.fileList.indexOf(file)
         let fileCopy = JSON.parse(JSON.stringify(file))
@@ -110,19 +120,28 @@
         let fileListCopy = [...this.fileList]
         fileListCopy.splice(index, 1, fileCopy)
         this.$emit('update:fileList', fileListCopy)
+
+        let error = ''
+        if (xhr.status === 0) {
+          error = '网络无法连接'
+        }
+        this.$emit('uploadError', error)
       },
       uploadFile(rawFile) {
         let {name, size, type} = rawFile
         if(this.validateDuplicateName(name)) {
           let formData = new FormData()
           formData.append(this.name, rawFile)
-          this.beforeUploadFile(rawFile)
+
+          let canUpload = this.beforeUploadFile(rawFile)
+          if (!canUpload) { return }
+
           this.doUpdateLoadFile(formData, (res)=> {
             let url = this.parseResponse(res)
             this.url = url
             this.afterUploadFile(name, url)
-          }, (err) => {
-            this.uploadError(name, err)
+          }, (xhr) => {
+            this.uploadError(name, xhr)
           })
         }
       },
@@ -147,12 +166,18 @@
         let xhr = new XMLHttpRequest()
         xhr.open('POST', this.action)
         xhr.onload = () => {
-          if (Math.random() > 0.5) {
-            fail()
-          } else {
-            success(xhr.response)
-          }
+          success(xhr.response)
         }
+        xhr.onerror = () => {
+          fail(xhr)
+        }
+        // xhr.onload = () => {
+        //   if (Math.random() > 0.5) {
+        //     fail()
+        //   } else {
+        //     success(xhr.response)
+        //   }
+        // }
         xhr.send(formData)
       }
     }

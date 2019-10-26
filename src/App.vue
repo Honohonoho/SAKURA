@@ -283,11 +283,16 @@
         <!--</s-sub-nav>-->
         <!--<s-nav-item name="hire">招聘</s-nav-item>-->
       <!--</s-nav>-->
+      <div>
+        {{error}}
+      </div>
       <div>只能上传 300kb 以内的 png、jpeg 文件</div>
       <s-upload accept="image/*" name="file" method="POST"
         action="http://127.0.0.1:3000/upload"
         :parseResponse="handleParseRes"
         :file-list.sync="fileList"
+        :sizeLimit="1024*1024"
+        @uploadError="onUploadError"
       >
         <s-button type="primary" icon="upload">上传</s-button>
       </s-upload>
@@ -425,7 +430,8 @@
         // ],
         // tableLoading: false
         selected: 'home',
-        fileList: []
+        fileList: [],
+        error: ''
       }
     },
     created() {
@@ -479,7 +485,10 @@
         let obj = JSON.parse(res)
         let url = `http://127.0.0.1:3000/preview/${obj.id}`
         return url
-      }
+      },
+      onUploadError (error) {
+        this.error = error || '上传失败'
+      },
       // onRowChange(newData) {
       //   this.selectedItems = newData
       // },
