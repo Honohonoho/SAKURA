@@ -85,8 +85,7 @@
       onClickUpload() {
         let input = this.createInput()
         input.addEventListener('change', ()=>{
-          let file = input.files[0]
-          this.uploadFile(file)
+          this.uploadFiles(input.files)
           input.remove()
         })
         input.click()
@@ -99,7 +98,8 @@
           this.$emit('uploadError', `文件不能大于 ${this.sizeLimit / 1024 / 1024}MB`)
           return false
         }
-        this.$emit('update:fileList', [...this.fileList, {name, type, size, status: 'uploading'}])
+        // this.$emit('update:fileList', [...this.fileList, {name, type, size, status: 'uploading'}])
+        this.$emit('addFile',{name, type, size, status: 'uploading'})
         return true
       },
       afterUploadFile(name, url) {
@@ -127,22 +127,25 @@
         }
         this.$emit('uploadError', error)
       },
-      uploadFile(rawFile) {
-        let {name, size, type} = rawFile
-        if(this.validateDuplicateName(name)) {
-          let formData = new FormData()
-          formData.append(this.name, rawFile)
+      uploadFiles(rawFiles) {
+        console.log(rawFiles);
+        for (let i = 0; i < rawFiles.length; i++) {
+          let rawFile = rawFiles[i]
+          let {name, size, type} = rawFile
+          if(this.validateDuplicateName(name)) {
+            let canUpload = this.beforeUploadFile(rawFile)
+            if (!canUpload) { return }
+            let formData = new FormData()
+            formData.append(this.name, rawFile)
 
-          let canUpload = this.beforeUploadFile(rawFile)
-          if (!canUpload) { return }
-
-          this.doUpdateLoadFile(formData, (res)=> {
-            let url = this.parseResponse(res)
-            this.url = url
-            this.afterUploadFile(name, url)
-          }, (xhr) => {
-            this.uploadError(name, xhr)
-          })
+            this.doUpdateLoadFile(formData, (res)=> {
+              let url = this.parseResponse(res)
+              this.url = url
+              this.afterUploadFile(name, url)
+            }, (xhr) => {
+              this.uploadError(name, xhr)
+            })
+          }
         }
       },
       validateDuplicateName(name) {
@@ -159,25 +162,19 @@
         this.$refs.temp.innerHTML = ''
         let input = document.createElement('input')
         input.type = 'file'
+        input.multiple = true
         this.$refs.temp.appendChild(input)
         return input
       },
       doUpdateLoadFile (formData, success, fail) {
         let xhr = new XMLHttpRequest()
-        xhr.open('POST', this.action)
+        xhr.open(this.method, this.action)
         xhr.onload = () => {
           success(xhr.response)
         }
         xhr.onerror = () => {
           fail(xhr)
         }
-        // xhr.onload = () => {
-        //   if (Math.random() > 0.5) {
-        //     fail()
-        //   } else {
-        //     success(xhr.response)
-        //   }
-        // }
         xhr.send(formData)
       }
     }
