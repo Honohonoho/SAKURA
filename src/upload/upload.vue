@@ -43,6 +43,10 @@
       's-icon': Icon
     },
     props: {
+      accept: {
+        type: String,
+        default: 'image/*'
+      },
       name: {
         type: String,
         required: true
@@ -54,6 +58,10 @@
       method: {
         type: String,
         default: 'POST'
+      },
+      multiple: {
+        type: Boolean,
+        default: true
       },
       parseResponse: {
         type: Function,
@@ -133,7 +141,6 @@
         this.$emit('uploadError', error)
       },
       uploadFiles(rawFiles) {
-        console.log(rawFiles);
         let copyNames = []
         for (let i = 0; i < rawFiles.length; i++) {
           let rawFile = rawFiles[i]
@@ -174,8 +181,9 @@
       createInput() {
         this.$refs.temp.innerHTML = ''
         let input = document.createElement('input')
+        input.accept = this.accept
         input.type = 'file'
-        input.multiple = true
+        input.multiple = this.multiple
         this.$refs.temp.appendChild(input)
         return input
       },

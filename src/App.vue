@@ -287,7 +287,7 @@
         {{error}}
       </div>
       <div>只能上传 300kb 以内的 png、jpeg 文件</div>
-      <s-upload accept="image/*" name="file" method="POST"
+      <s-upload accept="image/*" name="file" method="POST" :multiple="false"
         action="http://127.0.0.1:3000/upload"
         :parseResponse="handleParseRes"
         :file-list.sync="fileList"
