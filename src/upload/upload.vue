@@ -90,16 +90,21 @@
         })
         input.click()
       },
-      beforeUploadFile(rawFile) {
-        let {name, size, type} = rawFile
-        console.log('size', size)
-        // 单位为字节
-        if (size > this.sizeLimit) {
-          this.$emit('uploadError', `文件不能大于 ${this.sizeLimit / 1024 / 1024}MB`)
-          return false
+      beforeUploadFile(rawFiles, newNames) {
+        rawFiles = Array.from(rawFiles)
+        for (let i = 0; i < rawFiles.length; i++) {
+          // 单位为字节
+          let {size} = rawFiles[i]
+          if (size > this.sizeLimit) {
+            this.$emit('uploadError', `文件不能大于 ${this.sizeLimit / 1024 / 1024}MB`)
+            return false
+          }
         }
-        // this.$emit('update:fileList', [...this.fileList, {name, type, size, status: 'uploading'}])
-        this.$emit('addFile',{name, type, size, status: 'uploading'})
+        let x = rawFiles.map((rawFile, i) => {
+          let {size, type} = rawFile
+          return {name: newNames[i], type, size, status: 'uploading'}
+        })
+        this.$emit('update:fileList', [...this.fileList, ...x])
         return true
       },
       afterUploadFile(name, url) {
@@ -129,12 +134,20 @@
       },
       uploadFiles(rawFiles) {
         console.log(rawFiles);
+        let copyNames = []
+        for (let i = 0; i < rawFiles.length; i++) {
+          let rawFile = rawFiles[i]
+          let {name, size, type} = rawFile
+          copyNames[i] = name
+        }
+
+        let canUpload = this.beforeUploadFile(rawFiles, copyNames)
+        if (!canUpload) { return }
+
         for (let i = 0; i < rawFiles.length; i++) {
           let rawFile = rawFiles[i]
           let {name, size, type} = rawFile
           if(this.validateDuplicateName(name)) {
-            let canUpload = this.beforeUploadFile(rawFile)
-            if (!canUpload) { return }
             let formData = new FormData()
             formData.append(this.name, rawFile)
 

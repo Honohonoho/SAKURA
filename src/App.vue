@@ -293,7 +293,6 @@
         :file-list.sync="fileList"
         :sizeLimit="5*1024*1024"
         @uploadError="onUploadError"
-        @addFile="addFile"
       >
         <s-button type="primary" icon="upload">上传</s-button>
       </s-upload>
@@ -489,9 +488,6 @@
       },
       onUploadError (error) {
         this.error = error || '上传失败'
-      },
-      addFile(file) {
-        this.fileList.push(file)
       },
       // onRowChange(newData) {
       //   this.selectedItems = newData
