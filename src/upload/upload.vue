@@ -36,6 +36,8 @@
 <script>
   import Button from '../button/button'
   import Icon from '../icon'
+  import http from '../http'
+
   export default {
     name: "s-upload",
     components: {
@@ -190,15 +192,11 @@
         return input
       },
       doUpdateLoadFile (formData, success, fail) {
-        let xhr = new XMLHttpRequest()
-        xhr.open(this.method, this.action)
-        xhr.onload = () => {
-          success(xhr.response)
-        }
-        xhr.onerror = () => {
-          fail(xhr)
-        }
-        xhr.send(formData)
+        http(this.method, this.action, {
+          success: success,
+          fail: fail,
+          data: formData
+        })
       }
     }
   }
