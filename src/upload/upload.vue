@@ -192,7 +192,7 @@
         return input
       },
       doUpdateLoadFile (formData, success, fail) {
-        http(this.method, this.action, {
+        http[this.method.toLowerCase()](this.action, {
           success: success,
           fail: fail,
           data: formData
