@@ -100,12 +100,14 @@
       },
       beforeUploadFile(rawFiles, newNames) {
         rawFiles = Array.from(rawFiles)
-        for (let i = 0; i < rawFiles.length; i++) {
-          // 单位为字节
-          let {size} = rawFiles[i]
-          if (size > this.sizeLimit) {
-            this.$emit('uploadError', `文件不能大于 ${this.sizeLimit / 1024 / 1024}MB`)
-            return false
+        if (this.sizeLimit) {
+          for (let i = 0; i < rawFiles.length; i++) {
+            // 单位为字节
+            let {size} = rawFiles[i]
+            if (size > this.sizeLimit) {
+              this.$emit('uploadError', `文件不能大于 ${this.sizeLimit / 1024 / 1024}MB`)
+              return false
+            }
           }
         }
         let x = rawFiles.map((rawFile, i) => {
